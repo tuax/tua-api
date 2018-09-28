@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>介绍 | tua-api</title>
+    <meta name="description" content="🏗 一款可配置的通用 api 请求函数生成工具">
+    <link rel="icon" href="/tua-api/logo.png">
+    
+    <link rel="preload" href="/tua-api/assets/css/styles.8de066c8.css" as="style"><link rel="preload" href="/tua-api/assets/js/app.8de066c8.js" as="script"><link rel="preload" href="/tua-api/assets/js/8.8fbee516.js" as="script"><link rel="prefetch" href="/tua-api/assets/js/4.7d11ee18.js"><link rel="prefetch" href="/tua-api/assets/css/1.styles.babd7481.css"><link rel="prefetch" href="/tua-api/assets/js/1.babd7481.js"><link rel="prefetch" href="/tua-api/assets/css/2.styles.8662775e.css"><link rel="prefetch" href="/tua-api/assets/js/2.8662775e.js"><link rel="prefetch" href="/tua-api/assets/js/3.53589cd1.js"><link rel="prefetch" href="/tua-api/assets/js/5.84d1acec.js"><link rel="prefetch" href="/tua-api/assets/js/6.7700314f.js"><link rel="prefetch" href="/tua-api/assets/js/7.6c1db858.js"><link rel="prefetch" href="/tua-api/assets/js/9.c0f68bd3.js"><link rel="prefetch" href="/tua-api/assets/js/10.25ced0dc.js"><link rel="prefetch" href="/tua-api/assets/js/11.aaff2c36.js">
+    <link rel="stylesheet" href="/tua-api/assets/css/1.styles.babd7481.css"><link rel="stylesheet" href="/tua-api/assets/css/2.styles.8662775e.css"><link rel="stylesheet" href="/tua-api/assets/css/styles.8de066c8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/tua-api/" class="home-link router-link-active"><!----> <span class="site-name">tua-api</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/tua-api/quick-start/" class="nav-link router-link-exact-active router-link-active">快速上手</a></div><div class="nav-item"><a href="/tua-api/config/" class="nav-link">配置</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">生态系统</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/tua-storage/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  本地存储
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  小程序框架
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <a href="https://github.com/tuateam/tua-api" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/tua-api/quick-start/" class="nav-link router-link-exact-active router-link-active">快速上手</a></div><div class="nav-item"><a href="/tua-api/config/" class="nav-link">配置</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">生态系统</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/tua-storage/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  本地存储
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  小程序框架
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <a href="https://github.com/tuateam/tua-api" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>快速上手</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/tua-api/quick-start/installation.html" class="sidebar-link">安装</a></li><li><a href="/tua-api/quick-start/" class="active sidebar-link">介绍</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tua-api/quick-start/#tua-api-是什么？" class="sidebar-link">tua-api 是什么？</a></li><li class="sidebar-sub-header"><a href="/tua-api/quick-start/#tua-api-能干什么？" class="sidebar-link">tua-api 能干什么？</a></li><li class="sidebar-sub-header"><a href="/tua-api/quick-start/#怎么写-api-配置？" class="sidebar-link">怎么写 api 配置？</a></li></ul></li><li><a href="/tua-api/quick-start/middleware.html" class="sidebar-link">中间件进阶</a></li><li><a href="/tua-api/quick-start/export-utils.html" class="sidebar-link">辅助函数</a></li><li><a href="/tua-api/config/" class="sidebar-link">配置说明</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="介绍"><a href="#介绍" aria-hidden="true" class="header-anchor">#</a> 介绍</h1> <h2 id="tua-api-是什么？"><a href="#tua-api-是什么？" aria-hidden="true" class="header-anchor">#</a> <code>tua-api</code> 是什么？</h2> <p><code>tua-api</code> 是一个针对发起 api 请求提供辅助功能的库。采用 ES6+ 语法，将全部 api 使用 Promise 包裹，并采用 jest 进行了完整的单元测试。</p> <p>目前已适配：</p> <ul><li>web 端：<code>tua-api</code></li> <li>小程序端：<code>tua-api/dist/mp</code></li></ul> <h2 id="tua-api-能干什么？"><a href="#tua-api-能干什么？" aria-hidden="true" class="header-anchor">#</a> <code>tua-api</code> 能干什么？</h2> <p><code>tua-api</code> 能实现统一管理 api 配置（例如一般放在 <code>src/apis/</code> 下）。经过处理后，业务侧代码只需要这样写即可：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> fooApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+fooApi
+    <span class="token punctuation">.</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">'2'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// 发起请求，a、b 是请求参数</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span>       <span class="token comment">// 收到响应</span>
+    <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>error<span class="token punctuation">)</span>    <span class="token comment">// 处理错误</span>
+</code></pre></div><p>不仅如此，还有一些其他功能：</p> <ul><li>参数校验</li> <li>默认参数</li> <li>中间件（koa 风格）</li> <li>...</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 甚至可以更进一步和 tua-storage 配合使用</span>
+<span class="token keyword">import</span> TuaStorage <span class="token keyword">from</span> <span class="token string">'tua-storage'</span>
+
+<span class="token keyword">const</span> storage <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TuaStorage</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> fetchParam <span class="token operator">=</span> <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> fooApi<span class="token punctuation">.</span>bar<span class="token punctuation">.</span>key<span class="token punctuation">,</span>
+    syncParams<span class="token punctuation">:</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token string">'a'</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">'b'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 过期时间，默认值为实例化时的值，以秒为单位</span>
+    expires<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 是否直接调用同步函数更新数据，默认为 false</span>
+    <span class="token comment">// 适用于需要强制更新数据的场景，例如小程序中的下拉刷新</span>
+    isForceUpdate<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+storage
+    <span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>fetchParam<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>error<span class="token punctuation">)</span>
+</code></pre></div><h2 id="怎么写-api-配置？"><a href="#怎么写-api-配置？" aria-hidden="true" class="header-anchor">#</a> 怎么写 <code>api</code> 配置？</h2> <p>拿以下 api 地址举例：</p> <ul><li>https://example-base.com/foo/bar/something/create</li> <li>https://example-base.com/foo/bar/something/modify</li> <li>https://example-base.com/foo/bar/something/delete</li></ul> <h3 id="地址结构划分"><a href="#地址结构划分" aria-hidden="true" class="header-anchor">#</a> 地址结构划分</h3> <p>以上地址，一般将其分为<code>3</code>部分：</p> <ul><li>host: <code>https://example-base.com/foo/bar/</code></li> <li>prefix: <code>something</code></li> <li>pathList: <code>[ 'create', 'modify', 'delete ]</code></li></ul> <h3 id="文件结构"><a href="#文件结构" aria-hidden="true" class="header-anchor">#</a> 文件结构</h3> <p><code>api/</code> 一般是这样的文件结构：</p> <div class="language- extra-class"><pre class="language-text"><code>.
+└── apis
+    ├── prefix-1.js
+    ├── prefix-2.js
+    ├── something.js // &lt;-- 以上的 api 地址会放在这里
+    └── index.js
+</code></pre></div><h3 id="基础配置内容"><a href="#基础配置内容" aria-hidden="true" class="header-anchor">#</a> 基础配置内容</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// src/apis/something.js</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 请求的公用服务器地址。</span>
+    host<span class="token punctuation">:</span> <span class="token string">'http://example-base.com/foo/bar/'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 请求的中间路径，建议与文件同名，以便后期维护。</span>
+    prefix<span class="token punctuation">:</span> <span class="token string">'something'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 接口地址数组</span>
+    pathList<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'create'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'modify'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'delete'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><a href="/tua-api/quick-start/detail-config.html">更多配置请点击这里查看</a></p> <h3 id="配置导出"><a href="#配置导出" aria-hidden="true" class="header-anchor">#</a> 配置导出</h3> <p>最后来看一下 <code>apis/index.js</code> 该怎么写：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> TuaApi <span class="token keyword">from</span> <span class="token string">'tua-api'</span> <span class="token comment">// 小程序用 dist/mp</span>
+<span class="token keyword">import</span> fakeGetConfig <span class="token keyword">from</span> <span class="token string">'./fake-get'</span>
+<span class="token keyword">import</span> fakePostConfig <span class="token keyword">from</span> <span class="token string">'./fake-post'</span>
+
+<span class="token comment">// 初始化</span>
+<span class="token keyword">const</span> tuaApi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TuaApi</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 使用中间件</span>
+tuaApi
+    <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 请求发起前</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'before: '</span><span class="token punctuation">,</span> ctx<span class="token punctuation">)</span>
+
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// 响应返回后</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'after: '</span><span class="token punctuation">,</span> ctx<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">// 链式调用</span>
+    <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 生成请求函数对象</span>
+<span class="token keyword">const</span> fakeGet <span class="token operator">=</span> tuaApi<span class="token punctuation">.</span><span class="token function">getApi</span><span class="token punctuation">(</span>fakeGetConfig<span class="token punctuation">)</span>
+<span class="token keyword">const</span> fakePost <span class="token operator">=</span> tuaApi<span class="token punctuation">.</span><span class="token function">getApi</span><span class="token punctuation">(</span>fakePostConfig<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token punctuation">{</span>
+    fakeGet<span class="token punctuation">,</span>
+    fakePost<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><a href="/tua-api/config/">配置的详细说明点这里</a></p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/tuateam/tua-api/edit/master/docs/quick-start/README.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">9/28/2018, 5:29:00 PM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/tua-api/quick-start/installation.html" class="prev">
+          安装
+        </a></span> <span class="next"><a href="/tua-api/quick-start/middleware.html">
+          中间件进阶
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/tua-api/assets/js/8.8fbee516.js" defer></script><script src="/tua-api/assets/js/app.8de066c8.js" defer></script>
+  </body>
+</html>
