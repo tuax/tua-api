@@ -5,7 +5,7 @@
 </h5>
 
 <p align="center">
-    <a href="http://tuateam.github.io/tua-api/">👉完整文档地址点这里👈</a>
+    <a href="https://tuateam.github.io/tua-api/">👉完整文档地址点这里👈</a>
 </p>
 
 <p align="center">
@@ -216,3 +216,7 @@ export {
 其中优先级自然是:
 
 `自身配置 > 公共配置 > 默认配置`
+
+<p align="center">
+    <a href="https://tuateam.github.io/tua-api/config/">👉更多配置点击这里👈</a>
+</p>
