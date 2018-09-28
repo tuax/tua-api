@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="http://tuateam.github.io/tua-api/">👉完整文档地址点这里👈</a>
-</p>f
+</p>
 
 ## `tua-api` 是什么？
 `tua-api` 是一个针对发起 api 请求提供辅助功能的库。采用 ES6+ 语法，将全部 api 使用 Promise 包裹，并采用 jest 进行了完整的单元测试。
