@@ -69,7 +69,7 @@ $ npm i -S tua-api
 $ yarn add tua-api
 ```
 
-**注意并非直接导入！**，因为正宫是 web 端...
+**注意并非直接导入！**因为正宫是 web 端...
 
 ```js
 import TuaApi from 'tua-api/dist/mp'
