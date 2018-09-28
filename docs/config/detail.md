@@ -72,7 +72,7 @@ export default {
 }
 ```
 
-详情参阅：[中间件进阶](./middleware.md)
+详情参阅：[中间件进阶](../quick-start/middleware.md)
 
 ## beforeFn 发起请求前钩子函数
 在请求发起前执行的函数（例如小程序可以通过返回 `header` 传递 `cookie`），因为是通过 `beforeFn().then(...)` 调用，所以注意要返回 Promise。
