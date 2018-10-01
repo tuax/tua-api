@@ -24,6 +24,9 @@ export default {
          */
         {
             path: 'fail',
+            beforeFn: () => Promise.resolve({
+                header: { cookie: '123' },
+            }),
         },
         /**
          * array-data
