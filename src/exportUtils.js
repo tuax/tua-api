@@ -19,19 +19,18 @@ import {
 const getApiName = (name, suffix = 'Api') => hyphenCaseToCamelCase(name) + suffix
 
 /**
- * 导出当前文件夹下所有接口，接收 TuaApi 实例，调用 fs 读取当前文件夹下的所有接口文件，生成 api 函数对象并导出。
- * @param {TuaApi} tuaApi TuaApi实例
+ * 导出当前文件夹下所有接口，接收 api 文件夹路径，调用 fs 读取当前文件夹下的所有接口文件，生成 api 函数对象并导出。
+ * @param {String} dir api 文件夹路径
  * @param {String} suffix 生成的 api 的后缀
  */
-const exportAllApis = (tuaApi, suffix) => fs
-    .readdirSync(path.join(__dirname))
+const getAllApis = (dir, suffix) => fs
+    .readdirSync(dir)
     .filter(f => f !== 'index.js')
-    .map(file => require(path.join(__dirname, file)).default)
-    .forEach((cfg) => {
-        const apiName = getApiName(cfg.name || cfg.prefix, suffix)
-
-        module.exports[apiName] = tuaApi.getApi(cfg)
-    })
+    .map(file => require(path.join(dir, file)).default)
+    .map((cfg) => ({
+        cfg,
+        apiName: getApiName(cfg.name || cfg.prefix, suffix),
+    }))
 
 /**
  * 将各个发起 api 的函数的 key 与其绑定，与 TuaStorage 配合使用效果更佳
@@ -83,7 +82,7 @@ const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
 )(syncFnMap)
 
 export {
-    exportAllApis,
+    getAllApis,
     getSyncFnMapByApis,
     getPreFetchFnKeysBySyncFnMap,
 }

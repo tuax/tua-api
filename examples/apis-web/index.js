@@ -1,4 +1,4 @@
-import TuaApi, { exportAllApis } from '../../src/TuaApiWeb'
+import TuaApi, { getAllApis } from '../../src/TuaApiWeb'
 
 // 初始化
 const tuaApi = new TuaApi({
@@ -19,4 +19,6 @@ tuaApi.use(async (ctx, next) => {
 })
 
 // 导出当前文件夹下所有接口
-exportAllApis(tuaApi)
+getAllApis(__dirname).forEach(({ cfg, apiName }) => {
+    module.exports[apiName] = tuaApi.getApi(cfg)
+})
