@@ -1,6 +1,6 @@
-import TuaApi from '../../src/TuaApiMp'
-import fakeWxConfig from './fake-wx'
+import TuaApi, { exportAllApis } from '../../src/TuaApiMp'
 
+// 初始化
 const tuaApi = new TuaApi()
 
 // 使用中间件
@@ -14,8 +14,5 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
-const fakeWx = tuaApi.getApi(fakeWxConfig)
-
-export {
-    fakeWx,
-}
+// 导出当前文件夹下所有接口
+exportAllApis(tuaApi)

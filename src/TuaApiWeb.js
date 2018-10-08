@@ -1,6 +1,6 @@
 import TuaApiCore from './TuaApiCore'
 
-import { log, error, getParamStrFromObj } from './utils'
+import { logger, getParamStrFromObj } from './utils'
 import {
     DEFAULT_HEADER,
     VALID_REQ_TYPES,
@@ -26,7 +26,7 @@ class TuaApi extends TuaApiCore {
         ...rest
     }) {
         if (VALID_REQ_TYPES.indexOf(reqType) === -1) {
-            error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
+            logger.error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
             throw Error('invalid reqType')
         }
 
@@ -61,8 +61,8 @@ class TuaApi extends TuaApiCore {
         transformRequest = [getParamStrFromObj],
         ...rest
     }) {
-        log(`Req Url: ${url}`)
-        log(`Req Data:`, data)
+        logger.log(`Req Url: ${url}`)
+        logger.log(`Req Data:`, data)
 
         return require('axios')({
             url,
@@ -78,7 +78,7 @@ class TuaApi extends TuaApiCore {
 
     // 获取发起 jsonp 请求后的 promise 对象
     getFetchJsonpPromise ({ url, jsonpOptions }) {
-        log(`Jsonp Url: ${url}`)
+        logger.log(`Jsonp Url: ${url}`)
 
         return require('fetch-jsonp')(url, jsonpOptions)
             .then(res => res.json())
@@ -87,7 +87,4 @@ class TuaApi extends TuaApiCore {
 }
 
 export default TuaApi
-export {
-    getSyncFnMapByApis,
-    getPreFetchFnKeysBySyncFnMap,
-} from './exportUtils'
+export * from './exportUtils'

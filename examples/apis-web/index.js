@@ -1,7 +1,6 @@
-import TuaApi from '../../src/TuaApiWeb'
-import fakeGetConfig from './fake-get'
-import fakePostConfig from './fake-post'
+import TuaApi, { exportAllApis } from '../../src/TuaApiWeb'
 
+// 初始化
 const tuaApi = new TuaApi({
     host: 'http://example-base.com/',
     // 默认用 jsonp 的方式，不填默认用 axios
@@ -9,20 +8,15 @@ const tuaApi = new TuaApi({
 })
 
 // 使用中间件
-// tuaApi.use(async (ctx, next) => {
-//     // 请求发起前
-//     console.log('before: ', ctx)
+tuaApi.use(async (ctx, next) => {
+    // 请求发起前
+    // console.log('before: ', ctx)
 
-//     await next()
+    await next()
 
-//     // 响应返回后
-//     console.log('after: ', ctx)
-// })
+    // 响应返回后
+    // console.log('after: ', ctx)
+})
 
-const fakeGet = tuaApi.getApi(fakeGetConfig)
-const fakePost = tuaApi.getApi(fakePostConfig)
-
-export {
-    fakeGet,
-    fakePost,
-}
+// 导出当前文件夹下所有接口
+exportAllApis(tuaApi)

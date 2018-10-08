@@ -28,3 +28,6 @@ export default {
 
 ## commonParams 覆盖公共参数
 有时某个接口正好不需要上一级中 `commonParams` 的参数。那么可以传递 `null` 覆盖上一级中的 `commonParams`。
+
+## 其他参数
+其他参数参阅上一节 [详细配置](./detail.md)

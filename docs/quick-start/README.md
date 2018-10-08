@@ -104,9 +104,7 @@ export default {
 最后来看一下 `apis/index.js` 该怎么写：
 
 ```js
-import TuaApi from 'tua-api' // 小程序用 dist/mp
-import fakeGetConfig from './fake-get'
-import fakePostConfig from './fake-post'
+import TuaApi, { exportAllApis } from 'tua-api' // 小程序用 'tua-api/dist/mp'
 
 // 初始化
 const tuaApi = new TuaApi({ ... })
@@ -125,14 +123,16 @@ tuaApi
     // 链式调用
     .use(...)
 
-// 生成请求函数对象
-const fakeGet = tuaApi.getApi(fakeGetConfig)
-const fakePost = tuaApi.getApi(fakePostConfig)
-
-export {
-    fakeGet,
-    fakePost,
-}
+// 导出当前文件夹下所有接口
+exportAllApis(tuaApi)
 ```
+
+::: tip
+小程序端建议使用 [@tua-mp/cli](https://tuateam.github.io/tua-mp/tua-mp-cli/) 一键生成 api。
+
+```bash
+$ tuamp add api <api-name>
+```
+:::
 
 [配置的详细说明点这里](../config/)

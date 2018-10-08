@@ -1,10 +1,37 @@
+import fs from 'fs'
+import path from 'path'
 import {
     map,
     pipe,
     filter,
     flatten,
     mergeAll,
+    hyphenCaseToCamelCase,
 } from './utils/'
+
+/**
+ * 获取小驼峰形式的 api 名称
+ * 例如 name 是 foo-bar -> fooBarApi
+ * @param {String} name api 的名称
+ * @param {String} suffix 生成的 api 的后缀
+ * @return {String} 小驼峰形式的 api 名称
+ */
+const getApiName = (name, suffix = 'Api') => hyphenCaseToCamelCase(name) + suffix
+
+/**
+ * 导出当前文件夹下所有接口，接收 TuaApi 实例，调用 fs 读取当前文件夹下的所有接口文件，生成 api 函数对象并导出。
+ * @param {TuaApi} tuaApi TuaApi实例
+ * @param {String} suffix 生成的 api 的后缀
+ */
+const exportAllApis = (tuaApi, suffix) => fs
+    .readdirSync(path.join(__dirname))
+    .filter(f => f !== 'index.js')
+    .map(file => require(path.join(__dirname, file)).default)
+    .forEach((cfg) => {
+        const apiName = getApiName(cfg.name || cfg.prefix, suffix)
+
+        module.exports[apiName] = tuaApi.getApi(cfg)
+    })
 
 /**
  * 将各个发起 api 的函数的 key 与其绑定，与 TuaStorage 配合使用效果更佳
@@ -56,6 +83,7 @@ const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
 )(syncFnMap)
 
 export {
+    exportAllApis,
     getSyncFnMapByApis,
     getPreFetchFnKeysBySyncFnMap,
 }

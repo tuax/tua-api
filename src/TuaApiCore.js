@@ -3,7 +3,7 @@ import koaCompose from 'koa-compose'
 import {
     map,
     pipe,
-    error,
+    logger,
     mergeAll,
     apiConfigToReqFnParams,
 } from './utils'
@@ -81,7 +81,7 @@ class TuaApiCore {
      */
     _checkReqType () {
         if (VALID_REQ_TYPES.indexOf(this.reqType) === -1) {
-            error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
+            logger.error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
             throw TypeError(`invalid reqType`)
         }
     }

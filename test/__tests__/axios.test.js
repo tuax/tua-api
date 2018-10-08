@@ -1,7 +1,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
-import { fakeGet, fakePost } from '../../examples/apis-web/'
+import { fakeGetApi, fakePostApi } from '../../examples/apis-web/'
 
 const mock = new MockAdapter(axios)
 
@@ -9,11 +9,11 @@ const params = {
     param1: 'steve',
     param2: 'young',
 }
-const reqOH = fakePost['own-host']
-const reqAP = fakePost['array-params']
-const reqOP = fakePost['object-params']
-const reqTA = fakeGet['req-type-axios']
-const reqEAP = fakePost['empty-array-params']
+const reqOH = fakePostApi['own-host']
+const reqAP = fakePostApi['array-params']
+const reqOP = fakePostApi['object-params']
+const reqTA = fakeGetApi['req-type-axios']
+const reqEAP = fakePostApi['empty-array-params']
 
 const reqAPUrl = `http://example-base.com/fake-post/array-params`
 const reqOPUrl = `http://example-base.com/fake-post/object-params`
