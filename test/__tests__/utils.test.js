@@ -23,7 +23,7 @@ test('checkArrayParams', () => {
 
 test('getDefaultParamObj', () => {
     expect(getDefaultParamObj({
-        commonParams: { a: '1' }
+        commonParams: { a: '1' },
     })).toEqual({ a: '1' })
 
     expect(getDefaultParamObj({

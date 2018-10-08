@@ -1,6 +1,6 @@
 import TuaApiCore from '../../src/TuaApiCore'
 
-const tuaApi = new TuaApiCore
+const tuaApi = new TuaApiCore()
 
 describe('error handling', () => {
     test('non-function middleware', () => {
