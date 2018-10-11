@@ -23,6 +23,7 @@ class TuaApi extends TuaApiCore {
         callbackName,
         jsonpOptions,
         axiosOptions,
+        ...rest
     }) {
         if (VALID_REQ_TYPES.indexOf(reqType) === -1) {
             error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
@@ -36,6 +37,7 @@ class TuaApi extends TuaApiCore {
                 data,
                 method: type.toLowerCase(),
                 ...axiosOptions,
+                ...rest,
             })
         }
 

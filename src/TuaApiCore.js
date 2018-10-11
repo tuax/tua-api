@@ -175,6 +175,11 @@ class TuaApiCore {
 
             // 执行完 beforeFn 后执行的函数
             const beforeFnCallback = (rArgs = {}) => {
+                // 兼容小程序传递请求头（建议还是放在中间件中）
+                if (rArgs.header) {
+                    ctx.req.reqFnParams.header = rArgs.header
+                }
+
                 if (!rArgs.params) return
 
                 // 合并 beforeFn 中传入的 params

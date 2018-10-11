@@ -174,7 +174,7 @@ export default {
 最后来看一下 `apis/index.js` 该怎么写：
 
 ```js
-import TuaApi from '@tencent/tua-api' // 小程序用 dist/mp
+import TuaApi from 'tua-api' // 小程序用 dist/mp
 
 // 初始化
 const tuaApi = new TuaApi({ ... })
