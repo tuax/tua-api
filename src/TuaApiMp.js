@@ -1,5 +1,5 @@
 import TuaApiCore from './TuaApiCore'
-import { logger, promisifyWxApi } from './utils'
+import { log, promisifyWxApi } from './utils'
 import {
     MIN_LOADING_TIME,
     WX_VALID_METHODS,
@@ -28,8 +28,8 @@ class TuaApi extends TuaApiCore {
         method = method.toUpperCase()
 
         method === 'GET'
-            ? logger.log(`Req Url: ${fullUrl}`)
-            : logger.log(`Req Url: ${url} \nReq Data:`, data)
+            ? log(`Req Url: ${fullUrl}`)
+            : log(`Req Url: ${url} \nReq Data:`, data)
 
         const lastLoadingTime = Date.now()
 
@@ -58,4 +58,7 @@ class TuaApi extends TuaApiCore {
 }
 
 export default TuaApi
-export * from './exportUtils'
+export {
+    getSyncFnMapByApis,
+    getPreFetchFnKeysBySyncFnMap,
+} from './exportUtils'

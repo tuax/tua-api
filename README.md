@@ -174,7 +174,7 @@ export default {
 最后来看一下 `apis/index.js` 该怎么写：
 
 ```js
-import TuaApi, { getAllApis } from 'tua-api' // 小程序用 'tua-api/dist/mp'
+import TuaApi from '@tencent/tua-api' // 小程序用 dist/mp
 
 // 初始化
 const tuaApi = new TuaApi({ ... })
@@ -193,10 +193,8 @@ tuaApi
     // 链式调用
     .use(...)
 
-// 导出当前文件夹下所有接口
-getAllApis(__dirname).forEach(({ cfg, apiName }) => {
-    module.exports[apiName] = tuaApi.getApi(cfg)
-})
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)
 ```
 
 小程序端建议使用 [@tua-mp/cli](https://tuateam.github.io/tua-mp/tua-mp-cli/) 一键生成 api。

@@ -1,23 +1,10 @@
 import {
-    upperFirst,
     promisifyWxApi,
     checkArrayParams,
     getDefaultParamObj,
     getParamStrFromObj,
-    hyphenCaseToCamelCase,
     apiConfigToReqFnParams,
-} from '../../src/utils/'
-
-test('upperFirst', () => {
-    expect(upperFirst('')).toBe('')
-    expect(upperFirst('aaa')).toBe('Aaa')
-})
-
-test('hyphenCaseToCamelCase', () => {
-    expect(hyphenCaseToCamelCase('')).toBe('')
-    expect(hyphenCaseToCamelCase('a-b-c')).toBe('aBC')
-    expect(hyphenCaseToCamelCase('a-bc-de')).toBe('aBcDe')
-})
+} from '../../src/utils'
 
 test('promisifyWxApi', () => {
     const fn = ({ success }) => setTimeout(() => success('test'), 0)

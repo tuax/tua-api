@@ -5,25 +5,7 @@ import {
     merge,
     reduce,
 } from './fp'
-import { logger } from './logger'
-
-// 首字母大写
-const upperFirst = (str) => {
-    if (!str) return str
-
-    return str.slice(0, 1).toUpperCase() + str.slice(1)
-}
-
-// 连字符转成小驼峰
-const hyphenCaseToCamelCase = (str) => {
-    if (!str) return str
-
-    const arr = str.split('-').filter(x => x)
-    const firstWord = arr.shift()
-    const lastWords = arr.reduce((acc, cur) => acc + upperFirst(cur), '')
-
-    return firstWord + lastWords
-}
+import { warn } from './logger'
 
 /**
  * 将对象序列化为 queryString 的形式
@@ -47,7 +29,7 @@ const checkArrayParams = ({ args, params, apiName }) => {
     if (!Array.isArray(params)) return true
 
     if (Object.keys(args).length !== params.length) {
-        logger.warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
+        warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
         return false
     }
 
@@ -95,10 +77,8 @@ const apiConfigToReqFnParams = ({ pathList, ...rest }) =>
     map((pathObj) => ({ ...rest, ...pathObj }))(pathList)
 
 export {
-    upperFirst,
     checkArrayParams,
     getDefaultParamObj,
     getParamStrFromObj,
-    hyphenCaseToCamelCase,
     apiConfigToReqFnParams,
 }

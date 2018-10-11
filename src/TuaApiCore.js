@@ -3,7 +3,7 @@ import koaCompose from 'koa-compose'
 import {
     map,
     pipe,
-    logger,
+    error,
     mergeAll,
     apiConfigToReqFnParams,
 } from './utils'
@@ -81,7 +81,7 @@ class TuaApiCore {
      */
     _checkReqType () {
         if (VALID_REQ_TYPES.indexOf(this.reqType) === -1) {
-            logger.error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
+            error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
             throw TypeError(`invalid reqType`)
         }
     }
@@ -175,11 +175,6 @@ class TuaApiCore {
 
             // 执行完 beforeFn 后执行的函数
             const beforeFnCallback = (rArgs = {}) => {
-                // 兼容小程序传递请求头（建议还是放在中间件中）
-                if (rArgs.header) {
-                    ctx.req.reqFnParams.header = rArgs.header
-                }
-
                 if (!rArgs.params) return
 
                 // 合并 beforeFn 中传入的 params

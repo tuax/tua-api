@@ -1,6 +1,5 @@
-import TuaApi, { getAllApis } from '../../src/TuaApiWeb'
+import TuaApi from '../../src/TuaApiWeb'
 
-// 初始化
 const tuaApi = new TuaApi({
     host: 'http://example-base.com/',
     // 默认用 jsonp 的方式，不填默认用 axios
@@ -18,7 +17,5 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
-// 导出当前文件夹下所有接口
-getAllApis(__dirname).forEach(({ cfg, apiName }) => {
-    module.exports[apiName] = tuaApi.getApi(cfg)
-})
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)

@@ -1,13 +1,13 @@
 import fetchJsonp from 'fetch-jsonp'
 
-import { fakeGetApi } from '../../examples/apis-web/'
+import { fakeGet } from '../../examples/apis-web/'
 
 jest.mock('fetch-jsonp')
 
-const reqAP = fakeGetApi['array-params']
-const reqOP = fakeGetApi['object-params']
-const reqACP = fakeGetApi['async-common-params']
-const reqIRT = fakeGetApi['invalid-req-type']
+const reqAP = fakeGet['array-params']
+const reqOP = fakeGet['object-params']
+const reqACP = fakeGet['async-common-params']
+const reqIRT = fakeGet['invalid-req-type']
 
 const returnVal = { code: 0, data: 'array data' }
 

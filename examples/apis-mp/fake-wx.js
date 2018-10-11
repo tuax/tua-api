@@ -5,7 +5,7 @@ export default {
     // 该参数表示请求的中间路径，建议与文件同名，以便后期维护。
     prefix: 'fake-wx',
 
-    // 所有请求类型（可选值 OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT）
+    // 所有请求类型（历史原因，默认为 post，可选值 OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT）
     type: 'post',
 
     // 所有请求都需要携带的参数，例如小程序中的所有接口都要携带以下参数 `from=miniprogram`
@@ -24,16 +24,12 @@ export default {
          */
         {
             path: 'fail',
-            beforeFn: () => Promise.resolve({
-                header: { cookie: '123' },
-            }),
         },
         /**
          * array-data
          */
         {
             path: 'array-data',
-            type: 'get',
             params: ['param1', 'param2'],
         },
         /**
