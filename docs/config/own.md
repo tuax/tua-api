@@ -1,6 +1,43 @@
 # 自身配置
 自身配置指的是填写在 `pathList` 中的配置。这部分的配置优先级最高。
 
+以下接口以导出为 `exampleApi` 为例。
+
+## path 接口地址
+```js
+export default {
+    pathList: [
+        {
+            path: 'foo-bar',
+        },
+    ],
+}
+```
+
+即接口地址的最后部分。默认这样调用
+
+```js
+exampleApi['foo-bar]({ ... })
+```
+
+## name 接口名称（可省略）
+```js
+export default {
+    pathList: [
+        {
+            path: 'foo-bar',
+            name: 'fooBar',
+        },
+    ],
+}
+```
+
+有时接口地址较长，可以添加 `name` 配置重命名接口，这样就可以这样调用
+
+```js
+exampleApi.fooBar({ ... })
+```
+
 ## params 接口参数
 
 ```js
