@@ -17,7 +17,7 @@ export default {
 即接口地址的最后部分。默认这样调用
 
 ```js
-exampleApi['foo-bar]({ ... })
+exampleApi['foo-bar']({ ... })
 ```
 
 ## name 接口名称（可省略）
