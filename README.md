@@ -175,8 +175,6 @@ export default {
 
 ```js
 import TuaApi from 'tua-api' // 小程序用 dist/mp
-import fakeGetConfig from './fake-get'
-import fakePostConfig from './fake-post'
 
 // 初始化
 const tuaApi = new TuaApi({ ... })
@@ -195,15 +193,14 @@ tuaApi
     // 链式调用
     .use(...)
 
-// 生成请求函数对象
-const fakeGet = tuaApi.getApi(fakeGetConfig)
-const fakePost = tuaApi.getApi(fakePostConfig)
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)
+```
 
-export {
-    fakeGet,
-    fakePost,
-}
+小程序端建议使用 [@tua-mp/cli](https://tuateam.github.io/tua-mp/tua-mp-cli/) 一键生成 api。
 
+```bash
+$ tuamp add api <api-name>
 ```
 
 ### 配置的构成

@@ -14,6 +14,9 @@ export default {
     // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
     axiosOptions: { timeout: 10 * 1000 },
 
+    // 是否使用在 index.js 中定义的全局中间件，默认为 true
+    useGlobalMiddleware: false,
+
     // 中间件函数数组
     middleware: [
         // (ctx, next) => {

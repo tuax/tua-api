@@ -1,5 +1,4 @@
 import TuaApi from '../../src/TuaApiMp'
-import fakeWxConfig from './fake-wx'
 
 const tuaApi = new TuaApi()
 
@@ -14,8 +13,4 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
-const fakeWx = tuaApi.getApi(fakeWxConfig)
-
-export {
-    fakeWx,
-}
+export const fakeWx = tuaApi.getApi(require('./fake-wx').default)

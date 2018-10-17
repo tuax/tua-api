@@ -11,6 +11,9 @@ export default {
     // 所有请求都需要携带的参数，例如小程序中的所有接口都要携带以下参数 `from=miniprogram`
     commonParams: { from: 'miniprogram' },
 
+    // 是否使用在 index.js 中定义的全局中间件，默认为 true
+    useGlobalMiddleware: false,
+
     // 所有请求发起时是否自动展示 loading（默认为 true）
     // isShowLoading: true,
 
@@ -27,12 +30,14 @@ export default {
             beforeFn: () => Promise.resolve({
                 header: { cookie: '123' },
             }),
+            useGlobalMiddleware: true,
         },
         /**
          * array-data
          */
         {
             path: 'array-data',
+            name: 'arrayData',
             type: 'get',
             params: ['param1', 'param2'],
         },

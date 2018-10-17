@@ -1,7 +1,7 @@
 import { fakeWx } from '../../examples/apis-mp/'
 
 const reqF = fakeWx['fail']
-const reqAD = fakeWx['array-data']
+const reqAD = fakeWx.arrayData
 const reqOD = fakeWx['object-data']
 const reqNB = fakeWx['no-beforeFn']
 const reqHL = fakeWx['hide-loading']

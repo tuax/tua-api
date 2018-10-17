@@ -1,6 +1,4 @@
 import TuaApi from '../../src/TuaApiWeb'
-import fakeGetConfig from './fake-get'
-import fakePostConfig from './fake-post'
 
 const tuaApi = new TuaApi({
     host: 'http://example-base.com/',
@@ -9,20 +7,15 @@ const tuaApi = new TuaApi({
 })
 
 // 使用中间件
-// tuaApi.use(async (ctx, next) => {
-//     // 请求发起前
-//     console.log('before: ', ctx)
+tuaApi.use(async (ctx, next) => {
+    // 请求发起前
+    // console.log('before: ', ctx)
 
-//     await next()
+    await next()
 
-//     // 响应返回后
-//     console.log('after: ', ctx)
-// })
+    // 响应返回后
+    // console.log('after: ', ctx)
+})
 
-const fakeGet = tuaApi.getApi(fakeGetConfig)
-const fakePost = tuaApi.getApi(fakePostConfig)
-
-export {
-    fakeGet,
-    fakePost,
-}
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)

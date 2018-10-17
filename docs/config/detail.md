@@ -115,6 +115,11 @@ const afterFn = ([x]) => x
 * 可选值: wx.hideNavigationBarLoading
 * 或者调用你自己定义的隐藏 loading 方法...
 
+## useGlobalMiddleware 使用全局中间件
+是否使用全局中间件，默认为 true。
+
+适用于某些接口正好不需要调用在 `tua-api` 初始化时定义的全局中间件的情况。
+
 ## pathList 各个接口自身配置数组
 这个数组中填写的是接口最后的地址。
 

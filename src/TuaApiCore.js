@@ -89,15 +89,20 @@ class TuaApiCore {
     /**
      * 组合生成中间件函数
      * @param {Function[]} middleware
+     * @param {Boolean} useGlobalMiddleware 是否使用全局中间件
      */
-    _getMiddlewareFn (middleware) {
+    _getMiddlewareFn (middleware, useGlobalMiddleware) {
+        const middlewareFns = useGlobalMiddleware
+            ? this.middleware.concat(middleware)
+            : middleware
+
         return koaCompose([
             // 记录时间
             recordReqTimeMiddleware,
             // 格式化生成请求参数
             formatReqParamsMiddleware,
             // 业务侧中间件函数数组
-            ...this.middleware.concat(middleware),
+            ...middlewareFns,
             // 更新请求参数
             updateFullUrlMiddleware,
             // 统一转换响应数据为对象
@@ -125,6 +130,7 @@ class TuaApiCore {
      * @param {Function} afterFn 在请求完成后执行的钩子函数（将被废弃）
      * @param {Function} beforeFn 在请求发起前执行的钩子函数（将被废弃）
      * @param {Function[]} middleware 中间件函数数组
+     * @param {Boolean} useGlobalMiddleware 是否使用全局中间件
      * @return {Object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
@@ -136,6 +142,7 @@ class TuaApiCore {
         afterFn = ([x]) => x,
         beforeFn = Promise.resolve.bind(Promise),
         middleware = [],
+        useGlobalMiddleware = true,
         ...rest
     }) {
         // 优先使用 name
@@ -171,7 +178,7 @@ class TuaApiCore {
             }
 
             // 中间件函数
-            const middlewareFn = this._getMiddlewareFn(middleware)
+            const middlewareFn = this._getMiddlewareFn(middleware, useGlobalMiddleware)
 
             // 执行完 beforeFn 后执行的函数
             const beforeFnCallback = (rArgs = {}) => {
