@@ -12,6 +12,10 @@ export default {
         name: 'TuaApi',
         format: 'umd',
         exports: 'named',
+        globals: {
+            axios: 'axios',
+            'fetch-jsonp': 'fetchJsonp',
+        },
     }, {
         file: 'dist/es.js',
         format: 'es',
@@ -28,9 +32,5 @@ export default {
             'process.env.NODE_ENV': JSON.stringify('prod'),
         }),
     ],
-    globals: {
-        axios: 'axios',
-        'fetch-jsonp': 'fetchJsonp',
-    },
     external: ['axios', 'fetch-jsonp'],
 }

@@ -64,7 +64,7 @@ storage
 
 * host: `https://example-base.com/foo/bar/`
 * prefix: `something`
-* pathList: `[ 'create', 'modify', 'delete ]`
+* pathList: `[ 'create', 'modify', 'delete' ]`
 
 ### 文件结构
 `api/` 一般是这样的文件结构：

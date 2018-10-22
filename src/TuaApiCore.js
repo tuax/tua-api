@@ -1,7 +1,9 @@
 import koaCompose from 'koa-compose'
 
+import { version } from '../package.json'
 import {
     map,
+    log,
     pipe,
     error,
     mergeAll,
@@ -16,6 +18,8 @@ import {
     updateFullUrlMiddleware,
     formatReqParamsMiddleware,
 } from './middlewareFns'
+
+log(`Version: ${version}`)
 
 class TuaApiCore {
     /**
