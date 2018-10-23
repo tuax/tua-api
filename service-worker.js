@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "0fc6ae662ca0a46c350598ea62572dce"
+    "revision": "964758408c72deb871593c116f433a4d"
   },
   {
     "url": "assets/css/1.styles.babd7481.css",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "revision": "df7c35ec8029dbbde0735a45f875eaf7"
   },
   {
-    "url": "assets/css/styles.a6a2dc71.css",
+    "url": "assets/css/styles.0ef97cc4.css",
     "revision": "5f4e33fe0881a45048694069c94020ff"
   },
   {
@@ -84,28 +84,28 @@ self.__precacheManifest = [
     "revision": "2f9ce721f838bf56037aa074e87ca314"
   },
   {
-    "url": "assets/js/app.a6a2dc71.js",
-    "revision": "b7162713a0226ce65eb9d4dbf8261621"
+    "url": "assets/js/app.0ef97cc4.js",
+    "revision": "49c0f5297e75e855c4aab14a51cde070"
   },
   {
     "url": "config/default.html",
-    "revision": "7d8b7b8c62230ba5818cf55623795bf0"
+    "revision": "4a092c99430dd32be02459a2ab86d51d"
   },
   {
     "url": "config/detail.html",
-    "revision": "48d364b610ee415a5b28d7d7b5ed3543"
+    "revision": "c8a122f254de645ffe9ff6cc6b3cf590"
   },
   {
     "url": "config/index.html",
-    "revision": "c1d68090d0766b89807d814750c2e8f2"
+    "revision": "7e93803a46053e63b59adea7e01a45ad"
   },
   {
     "url": "config/own.html",
-    "revision": "3a81d2f6dca66dd2cf6e0c6f76288ed6"
+    "revision": "30437b37f2c36f8f04dbcff5a11d2f1b"
   },
   {
     "url": "index.html",
-    "revision": "de15ac547d8c5c5db563049333bd7c85"
+    "revision": "2b7ecf170024e88d80278b3758301901"
   },
   {
     "url": "logo.png",
@@ -113,19 +113,19 @@ self.__precacheManifest = [
   },
   {
     "url": "quick-start/export-utils.html",
-    "revision": "16031fc9dcb119df5ca3e370fe092889"
+    "revision": "0e533c75d449e6018c5f1b80e4415e99"
   },
   {
     "url": "quick-start/index.html",
-    "revision": "0da5324de192c848dfa3b2704487097f"
+    "revision": "be4ec5f8c469208c523f7ed345c1c485"
   },
   {
     "url": "quick-start/installation.html",
-    "revision": "2e5dc1cba91ea55e6cdc2ed31a1f6293"
+    "revision": "c2a8f23766a67cf9b590b5e873a197ef"
   },
   {
     "url": "quick-start/middleware.html",
-    "revision": "aa604b71b2a2610def1a1207529ca5a5"
+    "revision": "b5ed4b9659b817cdcd1cd92f14ac5429"
   },
   {
     "url": "standard.svg",
