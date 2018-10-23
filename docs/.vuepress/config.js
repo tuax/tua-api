@@ -29,7 +29,7 @@ module.exports = {
             {
                 text: '生态系统',
                 items: [
-                    { text: '本地存储', link: 'https://tuateam.github.io/tua-mp/tua-storage/' },
+                    { text: '本地存储', link: 'https://tuateam.github.io/tua-storage/' },
                     { text: '小程序框架', link: 'https://tuateam.github.io/tua-mp/' },
                 ],
             },
