@@ -18,6 +18,9 @@ describe('middleware', () => {
     const tuaApi = new TuaApiMp()
     const globalMiddlewareFn = jest.fn(async (ctx, next) => {
         await next()
+
+        expect(ctx.endTime).toBeDefined()
+        expect(ctx.reqTime).toBeDefined()
     })
     tuaApi.use(globalMiddlewareFn)
 
