@@ -16,6 +16,7 @@ import {
     formatResDataMiddleware,
     recordReqTimeMiddleware,
     updateFullUrlMiddleware,
+    recordStartTimeMiddleware,
     formatReqParamsMiddleware,
 } from './middlewareFns'
 
@@ -101,12 +102,14 @@ class TuaApiCore {
             : middleware
 
         return koaCompose([
-            // 记录时间
-            recordReqTimeMiddleware,
+            // 记录开始时间
+            recordStartTimeMiddleware,
             // 格式化生成请求参数
             formatReqParamsMiddleware,
             // 业务侧中间件函数数组
             ...middlewareFns,
+            // 记录结束时间
+            recordReqTimeMiddleware,
             // 更新请求参数
             updateFullUrlMiddleware,
             // 统一转换响应数据为对象

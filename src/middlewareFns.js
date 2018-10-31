@@ -5,13 +5,22 @@ import {
 } from './utils'
 
 /**
- * 记录请求开始时间、接受响应时间和请求总时间的中间件
+ * 记录请求开始时间
+ * @param {Object} ctx 上下文对象
+ * @param {Function} next 转移控制权给下一个中间件的函数
+ */
+const recordStartTimeMiddleware = (ctx, next) => {
+    ctx.startTime = Date.now()
+
+    return next()
+}
+
+/**
+ * 记录接受响应时间和请求总时间的中间件
  * @param {Object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const recordReqTimeMiddleware = (ctx, next) => {
-    ctx.startTime = Date.now()
-
     return next().then(() => {
         ctx.endTime = Date.now()
         ctx.reqTime = Date.now() - ctx.startTime
@@ -98,5 +107,6 @@ export {
     recordReqTimeMiddleware,
     formatResDataMiddleware,
     updateFullUrlMiddleware,
+    recordStartTimeMiddleware,
     formatReqParamsMiddleware,
 }
