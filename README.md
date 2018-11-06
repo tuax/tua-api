@@ -132,9 +132,9 @@ storage
 ### 地址结构划分
 以上地址，一般将其分为`3`部分：
 
-* host: `https://example-base.com/foo/bar/`
-* prefix: `something`
-* pathList: `[ 'create', 'modify', 'delete ]`
+* host: `'https://example-base.com/foo/bar/'`
+* prefix: `'something'`
+* pathList: `[ 'create', 'modify', 'delete' ]`
 
 ### 文件结构
 `api/` 一般是这样的文件结构：
