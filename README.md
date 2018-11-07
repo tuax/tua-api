@@ -168,7 +168,7 @@ export default {
 }
 ```
 
-[更多配置请点击这里查看](./docs/config/default.md)
+[更多配置请点击这里查看](https://tuateam.github.io/tua-api/config/detail.html)
 
 ### 配置导出
 最后来看一下 `apis/index.js` 该怎么写：
