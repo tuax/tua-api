@@ -26,7 +26,7 @@ function (ctx, next) {
 
     // 传递控制权给下一个中间件
     return next().then(() => {
-        // 注意这里才有响应响应！
+        // 注意这里才有响应！
         ctx.res       // 响应对象
         ctx.res.data  // 响应的数据
         ctx.reqTime   // 请求花费的时间
@@ -41,7 +41,7 @@ async function (ctx, next) {
     // 传递控制权给下一个中间件
     await next()
 
-    // 注意这里才有响应响应！
+    // 注意这里才有响应！
     ctx.res // 响应对象
 }
 ```

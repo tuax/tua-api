@@ -29,8 +29,15 @@ fooApi
 ```js
 // 甚至可以更进一步和 tua-storage 配合使用
 import TuaStorage from 'tua-storage'
+// 小程序端要引入 'tua-api/dist/mp'
+import { getSyncFnMapByApis } from 'tua-api'
 
-const storage = new TuaStorage({ ... })
+// 本地写好的各种接口配置
+import * as apis from '@/apis'
+
+const tuaStorage = new TuaStorage({
+    syncFnMap: getSyncFnMapByApis(apis),
+})
 
 const fetchParam = {
     key: fooApi.bar.key,
