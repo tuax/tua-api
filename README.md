@@ -20,8 +20,9 @@
 
 目前已适配：
 
-* web 端：`tua-api`
-* 小程序端：`tua-api/dist/mp`
+* web 端：直接引入 `tua-api` (axios, fetch-jsonp)
+* Node 端：直接引入 `tua-api` (axios)
+* 小程序端：引入 `tua-api/dist/mp` (wx.request)
 
 ## 安装
 ### web 端
