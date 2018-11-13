@@ -1,6 +1,6 @@
-import TuaApi from '../../src/TuaApiMp'
+import TuaApi from '../../src/TuaApi'
 
-const tuaApi = new TuaApi()
+const tuaApi = new TuaApi({ reqType: 'wx' })
 
 // 使用中间件
 tuaApi.use(async (ctx, next) => {

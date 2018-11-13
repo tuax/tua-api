@@ -6,7 +6,7 @@ import { eslint } from 'rollup-plugin-eslint'
 import nodeResolve from 'rollup-plugin-node-resolve'
 
 export default {
-    input: 'src/TuaApiWeb.js',
+    input: 'src/TuaApi.js',
     output: [{
         file: 'dist/umd.js',
         name: 'TuaApi',
@@ -24,9 +24,7 @@ export default {
         eslint(),
         json(),
         nodeResolve(),
-        babel({
-            plugins: [['ramda', { useES: true }]],
-        }),
+        babel(),
         commonjs(),
         replace({
             'process.env.NODE_ENV': JSON.stringify('prod'),

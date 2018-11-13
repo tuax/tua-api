@@ -4,9 +4,9 @@
 
 目前已适配：
 
-* web 端：直接引入 `tua-api` (axios, fetch-jsonp)
-* Node 端：直接引入 `tua-api` (axios)
-* 小程序端：引入 `tua-api/dist/mp` (wx.request)
+* web 端：axios, fetch-jsonp
+* Node 端：axios
+* 小程序端：wx.request
 
 ## `tua-api` 能干什么？
 `tua-api` 能实现统一管理 api 配置（例如一般放在 `src/apis/` 下）。经过处理后，业务侧代码只需要这样写即可：
@@ -30,7 +30,6 @@ fooApi
 ```js
 // 甚至可以更进一步和 tua-storage 配合使用
 import TuaStorage from 'tua-storage'
-// 小程序端要引入 'tua-api/dist/mp'
 import { getSyncFnMapByApis } from 'tua-api'
 
 // 本地写好的各种接口配置
@@ -112,7 +111,7 @@ export default {
 最后来看一下 `apis/index.js` 该怎么写：
 
 ```js
-import TuaApi from 'tua-api' // 小程序用 dist/mp
+import TuaApi from 'tua-api'
 
 // 初始化
 const tuaApi = new TuaApi({ ... })

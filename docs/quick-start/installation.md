@@ -44,7 +44,7 @@ $ yarn add fetch-jsonp
 :::
 
 ## 小程序端
-### 安装本体
+### 安装本体即可
 
 ```bash
 $ npm i -S tua-api
@@ -52,13 +52,9 @@ $ npm i -S tua-api
 $ yarn add tua-api
 ```
 
-**注意并非直接导入！**，因为正宫是 web 端...
-
 ```js
-import TuaApi from 'tua-api/dist/mp'
+import TuaApi from 'tua-api
 ```
-
-或者在 webpack 配置中，设置 `alias`。
 
 ::: tip
 小程序还用不了 npm？[@tua-mp/service](https://tuateam.github.io/tua-mp/tua-mp-service/) 了解一下？

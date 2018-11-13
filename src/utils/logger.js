@@ -11,12 +11,8 @@ const logByType = (type) => (...out) => {
     console[type](`[TUA-API]:`, ...out)
 }
 
-const log = logByType('log')
-const warn = logByType('warn')
-const error = logByType('error')
-
-export {
-    log,
-    warn,
-    error,
+export const logger = {
+    log: logByType('log'),
+    warn: logByType('warn'),
+    error: logByType('error'),
 }

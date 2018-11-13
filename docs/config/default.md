@@ -2,7 +2,7 @@
 默认配置指的就是在 `tua-api` 初始化时传递的配置
 
 ```js
-import TuaApi from 'tua-api' // 小程序用 tua-api/dist/mp
+import TuaApi from 'tua-api'
 
 new TuaApi({
     host,

@@ -26,6 +26,7 @@ export default {
         {
             path: 'array-params',
             type: 'post',
+            reqType: 'axios',
             params: ['param1', 'param2'],
         },
         /**

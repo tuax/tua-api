@@ -3,15 +3,19 @@ import koaCompose from 'koa-compose'
 import { version } from '../package.json'
 import {
     map,
-    log,
     pipe,
-    error,
+    logger,
     mergeAll,
     apiConfigToReqFnParams,
 } from './utils'
 import {
     VALID_REQ_TYPES,
 } from './constants'
+import {
+    getWxPromise,
+    getAxiosPromise,
+    getFetchJsonpPromise,
+} from './adapters/'
 import {
     formatResDataMiddleware,
     recordReqTimeMiddleware,
@@ -20,16 +24,17 @@ import {
     formatReqParamsMiddleware,
 } from './middlewareFns'
 
-log(`Version: ${version}`)
+logger.log(`Version: ${version}`)
 
-class TuaApiCore {
+class TuaApi {
     /**
-     * @param {String} host 服务器基础地址，例如 https://example.com/
-     * @param {String} reqType 请求类型
-     * @param {Function[]} middleware 中间件函数数组
-     * @param {Object} axiosOptions 透传 axios 配置参数
-     * @param {Object} jsonpOptions 透传 fetch-jsonp 配置参数
-     * @param {Object} defaultErrorData 出错时的默认数据
+     * @param {Object} options
+     * @param {String} options.host 服务器基础地址，例如 https://example.com/
+     * @param {String} options.reqType 请求类型
+     * @param {Function[]} options.middleware 中间件函数数组
+     * @param {Object} options.axiosOptions 透传 axios 配置参数
+     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @param {Object} options.defaultErrorData 出错时的默认数据
      */
     constructor ({
         host,
@@ -63,6 +68,7 @@ class TuaApiCore {
             throw TypeError('middleware must be a function!')
         }
         this.middleware.push(fn)
+
         return this
     }
 
@@ -82,11 +88,63 @@ class TuaApiCore {
     /* -- 各种私有方法 -- */
 
     /**
+     * 根据 reqType 和 type 决定调用哪个库
+     * @param {Object} options
+     * @param {String} options.url 接口地址
+     * @param {String} options.type 接口请求类型 get/post...
+     * @param {String} options.fullUrl 完整接口地址（）
+     * @param {String} options.path 接口路径名称
+     * @return {Promise}
+     */
+    _reqFn ({
+        url,
+        type,
+        fullUrl,
+        reqType,
+        reqParams: data,
+        callbackName,
+        jsonpOptions,
+        axiosOptions,
+        ...rest
+    }) {
+        if (VALID_REQ_TYPES.indexOf(reqType) === -1) {
+            logger.error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
+            throw Error('invalid reqType')
+        }
+
+        const method = type.toUpperCase()
+
+        if (reqType === 'wx') {
+            return getWxPromise({ url, data, method, ...rest })
+        }
+
+        if (reqType === 'axios') {
+            const params = {
+                url: method === 'GET' ? fullUrl : url,
+                data,
+                method,
+                ...axiosOptions,
+                ...rest,
+            }
+
+            return getAxiosPromise(params)
+        }
+
+        // 对于 post 请求使用 axios
+        return method === 'POST'
+            ? getAxiosPromise({ url, data, ...axiosOptions })
+            : getFetchJsonpPromise({
+                url: fullUrl,
+                jsonpOptions: { ...jsonpOptions, callbackName },
+            })
+    }
+
+    /**
      * 检查 reqType 是否合法
      */
     _checkReqType () {
         if (VALID_REQ_TYPES.indexOf(this.reqType) === -1) {
-            error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
+            logger.error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
             throw TypeError(`invalid reqType`)
         }
     }
@@ -108,15 +166,15 @@ class TuaApiCore {
             formatReqParamsMiddleware,
             // 业务侧中间件函数数组
             ...middlewareFns,
-            // 记录结束时间
-            recordReqTimeMiddleware,
             // 更新请求参数
             updateFullUrlMiddleware,
             // 统一转换响应数据为对象
             formatResDataMiddleware,
+            // 记录结束时间
+            recordReqTimeMiddleware,
             // 发起请求
             (ctx, next) => next()
-                .then(() => this.reqFn(ctx.req.reqFnParams))
+                .then(() => this._reqFn(ctx.req.reqFnParams))
                 // 暂存出错，保证 afterFn 能执行（finally）
                 .catch((error) => ({
                     // 浅拷贝一份默认出错值
@@ -129,15 +187,16 @@ class TuaApiCore {
 
     /**
      * 接受 api 对象，返回待接收参数的单个 api 函数的对象
-     * @param {String} type 接口请求类型 get/post...
-     * @param {String} name 自定义的接口名称
-     * @param {String} path 接口路径名称
-     * @param {String[]} params 接口参数数组
-     * @param {String} prefix 接口前缀
-     * @param {Function} afterFn 在请求完成后执行的钩子函数（将被废弃）
-     * @param {Function} beforeFn 在请求发起前执行的钩子函数（将被废弃）
-     * @param {Function[]} middleware 中间件函数数组
-     * @param {Boolean} useGlobalMiddleware 是否使用全局中间件
+     * @param {Object} options
+     * @param {String} options.type 接口请求类型 get/post...
+     * @param {String} options.name 自定义的接口名称
+     * @param {String} options.path 接口路径名称
+     * @param {String[]} options.params 接口参数数组
+     * @param {String} options.prefix 接口前缀
+     * @param {Function} options.afterFn 在请求完成后执行的钩子函数（将被废弃）
+     * @param {Function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
+     * @param {Function[]} options.middleware 中间件函数数组
+     * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
      * @return {Object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
@@ -169,7 +228,8 @@ class TuaApiCore {
         /**
          * 被业务侧调用的函数
          * @param {Object} args 接口参数（覆盖默认值）
-         * @param {String} callbackName 自定义回调函数名称（用于 jsonp）
+         * @param {Object} options
+         * @param {String} options.callbackName 自定义回调函数名称（用于 jsonp）
          * @return {Promise}
          */
         const apiFn = (
@@ -228,6 +288,5 @@ class TuaApiCore {
     }
 }
 
-export default TuaApiCore
-export * from './utils/logger'
+export default TuaApi
 export * from './exportUtils'

@@ -20,9 +20,9 @@
 
 目前已适配：
 
-* web 端：直接引入 `tua-api` (axios, fetch-jsonp)
-* Node 端：直接引入 `tua-api` (axios)
-* 小程序端：引入 `tua-api/dist/mp` (wx.request)
+* web 端：axios, fetch-jsonp
+* Node 端：axios
+* 小程序端：wx.request
 
 ## 安装
 ### web 端
@@ -62,7 +62,7 @@ $ yarn add fetch-jsonp
 但是 jsonp 只支持使用 get 的方式请求，所以如果需要发送 post 或其他方式的请求，还是需要装 `axios`。
 
 ### 小程序端
-#### 安装本体
+#### 安装本体即可
 
 ```bash
 $ npm i -S tua-api
@@ -70,13 +70,9 @@ $ npm i -S tua-api
 $ yarn add tua-api
 ```
 
-**注意并非直接导入！**因为正宫是 web 端...
-
 ```js
-import TuaApi from 'tua-api/dist/mp'
+import TuaApi from 'tua-api'
 ```
-
-或者在 webpack 配置中，设置 `alias`。
 
 ## `tua-api` 能干什么？
 `tua-api` 能实现统一管理 api 配置（例如一般放在 `src/apis/` 下）。经过处理后，业务侧代码只需要这样写即可：
@@ -175,7 +171,7 @@ export default {
 最后来看一下 `apis/index.js` 该怎么写：
 
 ```js
-import TuaApi from 'tua-api' // 小程序用 dist/mp
+import TuaApi from 'tua-api'
 
 // 初始化
 const tuaApi = new TuaApi({ ... })
