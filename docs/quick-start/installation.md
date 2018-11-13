@@ -53,7 +53,7 @@ $ yarn add tua-api
 ```
 
 ```js
-import TuaApi from 'tua-api
+import TuaApi from 'tua-api'
 ```
 
 ::: tip
