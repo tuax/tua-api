@@ -54,6 +54,8 @@ $ yarn add tua-api
 
 ```js
 import TuaApi from 'tua-api'
+
+const tuaApi = new TuaApi({ reqType: 'wx' })
 ```
 
 ::: tip
