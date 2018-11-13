@@ -4,8 +4,9 @@
 
 目前已适配：
 
-* web 端：`tua-api`
-* 小程序端：`tua-api/dist/mp`
+* web 端：直接引入 `tua-api` (axios, fetch-jsonp)
+* Node 端：直接引入 `tua-api` (axios)
+* 小程序端：引入 `tua-api/dist/mp` (wx.request)
 
 ## `tua-api` 能干什么？
 `tua-api` 能实现统一管理 api 配置（例如一般放在 `src/apis/` 下）。经过处理后，业务侧代码只需要这样写即可：
