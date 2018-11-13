@@ -74,6 +74,8 @@ $ yarn add tua-api
 import TuaApi from 'tua-api'
 ```
 
+> 小程序还用不了 npm？[@tua-mp/service](https://tuateam.github.io/tua-mp/tua-mp-service/) 了解一下？
+
 ## `tua-api` 能干什么？
 `tua-api` 能实现统一管理 api 配置（例如一般放在 `src/apis/` 下）。经过处理后，业务侧代码只需要这样写即可：
 
