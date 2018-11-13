@@ -5,7 +5,7 @@ import {
     merge,
     reduce,
 } from './fp'
-import { warn } from './logger'
+import { logger } from './logger'
 
 /**
  * 将对象序列化为 queryString 的形式
@@ -29,7 +29,7 @@ const checkArrayParams = ({ args, params, apiName }) => {
     if (!Array.isArray(params)) return true
 
     if (Object.keys(args).length !== params.length) {
-        warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
+        logger.warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
         return false
     }
 

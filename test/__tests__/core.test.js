@@ -1,21 +1,20 @@
 import fakeGet from '../../examples/apis-mp/fake-wx'
-import TuaApiMp from '../../src/TuaApiMp'
-import TuaApiCore from '../../src/TuaApiCore'
+import TuaApi from '../../src/TuaApi'
 
 describe('error handling', () => {
-    const tuaApiCore = new TuaApiCore()
+    const tuaApi = new TuaApi()
 
     test('non-function middleware', () => {
-        expect(() => tuaApiCore.use('')).toThrow(TypeError('middleware must be a function!'))
+        expect(() => tuaApi.use('')).toThrow(TypeError('middleware must be a function!'))
     })
 
     test('unknown reqType', () => {
-        expect(() => new TuaApiCore({ reqType: '' })).toThrow(TypeError(`invalid reqType`))
+        expect(() => new TuaApi({ reqType: '' })).toThrow(TypeError(`invalid reqType`))
     })
 })
 
 describe('middleware', () => {
-    const tuaApi = new TuaApiMp()
+    const tuaApi = new TuaApi({ reqType: 'wx' })
     const globalMiddlewareFn = jest.fn(async (ctx, next) => {
         await next()
 
