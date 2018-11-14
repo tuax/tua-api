@@ -4,6 +4,7 @@ import { version } from '../package.json'
 import {
     map,
     pipe,
+    isWx,
     logger,
     mergeAll,
     apiConfigToReqFnParams,
@@ -25,7 +26,6 @@ import {
 } from './middlewareFns'
 
 logger.log(`Version: ${version}`)
-
 class TuaApi {
     /**
      * @param {Object} options
@@ -38,7 +38,7 @@ class TuaApi {
      */
     constructor ({
         host,
-        reqType = 'axios',
+        reqType = isWx() ? 'wx' : 'axios',
         middleware = [],
         axiosOptions = {},
         jsonpOptions = {},

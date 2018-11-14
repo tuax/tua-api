@@ -1,16 +1,43 @@
-import { fakeWx } from '../../examples/apis-mp/'
+import '../__mocks__/wxMock'
+import TuaApi from '../../src/TuaApi'
+import fakeWx from '../../examples/apis-mp/fake-wx'
+import { fakeWxApi } from '../../examples/apis-mp/'
 
-const reqF = fakeWx['fail']
-const reqAD = fakeWx.arrayData
-const reqOD = fakeWx['object-data']
-const reqNB = fakeWx['no-beforeFn']
-const reqHL = fakeWx['hide-loading']
-const reqTG = fakeWx['type-get']
-const reqUT = fakeWx['unknown-type']
-const reqNL = fakeWx['nav-loading']
+const reqF = fakeWxApi['fail']
+const reqAD = fakeWxApi.arrayData
+const reqOD = fakeWxApi['object-data']
+const reqNB = fakeWxApi['no-beforeFn']
+const reqHL = fakeWxApi['hide-loading']
+const reqTG = fakeWxApi['type-get']
+const reqUT = fakeWxApi['unknown-type']
+const reqNL = fakeWxApi['nav-loading']
 
 const testObjData = { code: 0, data: 'object data' }
 const testArrData = [ 0, 'array data' ]
+
+describe('middleware', () => {
+    const tuaApi = new TuaApi()
+    const fakeWxApi = tuaApi.getApi(fakeWx)
+    const globalMiddlewareFn = jest.fn(async (ctx, next) => {
+        await next()
+
+        expect(ctx.endTime).toBeDefined()
+        expect(ctx.reqTime).toBeDefined()
+    })
+
+    tuaApi.use(globalMiddlewareFn)
+
+    beforeEach(() => {
+        wx.__TEST_DATA__ = { testData: {} }
+    })
+
+    test('useGlobalMiddleware', async () => {
+        await fakeWxApi.arrayData()
+        expect(globalMiddlewareFn).toBeCalledTimes(0)
+        await fakeWxApi.fail()
+        expect(globalMiddlewareFn).toBeCalledTimes(1)
+    })
+})
 
 describe('fake wx requests', () => {
     beforeEach(() => {

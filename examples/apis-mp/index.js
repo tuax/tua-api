@@ -1,6 +1,6 @@
 import TuaApi from '../../src/TuaApi'
 
-const tuaApi = new TuaApi({ reqType: 'wx' })
+const tuaApi = new TuaApi()
 
 // 使用中间件
 tuaApi.use(async (ctx, next) => {
@@ -13,4 +13,4 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
-export const fakeWx = tuaApi.getApi(require('./fake-wx').default)
+export const fakeWxApi = tuaApi.getApi(require('./fake-wx').default)
