@@ -11,7 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js");
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d0a52ba04f1407eb05ae553bac170894"
+    "revision": "27e730cdf88ef76c9ee3d58fc5864087"
   },
   {
     "url": "assets/css/1.styles.babd7481.css",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "revision": "df7c35ec8029dbbde0735a45f875eaf7"
   },
   {
-    "url": "assets/css/styles.832bd99e.css",
+    "url": "assets/css/styles.fec25b36.css",
     "revision": "5f4e33fe0881a45048694069c94020ff"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "revision": "87b26c931f15723340e79b7706f16a71"
   },
   {
-    "url": "assets/js/10.dca29c6e.js",
-    "revision": "db1752b009b6f959046fb3fa6fc9d10a"
+    "url": "assets/js/10.8efd15b5.js",
+    "revision": "e70f42885087076a60af9f54fde49337"
   },
   {
     "url": "assets/js/11.569c83ef.js",
@@ -84,28 +84,28 @@ self.__precacheManifest = [
     "revision": "2f9ce721f838bf56037aa074e87ca314"
   },
   {
-    "url": "assets/js/app.832bd99e.js",
-    "revision": "ef9ef8928252aaab81f1816b8362a0c0"
+    "url": "assets/js/app.fec25b36.js",
+    "revision": "89e9de9ca7ea5d85096243a6f1d66b3b"
   },
   {
     "url": "config/default.html",
-    "revision": "f9cb72f8cc261d7261f7ffd9aa25e6a2"
+    "revision": "773241768b7213fee75d3b126b708085"
   },
   {
     "url": "config/detail.html",
-    "revision": "f41544e1cf5324dd2f78c065510afd7b"
+    "revision": "eb73f102f0d012e79e0aa71e74d16347"
   },
   {
     "url": "config/index.html",
-    "revision": "8fee48c13f7796d6a97c95a554b90b4d"
+    "revision": "6eea7204bad48d47fdcd3e6ae2aaad10"
   },
   {
     "url": "config/own.html",
-    "revision": "7a5dd42f6638fabf37f820f6f14eed01"
+    "revision": "428011d4fe8ef4659a58ef8165f1ea76"
   },
   {
     "url": "index.html",
-    "revision": "d043f618a2095b60b44b9e8a23295ea3"
+    "revision": "9eb4c25ab6040227f0c31fff783de5b3"
   },
   {
     "url": "logo.png",
@@ -113,19 +113,19 @@ self.__precacheManifest = [
   },
   {
     "url": "quick-start/export-utils.html",
-    "revision": "9d0b7d014de9a35c2382df471215ddfc"
+    "revision": "684af3491e301e3bca2dd4b082a9646d"
   },
   {
     "url": "quick-start/index.html",
-    "revision": "6641641f7c3a86d3c83b508d149e4cf6"
+    "revision": "38044f71014d82358b2cd661af3996aa"
   },
   {
     "url": "quick-start/installation.html",
-    "revision": "13cbccd63cb83b9c1a111750ab60eb4a"
+    "revision": "3b37e19446a3509fb3d8c029f1de0db3"
   },
   {
     "url": "quick-start/middleware.html",
-    "revision": "7a71fe41b754cbc8623fbd791c272cfa"
+    "revision": "37a4bfc63fb26deacf59c70fb0b91d33"
   },
   {
     "url": "standard.svg",
