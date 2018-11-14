@@ -60,8 +60,6 @@ $ yarn add tua-api
 
 ```js
 import TuaApi from 'tua-api'
-
-const tuaApi = new TuaApi()
 ```
 
 > 小程序还用不了 npm？[@tua-mp/service](https://tuateam.github.io/tua-mp/tua-mp-service/) 了解一下？
