@@ -1,6 +1,6 @@
 {
     "name": "tua-api",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "main": "dist/umd.js",
     "module": "dist/es.js",
     "jsnext:main": "dist/es.js",

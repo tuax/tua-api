@@ -115,7 +115,7 @@ class TuaApi {
         const method = type.toUpperCase()
 
         if (reqType === 'wx') {
-            return getWxPromise({ url, data, method, ...rest })
+            return getWxPromise({ url, fullUrl, data, method, ...rest })
         }
 
         if (reqType === 'axios') {

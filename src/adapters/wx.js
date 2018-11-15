@@ -3,10 +3,10 @@ import { WX_VALID_METHODS } from '../constants'
 
 export const getWxPromise = ({
     url,
+    data,
     method,
     header,
     fullUrl,
-    reqParams: data,
     isShowLoading = true,
     showLoadingFn = () => wx.showLoading({ title: '加载中' }),
     hideLoadingFn = wx.hideLoading.bind(wx),
