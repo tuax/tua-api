@@ -112,9 +112,9 @@ storage
 ## 怎么写 `api` 配置？
 拿以下 api 地址举例：
 
-* https://example-base.com/foo/bar/something/create
-* https://example-base.com/foo/bar/something/modify
-* https://example-base.com/foo/bar/something/delete
+* `https://example-base.com/foo/bar/something/create`
+* `https://example-base.com/foo/bar/something/modify`
+* `https://example-base.com/foo/bar/something/delete`
 
 ### 地址结构划分
 以上地址，一般将其分为`3`部分：
