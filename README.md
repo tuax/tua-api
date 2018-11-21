@@ -16,7 +16,7 @@
 </p>
 
 ## `tua-api` 是什么？
-`tua-api` 是一个针对发起 api 请求提供辅助功能的库。采用 ES6+ 语法，将全部 api 使用 Promise 包裹，并采用 jest 进行了完整的单元测试。
+`tua-api` 是一个针对发起 api 请求提供辅助功能的库。采用 ES6+ 语法，并采用 jest 进行了完整的单元测试。
 
 目前已适配：
 
@@ -119,8 +119,8 @@ storage
 ### 地址结构划分
 以上地址，一般将其分为`3`部分：
 
-* host: `'https://example-base.com/foo/bar/'`
-* prefix: `'something'`
+* host: `'https://example-base.com/'`
+* prefix: `'foo/bar/something'`
 * pathList: `[ 'create', 'modify', 'delete' ]`
 
 ### 文件结构
@@ -131,7 +131,7 @@ storage
 └── apis
     ├── prefix-1.js
     ├── prefix-2.js
-    ├── something.js // <-- 以上的 api 地址会放在这里
+    ├── something.js // <-- 以上的 api 地址会放在这里，名字随意
     └── index.js
 ```
 
@@ -140,11 +140,11 @@ storage
 // src/apis/something.js
 
 export default {
-    // 请求的公用服务器地址。
-    host: 'http://example-base.com/foo/bar/',
+    // 请求的公用服务器地址
+    host: 'https://example-base.com/',
 
-    // 请求的中间路径，建议与文件同名，以便后期维护。
-    prefix: 'something',
+    // 请求的中间路径
+    prefix: 'foo/bar/something',
 
     // 接口地址数组
     pathList: [
@@ -180,8 +180,7 @@ tuaApi
     // 链式调用
     .use(...)
 
-export const fakeGet = tuaApi.getApi(require('./fake-get').default)
-export const fakePost = tuaApi.getApi(require('./fake-post').default)
+export const somethingApi = tuaApi.getApi(require('./something').default)
 ```
 
 小程序端建议使用 [@tua-mp/cli](https://tuateam.github.io/tua-mp/tua-mp-cli/) 一键生成 api。
