@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d6a2bb7ec06e7af777a05b1d1d38eebe"
+    "revision": "b2277b3fda8c839a5c18af38b1325875"
   },
   {
     "url": "assets/css/1.styles.babd7481.css",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "revision": "df7c35ec8029dbbde0735a45f875eaf7"
   },
   {
-    "url": "assets/css/styles.8ae97d7e.css",
+    "url": "assets/css/styles.1cfae150.css",
     "revision": "5f4e33fe0881a45048694069c94020ff"
   },
   {
@@ -76,36 +76,36 @@ self.__precacheManifest = [
     "revision": "c09c045769ef221523d15eb1f353ec23"
   },
   {
-    "url": "assets/js/8.9c8da6a1.js",
-    "revision": "502aa952ba068700b9dfbe0dc0cb4fa6"
+    "url": "assets/js/8.5eb78e42.js",
+    "revision": "730c370f8ac054a8937b8cb73e6793ee"
   },
   {
     "url": "assets/js/9.c0f68bd3.js",
     "revision": "2f9ce721f838bf56037aa074e87ca314"
   },
   {
-    "url": "assets/js/app.8ae97d7e.js",
-    "revision": "3cb3f20dbe7630bc367096d15d568084"
+    "url": "assets/js/app.1cfae150.js",
+    "revision": "f70b45acc880765959f75524fd210e8e"
   },
   {
     "url": "config/default.html",
-    "revision": "d2312671dd5c32b5bd92521c4a22879a"
+    "revision": "b56e7f989f0da9b418c73773f5ceb2ee"
   },
   {
     "url": "config/detail.html",
-    "revision": "aa9d66acc6f2ccfa3ce80ef44aab1792"
+    "revision": "f3979b7a4c5ae6e56b88bf959c77c07b"
   },
   {
     "url": "config/index.html",
-    "revision": "a514d52b57e07da166ba8abd175d85af"
+    "revision": "104115cf24aa13818184b5bcb22c9b84"
   },
   {
     "url": "config/own.html",
-    "revision": "75b723e70ed287baeae448e8ca4d1986"
+    "revision": "3450d1cdfa3c9ca0e4553cee63b8fa7b"
   },
   {
     "url": "index.html",
-    "revision": "6715694e17fa9d31ae221675145367e0"
+    "revision": "7f74901522f8de4d7e964c99d77ffbf9"
   },
   {
     "url": "logo.png",
@@ -113,19 +113,19 @@ self.__precacheManifest = [
   },
   {
     "url": "quick-start/export-utils.html",
-    "revision": "5031cf4159aba52c2a5baf525e0ea9e1"
+    "revision": "894e076797abe67da5dfa8df5af8a603"
   },
   {
     "url": "quick-start/index.html",
-    "revision": "8d955111ac3b2d0f7564d5c1cb91e196"
+    "revision": "d004f1a4b4d6e7c807ecb6c552555826"
   },
   {
     "url": "quick-start/installation.html",
-    "revision": "8aa8561263bffe648d80c469fcaecb95"
+    "revision": "02390ec1e1fcbd2b8646234b4ca6fdd7"
   },
   {
     "url": "quick-start/middleware.html",
-    "revision": "a2b11cf1e0da3f6e1d9df3ac63fbddf4"
+    "revision": "53f6245767e37c1b07abe23c5069e6c8"
   },
   {
     "url": "standard.svg",
