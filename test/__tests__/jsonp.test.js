@@ -4,45 +4,47 @@ import { fakeGetApi } from '../../examples/apis-web/'
 
 jest.mock('fetch-jsonp')
 
-const reqAP = fakeGetApi['array-params']
-const reqOP = fakeGetApi['object-params']
-const reqACP = fakeGetApi['async-common-params']
-const reqIRT = fakeGetApi['invalid-req-type']
-
+const data = [ 0, 'array data' ]
 const returnVal = { code: 0, data: 'array data' }
 
 describe('fake jsonp requests', () => {
-    test('async-common-params', () => {
-        const data = [ 0, 'array data' ]
-
+    test('async-common-params', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
+        const resData = await fakeGetApi.acp()
 
-        return reqACP().then((resData) => {
-            expect(resData).toEqual(returnVal)
-        })
+        expect(resData).toEqual(returnVal)
     })
 
-    test('array-data', () => {
-        const data = [ 0, 'array data' ]
-
+    test('array-data', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
+        const resData = await fakeGetApi.ap()
 
-        return reqAP().then((resData) => {
-            expect(resData).toEqual(returnVal)
-        })
+        expect(resData).toEqual(returnVal)
     })
 
-    test('object-params', () => {
-        const data = [ 0, 'array data' ]
-
+    test('object-params', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
+        const resData = await fakeGetApi.op({ param3: 'steve' })
 
-        return reqOP({ param3: 'steve' }).then((resData) => {
-            expect(resData).toEqual(returnVal)
-        })
+        expect(resData).toEqual(returnVal)
     })
 
     test('invalid-req-type', () => {
-        return expect(reqIRT({ param3: 'steve' })).rejects.toEqual(Error('invalid reqType'))
+        return expect(fakeGetApi.irt({ param3: 'steve' }))
+            .rejects.toEqual(Error('invalid reqType'))
+    })
+
+    test('data should be passed through afterFn', async () => {
+        fetchJsonp.mockResolvedValue({ json: () => data })
+        const { afterData } = await fakeGetApi.afterData()
+
+        expect(afterData).toBe('afterData')
+    })
+
+    test('there must be some data after afterFn', async () => {
+        fetchJsonp.mockResolvedValue({ json: () => data })
+        const resData = await fakeGetApi.noAfterData()
+
+        expect(resData).toEqual(returnVal)
     })
 })

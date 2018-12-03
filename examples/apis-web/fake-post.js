@@ -17,6 +17,7 @@ export default {
          * empty-array-params
          */
         {
+            name: 'eap',
             path: 'empty-array-params',
             type: 'post',
         },
@@ -24,6 +25,7 @@ export default {
          * array-params
          */
         {
+            name: 'ap',
             path: 'array-params',
             type: 'post',
             reqType: 'axios',
@@ -33,6 +35,7 @@ export default {
          * object-params
          */
         {
+            name: 'op',
             path: 'object-params',
             type: 'post',
             params: {
@@ -45,6 +48,7 @@ export default {
          * own-host
          */
         {
+            name: 'oh',
             path: 'own-host',
             type: 'post',
             host: 'http://example-test.com/',

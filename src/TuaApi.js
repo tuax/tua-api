@@ -121,7 +121,7 @@ class TuaApi {
         if (reqType === 'axios') {
             const params = {
                 url: method === 'GET' ? fullUrl : url,
-                data,
+                data: method === 'GET' ? {} : data,
                 method,
                 ...axiosOptions,
                 ...rest,
@@ -132,7 +132,7 @@ class TuaApi {
 
         // 对于 post 请求使用 axios
         return method === 'POST'
-            ? getAxiosPromise({ url, data, ...axiosOptions })
+            ? getAxiosPromise({ url, data, ...axiosOptions, ...rest })
             : getFetchJsonpPromise({
                 url: fullUrl,
                 jsonpOptions: { ...jsonpOptions, callbackName },
@@ -274,9 +274,9 @@ class TuaApi {
                 // 请求执行完成后的钩子
                 .then(() => afterFn([ctx.res.data, ctx]))
                 // 抛出错误或响应数据
-                .then(() => ctx.res.error
+                .then((data) => ctx.res.error
                     ? Promise.reject(ctx.res.error)
-                    : ctx.res.data
+                    : data || ctx.res.data
                 )
         }
 

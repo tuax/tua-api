@@ -14,9 +14,14 @@ export const getWxPromise = ({
 }) => {
     method = method.toUpperCase()
 
-    method === 'GET'
-        ? logger.log(`Req Url: ${fullUrl}`)
-        : logger.log(`Req Url: ${url} \nReq Data:`, data)
+    if (method === 'GET') {
+        logger.log(`Req Url: ${fullUrl}`)
+    } else {
+        logger.log(`Req Url: ${url}`)
+        if (data && Object.keys(data).length) {
+            logger.log(`Req Data:`, data)
+        }
+    }
 
     // 展示 loading
     isShowLoading && showLoadingFn()

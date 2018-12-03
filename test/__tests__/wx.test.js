@@ -3,15 +3,6 @@ import TuaApi from '../../src/TuaApi'
 import fakeWx from '../../examples/apis-mp/fake-wx'
 import { fakeWxApi } from '../../examples/apis-mp/'
 
-const reqF = fakeWxApi['fail']
-const reqAD = fakeWxApi.arrayData
-const reqOD = fakeWxApi['object-data']
-const reqNB = fakeWxApi['no-beforeFn']
-const reqHL = fakeWxApi['hide-loading']
-const reqTG = fakeWxApi['type-get']
-const reqUT = fakeWxApi['unknown-type']
-const reqNL = fakeWxApi['nav-loading']
-
 const testObjData = { code: 0, data: 'object data' }
 const testArrData = [ 0, 'array data' ]
 
@@ -44,64 +35,62 @@ describe('fake wx requests', () => {
         wx.__TEST_DATA__ = {}
     })
 
-    test('object-data', () => {
+    test('object-data', async () => {
         wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await fakeWxApi.objectData({ param3: '123' })
 
-        return reqOD({ param3: '123' }).then((resData) => {
-            expect(resData).toEqual({ code: 0, data: 'object data' })
-        })
+        expect(resData).toEqual({ code: 0, data: 'object data' })
     })
 
-    test('array-data', () => {
+    test('array-data', async () => {
         wx.__TEST_DATA__ = { testData: testArrData }
+        const resData = await fakeWxApi.arrayData(null)
 
-        return reqAD(null).then((resData) => {
-            expect(resData).toEqual({ code: 0, data: 'array data' })
-        })
+        expect(resData).toEqual({ code: 0, data: 'array data' })
     })
 
     test('fail', () => {
         wx.__TEST_DATA__ = { isTestFail: true }
 
-        return expect(reqF({ a: 'b' })).rejects.toEqual(Error('test'))
+        return expect(fakeWxApi.fail({ a: 'b' }))
+            .rejects.toEqual(Error('test'))
     })
 
-    test('no-beforeFn', () => (
-        expect(reqNB()).rejects.toEqual(Error('没有数据'))
-    ))
-
-    test('hide-loading', () => {
-        wx.showLoading.mockClear()
-        wx.__TEST_DATA__ = { testData: testObjData }
-
-        return reqHL().then((resData) => {
-            expect(resData).toEqual({ code: 0, data: 'object data' })
-            expect(wx.showLoading).toHaveBeenCalledTimes(0)
-        })
+    test('no-beforeFn', () => {
+        return expect(fakeWxApi.noBeforeFn())
+            .rejects.toEqual(Error('没有数据'))
     })
 
-    test('type-get', () => {
+    test('hide-loading', async () => {
         wx.showLoading.mockClear()
         wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await fakeWxApi.hideLoading()
 
-        return reqTG().then(() => {
-            const [[{ method }]] = wx.request.mock.calls
-            expect(method).toBe('GET')
-            expect(wx.showLoading).toHaveBeenCalledTimes(1)
-        })
+        expect(resData).toEqual({ code: 0, data: 'object data' })
+        expect(wx.showLoading).toHaveBeenCalledTimes(0)
+    })
+
+    test('type-get', async () => {
+        wx.showLoading.mockClear()
+        wx.__TEST_DATA__ = { testData: testObjData }
+        await fakeWxApi.typeGet()
+        const [[{ method }]] = wx.request.mock.calls
+
+        expect(method).toBe('GET')
+        expect(wx.showLoading).toHaveBeenCalledTimes(1)
     })
 
     test('unknown-type', () => {
-        expect(reqUT()).rejects.toEqual(Error(`Unknown Method: FOO!!!`))
+        return expect(fakeWxApi.unknownType())
+            .rejects.toEqual(Error(`Unknown Method: FOO!!!`))
     })
 
-    test('nav-loading', () => {
+    test('nav-loading', async () => {
         wx.showNavigationBarLoading.mockClear()
         wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await fakeWxApi.navLoading()
 
-        return reqNL().then((resData) => {
-            expect(resData).toEqual({ code: 0, data: 'object data' })
-            expect(wx.showNavigationBarLoading).toHaveBeenCalledTimes(1)
-        })
+        expect(resData).toEqual({ code: 0, data: 'object data' })
+        expect(wx.showNavigationBarLoading).toHaveBeenCalledTimes(1)
     })
 })

@@ -85,14 +85,16 @@ export default {
 * 第一个参数是接口返回数据对象 `{ code, data, msg }`
 * 第二个参数是请求相关参数的对象，例如有请求的 host、type、params、fullPath、reqTime、startTime、endTime 等等
 
-默认值是
+默认值如下，即返回接口数据。
 
 ```js
 const afterFn = ([x]) => x
 ```
 
 ::: warning
-注意记得将 `res` 返回，不然业务侧就收不到请求接口的数据了！
+注意若是返回了数据，则业务侧将收到这个数据。所以在这里可以添加一些通用逻辑，处理返回的数据。
+
+反之，若是返回 `undefined` 则业务侧将收到 `res.data`。
 :::
 
 ## isShowLoading (小程序 only)
