@@ -9,11 +9,6 @@ const params = {
     param1: 'steve',
     param2: 'young',
 }
-const reqOH = fakePostApi['own-host']
-const reqAP = fakePostApi['array-params']
-const reqOP = fakePostApi['object-params']
-const reqTA = fakeGetApi['req-type-axios']
-const reqEAP = fakePostApi['empty-array-params']
 
 const reqAPUrl = `http://example-base.com/fake-post/array-params`
 const reqOPUrl = `http://example-base.com/fake-post/object-params`
@@ -23,66 +18,60 @@ const reqEAPUrl = `http://example-base.com/fake-post/empty-array-params`
 
 describe('error handling', () => {
     test('non-object params', () => {
-        expect(reqAP('a')).rejects
-            .toEqual(Error('请检查参数是否为对象！'))
+        return expect(fakePostApi.ap('a')).rejects.toEqual(Error('请检查参数是否为对象！'))
     })
 
     test('error', () => {
         mock.onPost(reqEAPUrl).networkError()
 
-        expect(reqEAP()).rejects.toEqual(Error('Network Error'))
+        return expect(fakePostApi.eap()).rejects.toEqual(Error('Network Error'))
     })
 
     test('must pass required params', () => {
-        expect(reqOP()).rejects.toEqual(Error(`object-params：必须传递参数 param3！请检查！`))
+        return expect(fakePostApi.op()).rejects.toEqual(Error(`op：必须传递参数 param3！请检查！`))
     })
 })
 
 describe('fake get requests', () => {
-    test('req-type-axios', () => {
+    test('req-type-axios', async () => {
         const data = { code: 0, data: 'req-type-axios' }
         mock.onGet(reqTAUrl).reply(200, data)
+        const resData = await fakeGetApi.rta()
 
-        return reqTA().then((resData) => {
-            expect(resData).toEqual(data)
-        })
+        expect(resData).toEqual(data)
     })
 })
 
 describe('fake post requests', () => {
-    test('own-host', () => {
+    test('own-host', async () => {
         const data = { code: 0, data: 'own-host' }
         mock.onPost(reqOHUrl).reply(200, data)
+        const resData = await fakePostApi.oh()
 
-        return reqOH().then((resData) => {
-            expect(resData).toEqual(data)
-        })
+        expect(resData).toEqual(data)
     })
 
-    test('empty-array-params', () => {
+    test('empty-array-params', async () => {
         const data = { code: 0, data: 'object data' }
         mock.onPost(reqEAPUrl).reply(200, data)
+        const resData = await fakePostApi.eap()
 
-        return reqEAP().then((resData) => {
-            expect(resData).toEqual(data)
-        })
+        expect(resData).toEqual(data)
     })
 
-    test('array-params', () => {
+    test('array-params', async () => {
         const data = { code: 0, data: 'object data' }
         mock.onPost(reqAPUrl).reply(200, data)
+        const resData = await fakePostApi.ap(params)
 
-        return reqAP(params).then((resData) => {
-            expect(resData).toEqual(data)
-        })
+        expect(resData).toEqual(data)
     })
 
-    test('array-data', () => {
+    test('array-data', async () => {
         const data = [ 0, 'array data' ]
         mock.onPost(reqOPUrl).reply(200, data)
+        const resData = await fakePostApi.op({ param3: 'steve' })
 
-        return reqOP({ param3: 'steve' }).then((resData) => {
-            expect(resData).toEqual({ code: 0, data: 'array data' })
-        })
+        expect(resData).toEqual({ code: 0, data: 'array data' })
     })
 })

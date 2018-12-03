@@ -36,8 +36,8 @@ export default {
          * array-data
          */
         {
-            path: 'array-data',
             name: 'arrayData',
+            path: 'array-data',
             type: 'get',
             params: ['param1', 'param2'],
         },
@@ -45,6 +45,7 @@ export default {
          * object-data
          */
         {
+            name: 'objectData',
             path: 'object-data',
             params: {
                 param1: 1217,
@@ -56,12 +57,14 @@ export default {
          * no-beforeFn
          */
         {
+            name: 'noBeforeFn',
             path: 'no-beforeFn',
         },
         /**
          * hide-loading
          */
         {
+            name: 'hideLoading',
             path: 'hide-loading',
             // 这个接口不需要展示 loading
             isShowLoading: false,
@@ -70,6 +73,7 @@ export default {
          * type-get
          */
         {
+            name: 'typeGet',
             path: 'type-get',
             // 这个接口单独配置类型
             type: 'get',
@@ -78,6 +82,7 @@ export default {
          * unknown-type
          */
         {
+            name: 'unknownType',
             path: 'unknown-type',
             // 这个接口单独配置类型
             type: 'foo',
@@ -86,6 +91,7 @@ export default {
          * nav-loading
          */
         {
+            name: 'navLoading',
             path: 'nav-loading',
             showLoadingFn: wx.showNavigationBarLoading,
             hideLoadingFn: wx.hideNavigationBarLoading,

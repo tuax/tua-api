@@ -42,6 +42,7 @@ export default {
          * array-params
          */
         {
+            name: 'ap',
             path: 'array-params',
             params: ['param1', 'param2'],
             // 在这里定义将覆盖公共中间件
@@ -51,6 +52,7 @@ export default {
          * object-params
          */
         {
+            name: 'op',
             path: 'object-params',
             reqType: '',
             params: {
@@ -64,6 +66,7 @@ export default {
          * async-common-params
          */
         {
+            name: 'acp',
             path: 'async-common-params',
             params: [],
             // 在这里返回的 params 会和请求的 params 合并
@@ -75,6 +78,7 @@ export default {
          * req-type-axios
          */
         {
+            name: 'rta',
             path: 'req-type-axios',
             // 用哪个包发起请求目前支持：jsonp、axios
             // 如果不指定默认对于 get 请求使用 fetch-jsonp，post 请求使用 axios
@@ -88,8 +92,25 @@ export default {
          * invalid-req-type
          */
         {
+            name: 'irt',
             path: 'invalid-req-type',
             reqType: 'foobar',
+        },
+        /**
+         * afterFn-data
+         */
+        {
+            name: 'afterData',
+            path: 'afterFn-data',
+            afterFn: ([data]) => ({ ...data, afterData: 'afterData' }),
+        },
+        /**
+         * no-afterFn-data
+         */
+        {
+            name: 'noAfterData',
+            path: 'no-afterFn-data',
+            afterFn: () => {},
         },
     ],
 }
