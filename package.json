@@ -5,6 +5,11 @@
     "module": "dist/TuaApi.es.js",
     "jsnext:main": "dist/TuaApi.es.js",
     "description": "A common tool helps converting configs to api functions",
+    "files": [
+        "src/",
+        "dist/",
+        "examples/"
+    ],
     "scripts": {
         "docs": "vuepress dev docs -h localhost",
         "docs:build": "vuepress build docs",
