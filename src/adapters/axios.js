@@ -15,7 +15,9 @@ export const getAxiosPromise = ({
     ...rest
 }) => {
     logger.log(`Req Url: ${url}`)
-    logger.log(`Req Data:`, data)
+    if (data && Object.keys(data).length) {
+        logger.log(`Req Data:`, data)
+    }
 
     return require('axios')({
         url,

@@ -59,6 +59,7 @@ export default {
         {
             name: 'noBeforeFn',
             path: 'no-beforeFn',
+            commonParams: null,
         },
         /**
          * hide-loading
