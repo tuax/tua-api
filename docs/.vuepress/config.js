@@ -43,6 +43,7 @@ module.exports = {
                         'installation',
                         '',
                         'middleware',
+                        'mock',
                         'export-utils',
                         '../config/',
                     ],

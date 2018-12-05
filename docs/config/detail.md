@@ -18,6 +18,27 @@ export default {
 }
 ```
 
+## mock 模拟接口数据
+* 类型：`Object`、`Function`
+* 默认值：`{}`
+
+模拟接口数据，可以直接填数据，或是填函数。函数将收到 `params` 参数对象，即最终发送给接口的数据对象。
+
+```js
+export default {
+    // 对象形式
+    mock: { code: 0, data: 'some data' },
+
+    // 函数形式
+    mock: (params) => ({
+        code: params.mockCode,
+        data: params.mockData,
+    }),
+}
+```
+
+详情参阅 [快速上手 - mock 章节](../quick-start/mock.md)
+
 ## prefix 接口中间地址
 建议与文件同名，方便维护。
 

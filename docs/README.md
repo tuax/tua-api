@@ -4,9 +4,13 @@ actionText: 快速上手 →
 actionLink: /quick-start/
 features:
 - title: 支持多端
-  details: 支持 web 端和小程序端
+  details: 支持 web 端、Node 端和小程序端
 - title: 支持跨域
   details: 默认使用 axios，也支持降级为 jsonp
+- title: 可配置
+  details: 可配置接口类型、请求方式、默认参数、必填参数等属性
+- title: 支持 mock
+  details: 接口数据支持 mock，方便开发调试
 - title: 中间件
   details: koa 风格中间件，方便添加各种特技
 footer: MIT Licensed | Copyright © 2018-present StEve Young
