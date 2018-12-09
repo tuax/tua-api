@@ -71,6 +71,9 @@ mock 属性不仅可以填在各个接口处，也可以将其放在上一级，
 
         // 没填自身 mock，则默认使用公共 mock
         { path: 'bar' },
+
+        // 禁用 mock
+        { path: 'null', mock: null },
     ],
 }
 ```
