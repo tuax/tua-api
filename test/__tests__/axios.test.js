@@ -15,6 +15,16 @@ const reqOPUrl = `http://example-base.com/fake-post/object-params`
 const reqOHUrl = `http://example-test.com/fake-post/own-host`
 const reqTAUrl = `http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp`
 const reqEAPUrl = `http://example-base.com/fake-post/empty-array-params`
+const reqMFDUrl = `http://example-base.com/fake-get/mock-function-data`
+
+describe('mock data', () => {
+    test('mock function data', async () => {
+        mock.onGet(reqMFDUrl).reply(200, {})
+        const resData = await fakeGetApi.mockFnData({ mockCode: 404 })
+
+        expect(resData.code).toBe(404)
+    })
+})
 
 describe('error handling', () => {
     test('non-object params', () => {

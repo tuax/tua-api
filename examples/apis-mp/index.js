@@ -13,4 +13,5 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
+export const mockApi = tuaApi.getApi(require('./mock').default)
 export const fakeWxApi = tuaApi.getApi(require('./fake-wx').default)

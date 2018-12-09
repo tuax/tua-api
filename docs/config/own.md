@@ -32,7 +32,7 @@ export default {
 }
 ```
 
-有时接口地址较长，可以添加 `name` 配置重命名接口，这样就可以这样调用
+有时接口地址较长或不方便直接调用，可以添加 `name` 配置重命名接口，这样就可以这样调用
 
 ```js
 exampleApi.fooBar({ ... })
@@ -67,4 +67,6 @@ export default {
 有时某个接口正好不需要上一级中 `commonParams` 的参数。那么可以传递 `null` 覆盖上一级中的 `commonParams`。
 
 ## 其他参数
-其他参数参阅上一节 [详细配置](./detail.md)
+上一节中的所有参数（除了 `pathList` 外）均有效，且优先级最高。
+
+详情参阅上一节 [详细配置](./detail.md)

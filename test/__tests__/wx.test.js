@@ -1,10 +1,53 @@
 import '../__mocks__/wxMock'
 import TuaApi from '../../src/TuaApi'
 import fakeWx from '../../examples/apis-mp/fake-wx'
-import { fakeWxApi } from '../../examples/apis-mp/'
+import { mockApi, fakeWxApi } from '../../examples/apis-mp/'
 
 const testObjData = { code: 0, data: 'object data' }
 const testArrData = [ 0, 'array data' ]
+
+describe('mock data', () => {
+    beforeEach(() => {
+        wx.__TEST_DATA__ = {}
+    })
+
+    test('common mock data', async () => {
+        wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await mockApi.bar({ __mockData__: { code: 404, data: {} } })
+
+        expect(resData.code).toBe(404)
+    })
+
+    test('self mock data', async () => {
+        wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await mockApi.foo({ __mockData__: { code: 404, data: {} } })
+
+        expect(resData.code).toBe(500)
+    })
+
+    test('null mock data', async () => {
+        wx.__TEST_DATA__ = { testData: testObjData }
+        const resData = await mockApi.null({ __mockData__: { code: 404, data: {} } })
+
+        expect(resData).toEqual({ code: 0, data: 'object data' })
+    })
+
+    test('dynamic object mock data', async () => {
+        wx.__TEST_DATA__ = { testData: testObjData }
+        mockApi.null.mock = { code: 123 }
+        const resData = await mockApi.null()
+
+        expect(resData.code).toBe(123)
+    })
+
+    test('dynamic function mock data', async () => {
+        wx.__TEST_DATA__ = { testData: testObjData }
+        mockApi.foo.mock = ({ mockCode }) => ({ code: mockCode })
+        const resData = await mockApi.foo({ mockCode: 123 })
+
+        expect(resData.code).toBe(123)
+    })
+})
 
 describe('middleware', () => {
     const tuaApi = new TuaApi()

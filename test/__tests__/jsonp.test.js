@@ -7,6 +7,15 @@ jest.mock('fetch-jsonp')
 const data = [ 0, 'array data' ]
 const returnVal = { code: 0, data: 'array data' }
 
+describe('mock data', () => {
+    test('mock object data', async () => {
+        fetchJsonp.mockResolvedValue({ json: () => data })
+        const resData = await fakeGetApi.mockObjectData()
+
+        expect(resData.code).toBe(404)
+    })
+})
+
 describe('fake jsonp requests', () => {
     test('async-common-params', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
