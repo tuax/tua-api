@@ -199,6 +199,7 @@ class TuaApi {
      * 接受 api 对象，返回待接收参数的单个 api 函数的对象
      * @param {Object} options
      * @param {String} options.type 接口请求类型 get/post...
+     * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @param {String} options.name 自定义的接口名称
      * @param {String} options.path 接口路径名称
      * @param {String[]} options.params 接口参数数组
@@ -211,7 +212,6 @@ class TuaApi {
      * @param {String} options.reqType 使用什么工具发
      * @param {Object} options.axiosOptions 透传 axios 配置参数
      * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
-     * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @return {Object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
