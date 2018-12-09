@@ -112,5 +112,22 @@ export default {
             path: 'no-afterFn-data',
             afterFn: () => {},
         },
+        /**
+         * mock-object-data
+         */
+        {
+            name: 'mockObjectData',
+            path: 'mock-object-data',
+            mock: { code: 404, data: {} },
+        },
+        /**
+         * mock-function-data
+         */
+        {
+            name: 'mockFnData',
+            path: 'mock-function-data',
+            reqType: 'axios',
+            mock: ({ mockCode }) => ({ code: mockCode, data: {} }),
+        },
     ],
 }

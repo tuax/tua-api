@@ -30,7 +30,7 @@ class TuaApi {
     /**
      * @param {Object} options
      * @param {String} options.host 服务器基础地址，例如 https://example.com/
-     * @param {String} options.reqType 请求类型
+     * @param {String} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {Function[]} options.middleware 中间件函数数组
      * @param {Object} options.axiosOptions 透传 axios 配置参数
      * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
@@ -107,9 +107,19 @@ class TuaApi {
         axiosOptions,
         ...rest
     }) {
+        // check type
         if (VALID_REQ_TYPES.indexOf(reqType) === -1) {
             logger.error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
             throw Error('invalid reqType')
+        }
+
+        // mock data
+        if (rest.mock) {
+            const resData = typeof rest.mock === 'function'
+                ? rest.mock(data)
+                : { ...rest.mock }
+
+            return Promise.resolve({ data: resData })
         }
 
         const method = type.toUpperCase()
@@ -197,10 +207,16 @@ class TuaApi {
      * @param {Function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
      * @param {Function[]} options.middleware 中间件函数数组
      * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
+     * @param {String} options.host 服务器地址
+     * @param {String} options.reqType 使用什么工具发
+     * @param {Object} options.axiosOptions 透传 axios 配置参数
+     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @return {Object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
         type = 'get',
+        mock,
         name,
         path,
         params = {},
@@ -241,14 +257,14 @@ class TuaApi {
 
             // 请求的上下文信息
             const ctx = {
-                req: { args, type, path, params, prefix, apiName, fullPath, callbackName, reqFnParams: {}, ...rest },
+                req: { args, type, path, params, prefix, apiName, fullPath, callbackName, reqFnParams: {}, mock: apiFn.mock, ...rest },
             }
 
             // 中间件函数
             const middlewareFn = this._getMiddlewareFn(middleware, useGlobalMiddleware)
 
             // 执行完 beforeFn 后执行的函数
-            const beforeFnCallback = (rArgs = {}) => {
+            const beforeFnCb = (rArgs = {}) => {
                 // 兼容小程序传递请求头（建议还是放在中间件中）
                 if (rArgs.header) {
                     ctx.req.reqFnParams.header = rArgs.header
@@ -268,7 +284,7 @@ class TuaApi {
             }
 
             return beforeFn()
-                .then(beforeFnCallback)
+                .then(beforeFnCb)
                 // 执行请求中间件函数
                 .then(() => middlewareFn(ctx))
                 // 请求执行完成后的钩子
@@ -280,8 +296,8 @@ class TuaApi {
                 )
         }
 
-        // 将请求的 key 和 params 挂上去，以便在 ssr 时预取数据
         apiFn.key = fullPath
+        apiFn.mock = mock
         apiFn.params = params
 
         return { [apiName]: apiFn }
