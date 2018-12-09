@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>数据 mock | tua-api</title>
+    <meta name="description" content="🏗 一款可配置的通用 api 请求函数生成工具">
+    <link rel="icon" href="/tua-api/logo.png">
+    
+    <link rel="preload" href="/tua-api/assets/css/0.styles.74beca84.css" as="style"><link rel="preload" href="/tua-api/assets/js/app.b097222c.js" as="script"><link rel="preload" href="/tua-api/assets/js/13.016da1ff.js" as="script"><link rel="prefetch" href="/tua-api/assets/js/2.285762ea.js"><link rel="prefetch" href="/tua-api/assets/js/3.7c0b9fb1.js"><link rel="prefetch" href="/tua-api/assets/js/4.cfa066f1.js"><link rel="prefetch" href="/tua-api/assets/js/5.f270ecdf.js"><link rel="prefetch" href="/tua-api/assets/js/6.4edb68df.js"><link rel="prefetch" href="/tua-api/assets/js/7.45356367.js"><link rel="prefetch" href="/tua-api/assets/js/8.cb99ad27.js"><link rel="prefetch" href="/tua-api/assets/js/9.283c5a42.js"><link rel="prefetch" href="/tua-api/assets/js/10.4de27916.js"><link rel="prefetch" href="/tua-api/assets/js/11.f7926ce8.js"><link rel="prefetch" href="/tua-api/assets/js/12.5dfdc5ae.js">
+    <link rel="stylesheet" href="/tua-api/assets/css/0.styles.74beca84.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/tua-api/" class="home-link router-link-active"><!----> <span class="site-name">tua-api</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/tua-api/quick-start/" class="nav-link router-link-active">快速上手</a></div><div class="nav-item"><a href="/tua-api/config/" class="nav-link">配置</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">生态系统</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-storage/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  本地存储
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  小程序框架
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <a href="https://github.com/tuateam/tua-api" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/tua-api/quick-start/" class="nav-link router-link-active">快速上手</a></div><div class="nav-item"><a href="/tua-api/config/" class="nav-link">配置</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">生态系统</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-storage/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  本地存储
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://tuateam.github.io/tua-mp/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  小程序框架
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <a href="https://github.com/tuateam/tua-api" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>快速上手</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/tua-api/quick-start/installation.html" class="sidebar-link">安装</a></li><li><a href="/tua-api/quick-start/" class="sidebar-link">介绍</a></li><li><a href="/tua-api/quick-start/middleware.html" class="sidebar-link">中间件进阶</a></li><li><a href="/tua-api/quick-start/mock.html" class="active sidebar-link">数据 mock</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tua-api/quick-start/mock.html#静态配置" class="sidebar-link">静态配置</a></li><li class="sidebar-sub-header"><a href="/tua-api/quick-start/mock.html#动态配置" class="sidebar-link">动态配置</a></li><li class="sidebar-sub-header"><a href="/tua-api/quick-start/mock.html#同时配置" class="sidebar-link">同时配置</a></li></ul></li><li><a href="/tua-api/quick-start/export-utils.html" class="sidebar-link">辅助函数</a></li><li><a href="/tua-api/config/" class="sidebar-link">配置说明</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="数据-mock"><a href="#数据-mock" aria-hidden="true" class="header-anchor">#</a> 数据 mock</h1> <h2 id="静态配置"><a href="#静态配置" aria-hidden="true" class="header-anchor">#</a> 静态配置</h2> <p>即将 mock 数据直接填在该接口的配置中。</p> <h3 id="简单对象"><a href="#简单对象" aria-hidden="true" class="header-anchor">#</a> 简单对象</h3> <p>简单粗暴，填数据就完事儿了~</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    pathList<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// 以 foo 接口为例</span>
+        <span class="token punctuation">{</span>
+            path<span class="token punctuation">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span>
+
+            <span class="token comment">// 对象形式</span>
+            mock<span class="token punctuation">:</span> <span class="token punctuation">{</span> code<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> data<span class="token punctuation">:</span> <span class="token string">'some data'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="mock-函数"><a href="#mock-函数" aria-hidden="true" class="header-anchor">#</a> mock 函数</h3> <p>使用函数形式，用法上会更灵活一些。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    pathList<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// 以 foo 接口为例</span>
+        <span class="token punctuation">{</span>
+            path<span class="token punctuation">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span>
+
+            <span class="token comment">// 函数形式</span>
+            mock<span class="token punctuation">:</span> <span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+                code<span class="token punctuation">:</span> params<span class="token punctuation">.</span>mockCode<span class="token punctuation">,</span>
+                data<span class="token punctuation">:</span> params<span class="token punctuation">.</span>mockData<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p><code>params</code> 即最终传入接口的参数对象。</p></div> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> exampleApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+<span class="token comment">// 填写 mock 数据</span>
+<span class="token keyword">const</span> mockCode <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">const</span> mockData <span class="token operator">=</span> <span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token string">'bar'</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 请求将收到 mock 数据</span>
+exampleApi<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mockCode<span class="token punctuation">,</span> mockData <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code<span class="token punctuation">,</span> data <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token comment">// 0 {foo: &quot;bar&quot;}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="多接口公共-mock"><a href="#多接口公共-mock" aria-hidden="true" class="header-anchor">#</a> 多接口公共 mock</h3> <p>mock 属性不仅可以填在各个接口处，也可以将其放在上一级，mock 当前配置中的所有接口。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token comment">// 公共 mock</span>
+    mock<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> __mockData__ <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> __mockData__<span class="token punctuation">,</span>
+
+    pathList<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// 自身的 mock 配置优先级更高</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span> mock<span class="token punctuation">:</span> <span class="token punctuation">{</span> code<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// 没填自身 mock，则默认使用公共 mock</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'bar'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// 禁用 mock</span>
+        <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'null'</span><span class="token punctuation">,</span> mock<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> exampleApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+<span class="token keyword">const</span> __mockData__ <span class="token operator">=</span> <span class="token punctuation">{</span> code<span class="token punctuation">:</span> <span class="token number">123</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 使用自己定义 mock 数据</span>
+exampleApi<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> __mockData__ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token comment">// 0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 使用公共的 mock 数据</span>
+exampleApi<span class="token punctuation">.</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">{</span> __mockData__ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token comment">// 123</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>更多配置优先级内容请参阅<a href="/tua-api/config/">配置说明</a>部分。</p> <h2 id="动态配置"><a href="#动态配置" aria-hidden="true" class="header-anchor">#</a> 动态配置</h2> <p>即为每个导出的 <code>api</code> 函数添加 <code>mock</code> 属性，在业务侧用以下方式调用。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> exampleApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+<span class="token comment">// 填写 mock 数据</span>
+exampleApi<span class="token punctuation">.</span>foo<span class="token punctuation">.</span>mock <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> <span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token string">'bar'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 同样支持 mock 函数</span>
+exampleApi<span class="token punctuation">.</span>foo<span class="token punctuation">.</span><span class="token function-variable function">mock</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> <span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token string">'bar'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 请求将收到 mock 数据</span>
+exampleApi<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code<span class="token punctuation">,</span> data <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token comment">// 0 {foo: &quot;bar&quot;}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="同时配置"><a href="#同时配置" aria-hidden="true" class="header-anchor">#</a> 同时配置</h2> <h3 id="优先级"><a href="#优先级" aria-hidden="true" class="header-anchor">#</a> 优先级</h3> <p>若是同时配置了静态和动态 mock，动态配置的 mock 数据优先级更高。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>优先级：动态 &gt; 静态</p></div> <ul><li>接口配置</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    pathList<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            path<span class="token punctuation">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span>
+            mock<span class="token punctuation">:</span> <span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> code<span class="token punctuation">:</span> params<span class="token punctuation">.</span>mockCode <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>业务侧</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> exampleApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+<span class="token comment">// 动态配置的数据将覆盖静态配置的数据</span>
+exampleApi<span class="token punctuation">.</span>foo<span class="token punctuation">.</span>mock <span class="token operator">=</span> <span class="token punctuation">{</span> code<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+
+exampleApi<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mockCode<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token comment">// 1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="关闭-mock"><a href="#关闭-mock" aria-hidden="true" class="header-anchor">#</a> 关闭 mock</h3> <p>可以通过以下代码实现关闭 mock 功能。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> exampleApi <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/apis/'</span>
+
+<span class="token comment">// 关闭 mock</span>
+exampleApi<span class="token punctuation">.</span>foo<span class="token punctuation">.</span>mock <span class="token operator">=</span> <span class="token keyword">null</span>
+
+<span class="token comment">// 即使传递 mock 数据也不起作用</span>
+exampleApi<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mockCode<span class="token punctuation">:</span> <span class="token number">404</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> code <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token comment">// 实际接口的返回值</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>其实动态配置 <code>exampleApi.foo.mock</code> 的默认值就是静态配置的值，而在 <code>tua-api</code> 底层读取的就是 <code>exampleApi.foo.mock</code>。</p> <p>所以自然动态配置的优先级更高，并且赋值为 <code>null</code> 即可关闭 mock。</p></div></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/tuateam/tua-api/edit/master/docs/quick-start/mock.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">12/9/2018, 9:26:14 PM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/tua-api/quick-start/middleware.html" class="prev">
+          中间件进阶
+        </a></span> <span class="next"><a href="/tua-api/quick-start/export-utils.html">
+          辅助函数
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/tua-api/assets/js/13.016da1ff.js" defer></script><script src="/tua-api/assets/js/app.b097222c.js" defer></script>
+  </body>
+</html>
