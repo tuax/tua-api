@@ -7,42 +7,28 @@ assignees: BuptStEve
 
 ---
 
+**Version**
+Version [e.g. 0.1.0]
+
 **Describe the bug**
-
-**描述一下 bug**
-
-A clear and concise description of what the bug is.
+A clear and concise description of what the bug is. If applicable, add screenshots to help explain your problem.
 
 **To Reproduce**
-
-**复现步骤**
-
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
+If it's convenient:
+
+* Add an online address to reproduce：
+  * codepen: https://codepen.io/pen/tour/welcome/start
+  * jsfiddle: https://jsfiddle.net/
+* Add a repository to reproduce：https://github.com/new
+
 **Expected behavior**
-
-**预期行为**
-
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-
-**截图**
-
-If applicable, add screenshots to help explain your problem.
-
-**Version**
-
-**版本**
-
-- Version [e.g. 0.1.0]
-
 **Additional context**
-
-**附加上下文**
-
 Add any other context about the problem here.
