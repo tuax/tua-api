@@ -23,8 +23,9 @@ Steps to reproduce the behavior:
 If it's convenient:
 
 * Add an online address to reproduce：
-  * codepen: https://codepen.io/pen/tour/welcome/start
+  * codepen: https://codepen.io/
   * jsfiddle: https://jsfiddle.net/
+  * codesandbox: https://codesandbox.io/
 * Add a repository to reproduce：https://github.com/new
 
 **Expected behavior**

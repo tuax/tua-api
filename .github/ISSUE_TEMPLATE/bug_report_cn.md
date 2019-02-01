@@ -24,8 +24,9 @@ Version [e.g. 0.1.0]
 如果方便的话：
 
 * 复现 bug 的在线地址：
-  * codepen: https://codepen.io/pen/tour/welcome/start
+  * codepen: https://codepen.io/
   * jsfiddle: https://jsfiddle.net/
+  * codesandbox: https://codesandbox.io/
 * 复现 bug 的仓库地址：https://github.com/new
 
 **预期行为**
