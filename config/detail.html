@@ -7,7 +7,7 @@
     <meta name="description" content="🏗 一款可配置的通用 api 请求函数生成工具">
     <link rel="icon" href="/tua-api/logo.png">
     
-    <link rel="preload" href="/tua-api/assets/css/0.styles.74beca84.css" as="style"><link rel="preload" href="/tua-api/assets/js/app.b097222c.js" as="script"><link rel="preload" href="/tua-api/assets/js/7.45356367.js" as="script"><link rel="prefetch" href="/tua-api/assets/js/2.285762ea.js"><link rel="prefetch" href="/tua-api/assets/js/3.7c0b9fb1.js"><link rel="prefetch" href="/tua-api/assets/js/4.cfa066f1.js"><link rel="prefetch" href="/tua-api/assets/js/5.f270ecdf.js"><link rel="prefetch" href="/tua-api/assets/js/6.4edb68df.js"><link rel="prefetch" href="/tua-api/assets/js/8.cb99ad27.js"><link rel="prefetch" href="/tua-api/assets/js/9.283c5a42.js"><link rel="prefetch" href="/tua-api/assets/js/10.4de27916.js"><link rel="prefetch" href="/tua-api/assets/js/11.f7926ce8.js"><link rel="prefetch" href="/tua-api/assets/js/12.5dfdc5ae.js"><link rel="prefetch" href="/tua-api/assets/js/13.016da1ff.js">
+    <link rel="preload" href="/tua-api/assets/css/0.styles.74beca84.css" as="style"><link rel="preload" href="/tua-api/assets/js/app.d4fac979.js" as="script"><link rel="preload" href="/tua-api/assets/js/7.cc38730d.js" as="script"><link rel="prefetch" href="/tua-api/assets/js/6.af42ba56.js"><link rel="prefetch" href="/tua-api/assets/js/2.285762ea.js"><link rel="prefetch" href="/tua-api/assets/js/3.c241b6e1.js"><link rel="prefetch" href="/tua-api/assets/js/4.1e413103.js"><link rel="prefetch" href="/tua-api/assets/js/5.3a033fcc.js"><link rel="prefetch" href="/tua-api/assets/js/8.f423383b.js"><link rel="prefetch" href="/tua-api/assets/js/9.efa0c957.js"><link rel="prefetch" href="/tua-api/assets/js/10.7d11e0b9.js"><link rel="prefetch" href="/tua-api/assets/js/11.f7926ce8.js"><link rel="prefetch" href="/tua-api/assets/js/12.02df0c8a.js"><link rel="prefetch" href="/tua-api/assets/js/13.e220c507.js">
     <link rel="stylesheet" href="/tua-api/assets/css/0.styles.74beca84.css">
   </head>
   <body>
@@ -50,10 +50,10 @@
     commonParams<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token string">'miniprogram'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 </code></pre></div><h2 id="axiosoptions-透传参数配置"><a href="#axiosoptions-透传参数配置" aria-hidden="true" class="header-anchor">#</a> axiosOptions 透传参数配置</h2> <p>由于 tua-api 是依赖于 <code>axios</code> 或是 <code>fetch-jsop</code> 来发送请求的。所以势必要提供参数透传的功能。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：</span>
+    <span class="token comment">// 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：</span>
     jsonpOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span> timeout<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
-    <span class="token comment">// 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：</span>
+    <span class="token comment">// 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：</span>
     axiosOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span> timeout<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 </code></pre></div><h2 id="jsonpoptions-透传参数配置"><a href="#jsonpoptions-透传参数配置" aria-hidden="true" class="header-anchor">#</a> jsonpOptions 透传参数配置</h2> <p>同上</p> <h2 id="middleware-中间件函数数组"><a href="#middleware-中间件函数数组" aria-hidden="true" class="header-anchor">#</a> middleware 中间件函数数组</h2> <p>中间件采用的是 koa 风格，所以对于一个 api 请求，从发起请求到收到响应你都有充分的控制权。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
@@ -76,7 +76,7 @@
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
-</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>在 pathList 的接口对象中填写的配置具有最高优先级！将会覆盖上一级的同名属性。</p></div> <p><code>pathList</code> 中其他配置见下一节~</p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/tuateam/tua-api/edit/master/docs/config/detail.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">12/9/2018, 9:26:14 PM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>在 pathList 的接口对象中填写的配置具有最高优先级！将会覆盖上一级的同名属性。</p></div> <p><code>pathList</code> 中其他配置见下一节~</p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/tuateam/tua-api/edit/master/docs/config/detail.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2/1/2019, 11:38:19 AM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
         ←
         <a href="/tua-api/config/default.html" class="prev">
           默认配置
@@ -85,6 +85,6 @@
         </a>
         →
       </span></p></div> </div> <!----></div></div>
-    <script src="/tua-api/assets/js/7.45356367.js" defer></script><script src="/tua-api/assets/js/app.b097222c.js" defer></script>
+    <script src="/tua-api/assets/js/7.cc38730d.js" defer></script><script src="/tua-api/assets/js/app.d4fac979.js" defer></script>
   </body>
 </html>
