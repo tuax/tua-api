@@ -8,10 +8,10 @@ export default {
     // 所有请求都需要携带的参数
     commonParams: null,
 
-    // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
+    // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
     jsonpOptions: { timeout: 10 * 1000 },
 
-    // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
+    // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
     axiosOptions: { timeout: 10 * 1000 },
 
     // 是否使用在 index.js 中定义的全局中间件，默认为 true

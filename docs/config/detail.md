@@ -73,10 +73,10 @@ export default {
 
 ```js
 export default {
-    // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
+    // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
     jsonpOptions: { timeout: 10 * 1000 },
 
-    // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
+    // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
     axiosOptions: { timeout: 10 * 1000 },
 }
 ```

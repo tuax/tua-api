@@ -23,10 +23,10 @@ new TuaApi({
 ## middleware 中间件函数数组
 【所有】请求都会调用的中间件函数数组！适合添加一些通用逻辑，例如接口上报。
 
-## axiosOptions 透传 axios 配置参数
+## axiosOptions 透传 axios 配置参数
 【通用】的配置，会和之后的配置合并。
 
-## jsonpOptions 透传 fetch-jsonp 配置参数
+## jsonpOptions 透传 fetch-jsonp 配置参数
 同上
 
 ## defaultErrorData 出错时的默认数据对象

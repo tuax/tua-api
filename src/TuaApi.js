@@ -26,14 +26,15 @@ import {
 } from './middlewareFns'
 
 logger.log(`Version: ${version}`)
+
 class TuaApi {
     /**
      * @param {Object} options
      * @param {String} options.host 服务器基础地址，例如 https://example.com/
      * @param {String} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {Function[]} options.middleware 中间件函数数组
-     * @param {Object} options.axiosOptions 透传 axios 配置参数
-     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @param {Object} options.axiosOptions 透传 axios 配置参数
+     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
      * @param {Object} options.defaultErrorData 出错时的默认数据
      */
     constructor ({
@@ -210,8 +211,8 @@ class TuaApi {
      * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
      * @param {String} options.host 服务器地址
      * @param {String} options.reqType 使用什么工具发
-     * @param {Object} options.axiosOptions 透传 axios 配置参数
-     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @param {Object} options.axiosOptions 透传 axios 配置参数
+     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
      * @return {Object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
