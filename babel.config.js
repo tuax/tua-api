@@ -14,7 +14,7 @@ module.exports = {
                 ],
             ],
         },
-        prod: {
+        production: {
             presets: [
                 [
                     '@babel/preset-env',

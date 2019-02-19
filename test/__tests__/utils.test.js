@@ -1,10 +1,11 @@
+import { ERROR_STRINGS } from '@/constants'
 import {
     promisifyWxApi,
     checkArrayParams,
     getDefaultParamObj,
     getParamStrFromObj,
     apiConfigToReqFnParams,
-} from '../../src/utils'
+} from '@/utils'
 
 test('promisifyWxApi', () => {
     const fn = ({ success }) => setTimeout(() => success('test'), 0)
@@ -40,12 +41,12 @@ test('getDefaultParamObj', () => {
     expect(() => getDefaultParamObj({
         params: { b: { required: true } },
         apiName: 'steve',
-    })).toThrow('steve：必须传递参数 b！请检查！')
+    })).toThrow(Error(ERROR_STRINGS.requiredParamFn('steve', 'b')))
 
     expect(() => getDefaultParamObj({
         params: { c: { isRequired: true } },
         apiName: 'steve',
-    })).toThrow('steve：必须传递参数 c！请检查！')
+    })).toThrow(Error(ERROR_STRINGS.requiredParamFn('steve', 'c')))
 })
 
 test('getParamStrFromObj', () => {

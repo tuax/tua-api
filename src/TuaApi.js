@@ -10,6 +10,7 @@ import {
     apiConfigToReqFnParams,
 } from './utils'
 import {
+    ERROR_STRINGS,
     VALID_REQ_TYPES,
 } from './constants'
 import {
@@ -18,9 +19,9 @@ import {
     getFetchJsonpPromise,
 } from './adapters/'
 import {
+    setFullUrlMiddleware,
     formatResDataMiddleware,
     recordReqTimeMiddleware,
-    updateFullUrlMiddleware,
     recordStartTimeMiddleware,
     formatReqParamsMiddleware,
 } from './middlewareFns'
@@ -52,7 +53,7 @@ class TuaApi {
         this.jsonpOptions = jsonpOptions
         this.defaultErrorData = defaultErrorData
 
-        this._checkReqType()
+        this._checkReqType(this.reqType)
 
         return this
     }
@@ -66,7 +67,7 @@ class TuaApi {
      */
     use (fn) {
         if (typeof fn !== 'function') {
-            throw TypeError('middleware must be a function!')
+            throw TypeError(ERROR_STRINGS.middleware)
         }
         this.middleware.push(fn)
 
@@ -93,7 +94,7 @@ class TuaApi {
      * @param {Object} options
      * @param {String} options.url 接口地址
      * @param {String} options.type 接口请求类型 get/post...
-     * @param {String} options.fullUrl 完整接口地址（）
+     * @param {String} options.fullUrl 完整接口地址
      * @param {String} options.path 接口路径名称
      * @return {Promise}
      */
@@ -109,10 +110,7 @@ class TuaApi {
         ...rest
     }) {
         // check type
-        if (VALID_REQ_TYPES.indexOf(reqType) === -1) {
-            logger.error(`reqType 的有效值为: ${VALID_REQ_TYPES.join(', ')}!`)
-            throw Error('invalid reqType')
-        }
+        this._checkReqType(reqType)
 
         // mock data
         if (rest.mock) {
@@ -153,11 +151,10 @@ class TuaApi {
     /**
      * 检查 reqType 是否合法
      */
-    _checkReqType () {
-        if (VALID_REQ_TYPES.indexOf(this.reqType) === -1) {
-            logger.error(`invalid reqType: ${this.reqType}, support these reqType: ${VALID_REQ_TYPES}`)
-            throw TypeError(`invalid reqType`)
-        }
+    _checkReqType (reqType) {
+        if (VALID_REQ_TYPES.indexOf(reqType) !== -1) return
+
+        throw TypeError(ERROR_STRINGS.reqTypeFn(reqType))
     }
 
     /**
@@ -177,8 +174,8 @@ class TuaApi {
             formatReqParamsMiddleware,
             // 业务侧中间件函数数组
             ...middlewareFns,
-            // 更新请求参数
-            updateFullUrlMiddleware,
+            // 生成 fullUrl 参数
+            setFullUrlMiddleware,
             // 统一转换响应数据为对象
             formatResDataMiddleware,
             // 记录结束时间
@@ -192,7 +189,7 @@ class TuaApi {
                     data: { ...this.defaultErrorData },
                     error,
                 }))
-                .then((res) => { ctx.res = res }),
+                .then(res => { ctx.res = res }),
         ])
     }
 
@@ -245,24 +242,26 @@ class TuaApi {
         /**
          * 被业务侧调用的函数
          * @param {Object} args 接口参数（覆盖默认值）
-         * @param {Object} options
-         * @param {String} options.callbackName 自定义回调函数名称（用于 jsonp）
+         * @param {Object} runtimeOptions 运行时配置
          * @return {Promise}
          */
         const apiFn = (
             args = {},
-            { callbackName = `${path}Callback` } = {}
+            runtimeOptions = {}
         ) => {
             // args 可能为 null
             args = args === null ? {} : args
 
+            // 最终的运行时配置，runtimeOptions 有最高优先级
+            const runtimeParams = { type, path, params, prefix, apiName, fullPath, ...rest, ...runtimeOptions }
+
+            // 自定义回调函数名称（用于 jsonp）
+            runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
+
             // 请求的上下文信息
             const ctx = {
-                req: { args, type, path, params, prefix, apiName, fullPath, callbackName, reqFnParams: {}, mock: apiFn.mock, ...rest },
+                req: { args, mock: apiFn.mock, reqFnParams: {}, ...runtimeParams },
             }
-
-            // 中间件函数
-            const middlewareFn = this._getMiddlewareFn(middleware, useGlobalMiddleware)
 
             // 执行完 beforeFn 后执行的函数
             const beforeFnCb = (rArgs = {}) => {
@@ -276,21 +275,17 @@ class TuaApi {
                 // 合并 beforeFn 中传入的 params
                 ctx.req.params = Array.isArray(params)
                     ? rArgs.params
-                    : {
-                        ...params,
-                        // 可以通过给 beforeFn
-                        // 添加 params 返回值添加通用参数
-                        ...rArgs.params,
-                    }
+                    // 可以通过给 beforeFn 添加 params 返回值来添加通用参数
+                    : { ...params, ...rArgs.params }
             }
+
+            // 中间件函数
+            const middlewareFn = this._getMiddlewareFn(middleware, useGlobalMiddleware)
 
             return beforeFn()
                 .then(beforeFnCb)
-                // 执行请求中间件函数
                 .then(() => middlewareFn(ctx))
-                // 请求执行完成后的钩子
                 .then(() => afterFn([ctx.res.data, ctx]))
-                // 抛出错误或响应数据
                 .then((data) => ctx.res.error
                     ? Promise.reject(ctx.res.error)
                     : data || ctx.res.data

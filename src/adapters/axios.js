@@ -1,7 +1,7 @@
+import axios from 'axios'
+
+import { DEFAULT_HEADER } from '../constants'
 import { logger, getParamStrFromObj } from '../utils'
-import {
-    DEFAULT_HEADER,
-} from '../constants'
 
 // 获取使用 axios 发起请求后的 promise 对象
 export const getAxiosPromise = ({
@@ -19,7 +19,7 @@ export const getAxiosPromise = ({
         logger.log(`Req Data:`, data)
     }
 
-    return require('axios')({
+    return axios({
         url,
         data,
         method,

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
-import { fakeGetApi, fakePostApi } from '../../examples/apis-web/'
+import { ERROR_STRINGS } from '@/constants'
+import { fakeGetApi, fakePostApi } from '@examples/apis-web/'
 
 const mock = new MockAdapter(axios)
 
@@ -28,7 +29,7 @@ describe('mock data', () => {
 
 describe('error handling', () => {
     test('non-object params', () => {
-        return expect(fakePostApi.ap('a')).rejects.toEqual(Error('请检查参数是否为对象！'))
+        return expect(fakePostApi.ap('a')).rejects.toEqual(TypeError(ERROR_STRINGS.argsType))
     })
 
     test('error', () => {
@@ -38,7 +39,8 @@ describe('error handling', () => {
     })
 
     test('must pass required params', () => {
-        return expect(fakePostApi.op()).rejects.toEqual(Error(`op：必须传递参数 param3！请检查！`))
+        return expect(fakePostApi.op())
+            .rejects.toEqual(Error(ERROR_STRINGS.requiredParamFn('op', 'param3')))
     })
 })
 
@@ -47,6 +49,18 @@ describe('fake get requests', () => {
         const data = { code: 0, data: 'req-type-axios' }
         mock.onGet(reqTAUrl).reply(200, data)
         const resData = await fakeGetApi.rta()
+
+        expect(resData).toEqual(data)
+    })
+
+    test('runtime get', async () => {
+        const data = { code: 0, data: 'runtime get' }
+        mock.onGet(reqAPUrl).reply(200, data)
+        const resData = await fakePostApi.ap(null, {
+            type: 'get',
+            reqType: 'axios',
+            commonParams: null,
+        })
 
         expect(resData).toEqual(data)
     })

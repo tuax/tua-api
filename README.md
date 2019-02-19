@@ -86,8 +86,14 @@ fooApi
 ```js
 // 甚至可以更进一步和 tua-storage 配合使用
 import TuaStorage from 'tua-storage'
+import { getSyncFnMapByApis } from 'tua-api'
 
-const storage = new TuaStorage({ ... })
+// 本地写好的各种接口配置
+import * as apis from '@/apis'
+
+const tuaStorage = new TuaStorage({
+    syncFnMap: getSyncFnMapByApis(apis),
+})
 
 const fetchParam = {
     key: fooApi.bar.key,
@@ -103,7 +109,7 @@ const fetchParam = {
     // ...
 }
 
-storage
+tuaStorage
     .load(fetchParam)
     .then(console.log)
     .catch(console.error)
@@ -155,7 +161,7 @@ export default {
 }
 ```
 
-[更多配置请点击这里查看](https://tuateam.github.io/tua-api/config/detail.html)
+[更多配置请点击这里查看](https://tuateam.github.io/tua-api/config/common.html)
 
 ### 配置导出
 最后来看一下 `apis/index.js` 该怎么写：
@@ -180,7 +186,8 @@ tuaApi
     // 链式调用
     .use(...)
 
-export const somethingApi = tuaApi.getApi(require('./something').default)
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)
 ```
 
 小程序端建议使用 [@tua-mp/cli](https://tuateam.github.io/tua-mp/tua-mp-cli/) 一键生成 api。
@@ -190,15 +197,16 @@ $ tuamp add api <api-name>
 ```
 
 ### 配置的构成
-在 `tua-api` 中配置分为三种：
+在 `tua-api` 中配置分为四种：
 
-* 默认配置（调用 `new TuaApi({ ... })` 时传递的）
-* 公共配置（和 `pathList` 同级的配置）
-* 自身配置（`pathList` 数组中的对象上的配置）
+* [默认配置（调用 `new TuaApi({ ... })` 时传递的）](https://tuateam.github.io/tua-api/config/default.html)
+* [公共配置（和 `pathList` 同级的配置）](https://tuateam.github.io/tua-api/config/common.html)
+* [自身配置（`pathList` 数组中的对象上的配置）](https://tuateam.github.io/tua-api/config/self.html)
+* [运行配置（在实际调用接口时传递的配置）](https://tuateam.github.io/tua-api/config/runtime.html)
 
 其中优先级自然是:
 
-`自身配置 > 公共配置 > 默认配置`
+`默认配置 < 公共配置 < 自身配置 < 运行配置`
 
 <p align="center">
     <a href="https://tuateam.github.io/tua-api/config/">👉更多配置点击这里👈</a>

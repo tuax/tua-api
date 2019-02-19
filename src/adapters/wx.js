@@ -1,5 +1,5 @@
 import { logger, promisifyWxApi } from '../utils'
-import { WX_VALID_METHODS } from '../constants'
+import { ERROR_STRINGS, WX_VALID_METHODS } from '../constants'
 
 export const getWxPromise = ({
     url,
@@ -27,7 +27,7 @@ export const getWxPromise = ({
     isShowLoading && showLoadingFn()
 
     if (WX_VALID_METHODS.indexOf(method) === -1) {
-        return Promise.reject(Error(`Unknown Method: ${method}!!!`))
+        return Promise.reject(Error(ERROR_STRINGS.unknownMethodFn(method)))
     }
 
     return promisifyWxApi(wx.request)({

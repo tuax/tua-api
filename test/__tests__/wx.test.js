@@ -1,7 +1,9 @@
 import '../__mocks__/wxMock'
-import TuaApi from '../../src/TuaApi'
-import fakeWx from '../../examples/apis-mp/fake-wx'
-import { mockApi, fakeWxApi } from '../../examples/apis-mp/'
+import TuaApi from '@/TuaApi'
+import { ERROR_STRINGS } from '@/constants'
+
+import fakeWx from '@examples/apis-mp/fake-wx'
+import { mockApi, fakeWxApi } from '@examples/apis-mp/'
 
 const testObjData = { code: 0, data: 'object data' }
 const testArrData = [ 0, 'array data' ]
@@ -101,7 +103,7 @@ describe('fake wx requests', () => {
 
     test('no-beforeFn', () => {
         return expect(fakeWxApi.noBeforeFn())
-            .rejects.toEqual(Error('没有数据'))
+            .rejects.toEqual(Error(ERROR_STRINGS.noData))
     })
 
     test('hide-loading', async () => {
@@ -125,7 +127,7 @@ describe('fake wx requests', () => {
 
     test('unknown-type', () => {
         return expect(fakeWxApi.unknownType())
-            .rejects.toEqual(Error(`Unknown Method: FOO!!!`))
+            .rejects.toEqual(Error(ERROR_STRINGS.unknownMethodFn('FOO')))
     })
 
     test('nav-loading', async () => {

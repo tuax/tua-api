@@ -1,4 +1,4 @@
-# 详细配置
+# 公共配置
 详细地址指的是填写在 `src/apis/foobar.js` 中的一级配置。这部分的配置优先级比默认配置高，但低于各个接口的自身配置。
 
 ## type 请求类型
@@ -37,7 +37,7 @@ export default {
 }
 ```
 
-详情参阅 [快速上手 - mock 章节](../quick-start/mock.md)
+详情参阅 [mock 章节](../guide/mock.md)
 
 ## prefix 接口中间地址
 建议与文件同名，方便维护。
@@ -93,7 +93,7 @@ export default {
 }
 ```
 
-详情参阅：[中间件进阶](../quick-start/middleware.md)
+详情参阅：[中间件进阶](../guide/middleware.md)
 
 ## beforeFn 发起请求前钩子函数
 在请求发起前执行的函数（例如小程序可以通过返回 `header` 传递 `cookie`），因为是通过 `beforeFn().then(...)` 调用，所以注意要返回 Promise。

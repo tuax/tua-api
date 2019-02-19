@@ -6,14 +6,27 @@ import { eslint } from 'rollup-plugin-eslint'
 import { uglify } from 'rollup-plugin-uglify'
 import nodeResolve from 'rollup-plugin-node-resolve'
 
+import pkg from './package.json'
+
+const input = `src/TuaApi.js`
+const banner = `/* ${pkg.name} version ${pkg.version} */`
+
 const output = {
-    es: {
-        file: 'dist/TuaApi.es.js',
-        format: 'es',
+    cjs: {
+        file: pkg.main,
+        banner,
+        format: 'cjs',
+        exports: 'named',
+    },
+    esm: {
+        file: pkg.module,
+        banner,
+        format: 'esm',
     },
     umd: {
         file: 'dist/TuaApi.umd.js',
         name: 'TuaApi',
+        banner,
         format: 'umd',
         exports: 'named',
         globals: {
@@ -26,21 +39,21 @@ const plugins = [
     eslint(),
     json(),
     nodeResolve(),
-    babel(),
     commonjs(),
+    babel(),
     replace({
-        'process.env.NODE_ENV': JSON.stringify('prod'),
+        'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 ]
 const external = ['axios', 'fetch-jsonp']
 
 export default [{
-    input: 'src/TuaApi.js',
-    output: [ output.es, output.umd ],
+    input,
+    output: [ output.cjs, output.esm, output.umd ],
     plugins,
     external,
 }, {
-    input: 'src/TuaApi.js',
+    input,
     output: {
         ...output.umd,
         file: 'dist/TuaApi.umd.min.js',

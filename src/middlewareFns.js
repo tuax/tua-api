@@ -1,3 +1,4 @@
+import { ERROR_STRINGS } from './constants'
 import {
     checkArrayParams,
     getParamStrFromObj,
@@ -37,7 +38,7 @@ const recordReqTimeMiddleware = (ctx, next) => {
 const formatResDataMiddleware = (ctx, next) => next().then(() => {
     const jsonData = ctx.res.data
 
-    if (!jsonData) return Promise.reject(Error('没有数据'))
+    if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
 
     if (Array.isArray(jsonData)) {
         const [ code, data, msg ] = jsonData
@@ -63,7 +64,7 @@ const formatReqParamsMiddleware = (ctx, next) => {
     } = ctx.req
 
     if (typeof args !== 'object') {
-        throw Error(`请检查参数是否为对象！`)
+        throw TypeError(ERROR_STRINGS.argsType)
     }
 
     checkArrayParams(ctx.req)
@@ -73,17 +74,13 @@ const formatReqParamsMiddleware = (ctx, next) => {
         ? { ...commonParams, ...args }
         : { ...getDefaultParamObj(ctx.req), ...args }
 
-    // 请求地址，用于 post 请求
+    // 请求地址
     const url = host + fullPath
-
-    // 完整请求地址，将参数拼在 url 上，用于 get 请求
-    const fullUrl = url + '?' + getParamStrFromObj(reqParams)
 
     ctx.req.reqFnParams = {
         ...ctx.req.reqFnParams,
         ...rest,
         url,
-        fullUrl,
         reqParams,
     }
 
@@ -91,22 +88,27 @@ const formatReqParamsMiddleware = (ctx, next) => {
 }
 
 /**
- * 更新请求 fullUrl 参数，因为可能请求参数被别的中间件改了
+ * 设置请求 fullUrl 参数
  * @param {Object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const updateFullUrlMiddleware = (ctx, next) => {
+const setFullUrlMiddleware = (ctx, next) => {
     const { url, reqParams } = ctx.req.reqFnParams
 
-    ctx.req.reqFnParams.fullUrl = url + '?' + getParamStrFromObj(reqParams)
+    const paramsStr = getParamStrFromObj(reqParams)
+
+    // 完整请求地址，将参数拼在 url 上，用于 get 请求
+    ctx.req.reqFnParams.fullUrl = paramsStr
+        ? url + '?' + paramsStr
+        : url
 
     return next()
 }
 
 export {
+    setFullUrlMiddleware,
     recordReqTimeMiddleware,
     formatResDataMiddleware,
-    updateFullUrlMiddleware,
     recordStartTimeMiddleware,
     formatReqParamsMiddleware,
 }

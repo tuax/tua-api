@@ -9,7 +9,7 @@ import {
     compose,
     flatten,
     mergeAll,
-} from '../../src/utils/'
+} from '@/utils/'
 
 describe('functional programming functions', () => {
     test('map', () => {

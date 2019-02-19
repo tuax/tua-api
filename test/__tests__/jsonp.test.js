@@ -1,6 +1,7 @@
 import fetchJsonp from 'fetch-jsonp'
 
-import { fakeGetApi } from '../../examples/apis-web/'
+import { fakeGetApi } from '@examples/apis-web/'
+import { ERROR_STRINGS } from '@/constants'
 
 jest.mock('fetch-jsonp')
 
@@ -40,7 +41,7 @@ describe('fake jsonp requests', () => {
 
     test('invalid-req-type', () => {
         return expect(fakeGetApi.irt({ param3: 'steve' }))
-            .rejects.toEqual(Error('invalid reqType'))
+            .rejects.toEqual(TypeError(ERROR_STRINGS.reqTypeFn('foobar')))
     })
 
     test('data should be passed through afterFn', async () => {
