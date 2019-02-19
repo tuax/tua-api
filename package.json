@@ -20,6 +20,7 @@
         "test:tdd": "cross-env NODE_ENV=test jest --watch",
         "prebuild": "rimraf dist/* & npm run test",
         "build": "cross-env NODE_ENV=production rollup -c",
+        "deploy": "npm run docs:build && gh-pages -m \"[ci skip]\" -d docs/.vuepress/dist",
         "next:pm": "npm --no-git-tag-version version preminor",
         "next:pr": "npm --no-git-tag-version version prerelease",
         "pub": "npm run build && npm publish",
