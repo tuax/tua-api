@@ -1,7 +1,7 @@
 import {
     getSyncFnMapByApis,
     getPreFetchFnKeysBySyncFnMap,
-} from '../../src/exportUtils'
+} from '@/exportUtils'
 
 const noop1 = () => {}
 noop1.key = 'noop1'

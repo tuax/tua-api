@@ -6,6 +6,7 @@ import {
     reduce,
 } from './fp'
 import { logger } from './logger'
+import { ERROR_STRINGS } from '../constants'
 
 /**
  * 将对象序列化为 queryString 的形式
@@ -59,7 +60,7 @@ const getDefaultParamObj = ({
             args[key] == null
 
         if (isRequiredValUndefined) {
-            throw Error(`${apiName}：必须传递参数 ${key}！请检查！`)
+            throw Error(ERROR_STRINGS.requiredParamFn(apiName, key))
         }
 
         return { [key]: val }

@@ -1,13 +1,14 @@
-import TuaApi from '../../src/TuaApi'
+import TuaApi from '@/TuaApi'
+import { ERROR_STRINGS } from '@/constants'
 
 describe('error handling', () => {
     const tuaApi = new TuaApi()
 
     test('non-function middleware', () => {
-        expect(() => tuaApi.use('')).toThrow(TypeError('middleware must be a function!'))
+        expect(() => tuaApi.use('')).toThrow(TypeError(ERROR_STRINGS.middleware))
     })
 
     test('unknown reqType', () => {
-        expect(() => new TuaApi({ reqType: '' })).toThrow(TypeError(`invalid reqType`))
+        expect(() => new TuaApi({ reqType: '' })).toThrow(TypeError(ERROR_STRINGS.reqTypeFn('')))
     })
 })

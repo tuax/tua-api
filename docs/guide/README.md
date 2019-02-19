@@ -53,7 +53,7 @@ const fetchParam = {
     // ...
 }
 
-storage
+tuaStorage
     .load(fetchParam)
     .then(console.log)
     .catch(console.error)
@@ -62,15 +62,15 @@ storage
 ## 怎么写 `api` 配置？
 拿以下 api 地址举例：
 
-* https://example-base.com/foo/bar/something/create
-* https://example-base.com/foo/bar/something/modify
-* https://example-base.com/foo/bar/something/delete
+* `https://example-base.com/foo/bar/something/create`
+* `https://example-base.com/foo/bar/something/modify`
+* `https://example-base.com/foo/bar/something/delete`
 
 ### 地址结构划分
 以上地址，一般将其分为`3`部分：
 
-* host: `https://example-base.com/`
-* prefix: `foo/bar/something`
+* host: `'https://example-base.com/'`
+* prefix: `'foo/bar/something'`
 * pathList: `[ 'create', 'modify', 'delete' ]`
 
 ### 文件结构
@@ -91,7 +91,7 @@ storage
 
 export default {
     // 请求的公用服务器地址
-    host: 'https://example-base.com//',
+    host: 'https://example-base.com/',
 
     // 请求的中间路径
     prefix: 'foo/bar/something',
@@ -105,7 +105,7 @@ export default {
 }
 ```
 
-[更多配置请点击这里查看](../config/detail.md)
+[更多配置请点击这里查看](../config/common.md)
 
 ### 配置导出
 最后来看一下 `apis/index.js` 该怎么写：
@@ -130,7 +130,8 @@ tuaApi
     // 链式调用
     .use(...)
 
-export const somethingApi = tuaApi.getApi(require('./something').default)
+export const fakeGet = tuaApi.getApi(require('./fake-get').default)
+export const fakePost = tuaApi.getApi(require('./fake-post').default)
 ```
 
 ::: tip
