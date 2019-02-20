@@ -31,6 +31,9 @@ footer: MIT Licensed | Copyright © 2018-present StEve Young
     <a href="https://codecov.io/github/tuateam/tua-api?branch=master" target="_blank">
         <img src="https://img.shields.io/codecov/c/github/tuateam/tua-api/master.svg" alt="Coverage Status">
     </a>
+    <a href="https://david-dm.org/tuateam/tua-api" target="_blank">
+        <img src="https://david-dm.org/tuateam/tua-api.svg" alt="dependencies">
+    </a>
     <a href="https://www.npmjs.com/package/tua-api" target="_blank">
         <img src="https://badgen.net/npm/dm/tua-api" alt="Downloads per month">
         <img src="https://img.shields.io/npm/v/tua-api.svg" alt="Version">
