@@ -24,6 +24,8 @@
 * Node 端：axios
 * 小程序端：wx.request
 
+[![Edit tua-api github example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2o24xn0750)
+
 ## 安装
 ### web 端
 #### 安装本体
