@@ -1,8 +1,6 @@
 <h1 align="center">tua-api</h1>
 
-<h5 align="center">
-    让我们优雅地调用 api~
-</h5>
+<h4 align="center">让我们优雅地调用 api~</h4>
 
 <p align="center">
     <a href="https://tuateam.github.io/tua-api/">👉完整文档地址点这里👈</a>
