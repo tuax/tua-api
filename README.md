@@ -24,7 +24,9 @@
 * Node 端：axios
 * 小程序端：wx.request
 
-[![Edit tua-api github example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2o24xn0750)
+<a href="https://codesandbox.io/s/2o24xn0750" target="_blank">
+    <img alt="Edit tua-api github example" src="https://codesandbox.io/static/img/play-codesandbox.svg">
+</a>
 
 ## 安装
 ### web 端
