@@ -41,23 +41,33 @@ const plugins = [
     nodeResolve(),
     commonjs(),
     babel(),
-    replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
 ]
+const env = 'process.env.NODE_ENV'
 const external = ['axios', 'fetch-jsonp']
 
 export default [{
     input,
-    output: [ output.cjs, output.esm, output.umd ],
+    output: [ output.cjs, output.esm ],
     plugins,
     external,
+}, {
+    input,
+    output: output.umd,
+    external,
+    plugins: [
+        ...plugins,
+        replace({ [env]: '"development"' }),
+    ],
 }, {
     input,
     output: {
         ...output.umd,
         file: 'dist/TuaApi.umd.min.js',
     },
-    plugins: [ ...plugins, uglify() ],
     external,
+    plugins: [
+        ...plugins,
+        replace({ [env]: '"production"' }),
+        uglify(),
+    ],
 }]
