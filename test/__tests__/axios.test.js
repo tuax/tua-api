@@ -18,6 +18,17 @@ const reqTAUrl = `http://example-base.com/fake-get/req-type-axios?asyncCp=asyncC
 const reqEAPUrl = `http://example-base.com/fake-post/empty-array-params`
 const reqMFDUrl = `http://example-base.com/fake-get/mock-function-data`
 
+describe('middleware', () => {
+    test('change host before request', async () => {
+        const data = { code: 0, data: 'custom host' }
+        const reqHAPUrl = `http://custom-host.com/fake-post/array-params`
+        mock.onPost(reqHAPUrl).reply(200, data)
+        const resData = await fakePostApi.hap()
+
+        expect(resData).toEqual(data)
+    })
+})
+
 describe('mock data', () => {
     test('mock function data', async () => {
         mock.onGet(reqMFDUrl).reply(200, {})

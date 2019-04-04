@@ -19,9 +19,9 @@ import {
     getFetchJsonpPromise,
 } from './adapters/'
 import {
-    setFullUrlMiddleware,
     formatResDataMiddleware,
     recordReqTimeMiddleware,
+    setReqFnParamsMiddleware,
     recordStartTimeMiddleware,
     formatReqParamsMiddleware,
 } from './middlewareFns'
@@ -92,31 +92,37 @@ class TuaApi {
     /**
      * 根据 reqType 和 type 决定调用哪个库
      * @param {Object} options
+     * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @param {String} options.url 接口地址
      * @param {String} options.type 接口请求类型 get/post...
      * @param {String} options.fullUrl 完整接口地址
-     * @param {String} options.path 接口路径名称
+     * @param {String} options.reqType 使用什么工具发(axios/jsonp/wx)
+     * @param {Object} options.reqParams 请求参数
+     * @param {String} options.callbackName 使用 jsonp 时的回调函数名
+     * @param {Object} options.axiosOptions 透传 axios 配置参数
+     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
      * @return {Promise}
      */
     _reqFn ({
         url,
+        mock,
         type,
         fullUrl,
         reqType,
         reqParams: data,
         callbackName,
-        jsonpOptions,
         axiosOptions,
+        jsonpOptions,
         ...rest
     }) {
         // check type
         this._checkReqType(reqType)
 
         // mock data
-        if (rest.mock) {
-            const resData = typeof rest.mock === 'function'
-                ? rest.mock(data)
-                : { ...rest.mock }
+        if (mock) {
+            const resData = typeof mock === 'function'
+                ? mock(data)
+                : { ...mock }
 
             return Promise.resolve({ data: resData })
         }
@@ -175,7 +181,7 @@ class TuaApi {
             // 业务侧中间件函数数组
             ...middlewareFns,
             // 生成 fullUrl 参数
-            setFullUrlMiddleware,
+            setReqFnParamsMiddleware,
             // 统一转换响应数据为对象
             formatResDataMiddleware,
             // 记录结束时间
@@ -199,7 +205,7 @@ class TuaApi {
      * @param {String} options.type 接口请求类型 get/post...
      * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @param {String} options.name 自定义的接口名称
-     * @param {String} options.path 接口路径名称
+     * @param {String} options.path 接口结尾路径
      * @param {String[]} options.params 接口参数数组
      * @param {String} options.prefix 接口前缀
      * @param {Function} options.afterFn 在请求完成后执行的钩子函数（将被废弃）
@@ -227,7 +233,6 @@ class TuaApi {
     }) {
         // 优先使用 name
         const apiName = name || path
-        const fullPath = `${prefix}/${path}`
 
         // 合并全局默认值
         rest.host = rest.host || this.host
@@ -253,7 +258,7 @@ class TuaApi {
             args = args === null ? {} : args
 
             // 最终的运行时配置，runtimeOptions 有最高优先级
-            const runtimeParams = { type, path, params, prefix, apiName, fullPath, ...rest, ...runtimeOptions }
+            const runtimeParams = { type, path, params, prefix, apiName, ...rest, ...runtimeOptions }
 
             // 自定义回调函数名称（用于 jsonp）
             runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
@@ -292,7 +297,7 @@ class TuaApi {
                 )
         }
 
-        apiFn.key = fullPath
+        apiFn.key = `${prefix}/${path}`
         apiFn.mock = mock
         apiFn.params = params
 
