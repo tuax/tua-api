@@ -53,8 +53,17 @@ async function (ctx, next) {
 | 已使用的属性名 | 含义和作用 |
 | --- | --- |
 | req | 请求 |
-| req.reqFnParams | 发起请求所需的配置 |
-| req.reqFnParams.reqParams | 请求的数据对象 |
+| req.host | 服务器地址 |
+| req.mock | 模拟的响应数据或是生成数据的函数 |
+| req.type | 接口请求类型 get/post... |
+| req.path | 接口结尾路径 |
+| req.prefix | 接口前缀 |
+| req.reqType | 使用什么工具发(axios/jsonp/wx) |
+| req.reqParams | 已添加默认参数的请求参数 |
+| req.callbackName | 使用 jsonp 时的回调函数名 |
+| req.axiosOptions | 透传 axios 配置参数 |
+| req.jsonpOptions | 透传 fetch-jsonp 配置参数|
+| req.reqFnParams | 发起请求时的参数对象（上面那些参数都会被放进来作为属性） |
 | --- | --- |
 | res | 响应 |
 | res.data | 响应的数据 |

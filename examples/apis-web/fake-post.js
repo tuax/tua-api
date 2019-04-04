@@ -32,6 +32,21 @@ export default {
             params: ['param1', 'param2'],
         },
         /**
+         * array-params with new host
+         */
+        {
+            name: 'hap',
+            path: 'array-params',
+            type: 'post',
+            reqType: 'axios',
+            middleware: [
+                async (ctx, next) => {
+                    ctx.req.host = 'http://custom-host.com/'
+                    await next()
+                },
+            ],
+        },
+        /**
          * object-params
          */
         {
