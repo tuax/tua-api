@@ -1,6 +1,6 @@
 {
     "name": "tua-api",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "🏗 A common tool helps converting configs to api functions",
     "main": "dist/TuaApi.cjs.js",
     "module": "dist/TuaApi.esm.js",

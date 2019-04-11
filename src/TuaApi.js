@@ -258,7 +258,7 @@ class TuaApi {
             args = args === null ? {} : args
 
             // 最终的运行时配置，runtimeOptions 有最高优先级
-            const runtimeParams = { type, path, params, prefix, apiName, ...rest, ...runtimeOptions }
+            const runtimeParams = { type, path, params, prefix, apiName, fullPath: `${prefix}/${path}`, ...rest, ...runtimeOptions }
 
             // 自定义回调函数名称（用于 jsonp）
             runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
