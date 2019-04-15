@@ -1,11 +1,12 @@
 {
     "name": "tua-api",
-    "version": "1.1.1",
+    "version": "1.2.0-0",
     "description": "🏗 A common tool helps converting configs to api functions",
     "main": "dist/TuaApi.cjs.js",
     "module": "dist/TuaApi.esm.js",
     "unpkg": "dist/TuaApi.umd.js",
     "jsdelivr": "dist/TuaApi.umd.js",
+    "types": "src/index.d.ts",
     "files": [
         "src",
         "dist",
@@ -51,7 +52,8 @@
         },
         "collectCoverage": true,
         "collectCoverageFrom": [
-            "src/**"
+            "src/**",
+            "!src/index.d.ts"
         ]
     },
     "eslintIgnore": [
