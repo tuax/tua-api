@@ -8,7 +8,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 
 import pkg from './package.json'
 
-const input = `src/TuaApi.js`
+const input = `src/index.js`
 const banner = `/* ${pkg.name} version ${pkg.version} */`
 
 const output = {
@@ -24,7 +24,7 @@ const output = {
         format: 'esm',
     },
     umd: {
-        file: 'dist/TuaApi.umd.js',
+        file: pkg.unpkg,
         name: 'TuaApi',
         banner,
         format: 'umd',

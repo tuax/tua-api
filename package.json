@@ -55,8 +55,8 @@
         ]
     },
     "eslintIgnore": [
-        "package.json",
-        "dist/*"
+        "dist/*",
+        "package.json"
     ],
     "dependencies": {
         "axios": "^0.18.0",
