@@ -1,4 +1,4 @@
-import TuaApi from '../../src/TuaApi'
+import TuaApi from '../../src'
 
 const tuaApi = new TuaApi({
     host: 'http://example-base.com/',

@@ -1,5 +1,5 @@
 import '../__mocks__/wxMock'
-import TuaApi from '@/TuaApi'
+import TuaApi from '@/'
 import { ERROR_STRINGS } from '@/constants'
 
 import fakeWx from '@examples/apis-mp/fake-wx'

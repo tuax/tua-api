@@ -180,7 +180,7 @@ class TuaApi {
             formatReqParamsMiddleware,
             // 业务侧中间件函数数组
             ...middlewareFns,
-            // 生成 fullUrl 参数
+            // 生成 _reqFn 参数
             setReqFnParamsMiddleware,
             // 统一转换响应数据为对象
             formatResDataMiddleware,

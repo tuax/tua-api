@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "experimentalDecorators": true,
+        "lib": ["es2015"],
         "allowJs": true,
         "baseUrl": ".",
+        "experimentalDecorators": true,
         "paths":{
             "@/*": ["src/*"],
             "@examples/*": ["examples/*"]

@@ -1,4 +1,4 @@
-import TuaApi from '@/TuaApi'
+import TuaApi from '@/'
 import { ERROR_STRINGS } from '@/constants'
 
 describe('error handling', () => {
