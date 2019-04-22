@@ -13,6 +13,7 @@ const params = {
 
 const reqAPUrl = `http://example-base.com/fake-post/array-params`
 const reqOPUrl = `http://example-base.com/fake-post/object-params`
+const reqGOPUrl = `http://example-base.com/fake-get/object-params`
 const reqOHUrl = `http://example-test.com/fake-post/own-host`
 const reqTAUrl = `http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp`
 const reqEAPUrl = `http://example-base.com/fake-post/empty-array-params`
@@ -56,6 +57,10 @@ describe('error handling', () => {
 })
 
 describe('fake get requests', () => {
+    beforeEach(() => {
+        mock.resetHistory()
+    })
+
     test('req-type-axios', async () => {
         const data = { code: 0, data: 'req-type-axios' }
         mock.onGet(reqTAUrl).reply(200, data)
@@ -74,6 +79,15 @@ describe('fake get requests', () => {
         })
 
         expect(resData).toEqual(data)
+    })
+
+    test('required param', async () => {
+        const data = [ 0, 'array data' ]
+        mock.onGet(reqGOPUrl + `?param1=1217&param2=steve&param3=young`).reply(200, data)
+        const resData = await fakeGetApi.op({ param3: 'young' }, { reqType: 'axios' })
+
+        expect(mock.history.get[0].params).toBe(undefined)
+        expect(resData).toEqual({ code: 0, data: 'array data' })
     })
 })
 
