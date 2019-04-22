@@ -139,7 +139,6 @@ class TuaApi {
                 data: method === 'GET' ? {} : data,
                 method,
                 ...axiosOptions,
-                ...rest,
             }
 
             return getAxiosPromise(params)
@@ -147,7 +146,7 @@ class TuaApi {
 
         // 对于 post 请求使用 axios
         return method === 'POST'
-            ? getAxiosPromise({ url, data, ...axiosOptions, ...rest })
+            ? getAxiosPromise({ url, data, ...axiosOptions })
             : getFetchJsonpPromise({
                 url: fullUrl,
                 jsonpOptions: { ...jsonpOptions, callbackName },
