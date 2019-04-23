@@ -93,11 +93,7 @@ const setReqFnParamsMiddleware = (ctx, next) => {
     const url = host + prefix + '/' + path
     const paramsStr = getParamStrFromObj(reqParams)
     // 完整请求地址，将参数拼在 url 上，用于 get 请求
-    const fullUrl = isFormData(reqParams)
-        ? url
-        : paramsStr
-            ? `${url}?${paramsStr}`
-            : url
+    const fullUrl = paramsStr ? `${url}?${paramsStr}` : url
 
     ctx.req.reqFnParams = {
         url,
