@@ -8,5 +8,6 @@ module.exports = {
     },
     globals: {
         wx: true,
+        FormData: true,
     },
 }

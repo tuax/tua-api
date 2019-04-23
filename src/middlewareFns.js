@@ -1,5 +1,6 @@
 import { ERROR_STRINGS } from './constants'
 import {
+    isFormData,
     checkArrayParams,
     getParamStrFromObj,
     getDefaultParamObj,
@@ -64,6 +65,12 @@ const formatReqParamsMiddleware = (ctx, next) => {
         throw TypeError(ERROR_STRINGS.argsType)
     }
 
+    if (isFormData(args)) {
+        ctx.req.reqParams = args
+
+        return next()
+    }
+
     checkArrayParams(ctx.req)
 
     // 根据配置生成请求的参数
@@ -86,7 +93,11 @@ const setReqFnParamsMiddleware = (ctx, next) => {
     const url = host + prefix + '/' + path
     const paramsStr = getParamStrFromObj(reqParams)
     // 完整请求地址，将参数拼在 url 上，用于 get 请求
-    const fullUrl = paramsStr ? `${url}?${paramsStr}` : url
+    const fullUrl = isFormData(reqParams)
+        ? url
+        : paramsStr
+            ? `${url}?${paramsStr}`
+            : url
 
     ctx.req.reqFnParams = {
         url,

@@ -92,6 +92,10 @@ describe('fake get requests', () => {
 })
 
 describe('fake post requests', () => {
+    beforeEach(() => {
+        mock.resetHistory()
+    })
+
     test('own-host', async () => {
         const data = { code: 0, data: 'own-host' }
         mock.onPost(reqOHUrl).reply(200, data)
@@ -122,5 +126,22 @@ describe('fake post requests', () => {
         const resData = await fakePostApi.op({ param3: 'steve' })
 
         expect(resData).toEqual({ code: 0, data: 'array data' })
+    })
+
+    test('form-data', async () => {
+        mock.onPost(reqOHUrl).reply(200, {})
+        const formData = new FormData()
+        formData.append('a', 'a')
+        formData.append('b', 123)
+
+        await fakePostApi.oh(formData)
+
+        const {
+            data,
+            transformRequest,
+        } = mock.history.post[0]
+
+        expect(data).toBe(formData)
+        expect(transformRequest[0].name).toBe('transformRequest')
     })
 })

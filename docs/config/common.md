@@ -49,7 +49,7 @@ export default {
 ```
 
 ## reqType 请求使用库类型
-即用哪个库发起请求目前支持：jsonp、axios，不填则使用默认配置。
+即用哪个库发起请求目前支持：jsonp、axios、wx，不填则使用默认配置中的 reqType。
 
 ```js
 export default {
