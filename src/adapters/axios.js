@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { DEFAULT_HEADER } from '../constants'
-import { logger, getParamStrFromObj } from '../utils'
+import { logger, isFormData, getParamStrFromObj } from '../utils'
 
 // 获取使用 axios 发起请求后的 promise 对象
 export const getAxiosPromise = ({
@@ -14,10 +14,14 @@ export const getAxiosPromise = ({
     transformRequest = [getParamStrFromObj],
     ...rest
 }) => {
+    const isFD = isFormData(data)
+
     logger.log(`Req Url: ${url}`)
-    if (data && Object.keys(data).length) {
+    if (data && (Object.keys(data).length || isFD)) {
         logger.log(`Req Data:`, data)
     }
+
+    transformRequest = isFD ? null : transformRequest
 
     return axios({
         url,

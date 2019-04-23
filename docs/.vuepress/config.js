@@ -47,6 +47,7 @@ module.exports = {
                         'middleware',
                         'mock',
                         'export-utils',
+                        'form-data',
                         '../config/',
                     ],
                 },

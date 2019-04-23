@@ -1,5 +1,6 @@
 import { ERROR_STRINGS } from './constants'
 import {
+    isFormData,
     checkArrayParams,
     getParamStrFromObj,
     getDefaultParamObj,
@@ -62,6 +63,12 @@ const formatReqParamsMiddleware = (ctx, next) => {
 
     if (typeof args !== 'object') {
         throw TypeError(ERROR_STRINGS.argsType)
+    }
+
+    if (isFormData(args)) {
+        ctx.req.reqParams = args
+
+        return next()
     }
 
     checkArrayParams(ctx.req)

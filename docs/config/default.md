@@ -18,7 +18,7 @@ new TuaApi({
 例如 `https://example.com/api/`
 
 ## reqType 请求类型
-即在 web 端使用哪个库发起请求目前支持：jsonp、axios，不填默认使用 axios。（小程序端没得选...）
+即使用哪个库发起请求目前支持：jsonp、axios、wx，不填默认使用 axios。
 
 ## middleware 中间件函数数组
 【所有】请求都会调用的中间件函数数组！适合添加一些通用逻辑，例如接口上报。
