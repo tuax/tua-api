@@ -5,11 +5,12 @@ import {
 } from 'axios'
 
 /* -- types -- */
+export type AnyFunction = (...args: any[]) => any
+export type AnyPromiseFunction<T = any> = (...args: any[]) => Promise<T>
+
 export type Mock = AnyFunction | any
 
 export type ApiConfig = WxApiConfig | WebApiConfig
-
-export type AnyFunction = (...args: any[]) => any
 
 export type ParamsConfig = string[] | ParamsObject
 
@@ -79,7 +80,7 @@ export interface BaseApiConfig {
     type?: Method
     prefix?: string
     reqType?: ReqType
-    afterFn?: <T = any, U = any>(args: [U, Ctx]) => Promise<T>
+    afterFn?: <T = any, U = any>(args: [U?, Ctx?]) => Promise<T>
     beforeFn?: <T = any>() => Promise<T>
     middleware?: Middleware<Ctx>[]
     commonParams?: object

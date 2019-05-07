@@ -3,7 +3,10 @@ import axios from 'axios'
 import { DEFAULT_HEADER } from '../constants'
 import { logger, isFormData, getParamStrFromObj } from '../utils'
 
-// 获取使用 axios 发起请求后的 promise 对象
+/**
+ * 获取使用 axios 发起请求后的 promise 对象
+ * @param {object} options
+ */
 export const getAxiosPromise = ({
     url,
     data,

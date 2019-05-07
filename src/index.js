@@ -1,3 +1,4 @@
+
 import koaCompose from 'koa-compose'
 
 import { version } from '../package.json'
@@ -30,13 +31,13 @@ logger.log(`Version: ${version}`)
 
 class TuaApi {
     /**
-     * @param {Object} options
-     * @param {String} options.host 服务器基础地址，例如 https://example.com/
-     * @param {String} options.reqType 使用什么工具发(axios/jsonp/wx)
-     * @param {Function[]} options.middleware 中间件函数数组
-     * @param {Object} options.axiosOptions 透传 axios 配置参数
-     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
-     * @param {Object} options.defaultErrorData 出错时的默认数据
+     * @param {object} [options]
+     * @param {string} [options.host] 服务器基础地址，例如 https://example.com/
+     * @param {string} [options.reqType] 使用什么工具发(axios/jsonp/wx)
+     * @param {function[]} [options.middleware] 中间件函数数组
+     * @param {object} [options.axiosOptions] 透传 axios 配置参数
+     * @param {object} [options.jsonpOptions] 透传 fetch-jsonp 配置参数
+     * @param {object} [options.defaultErrorData] 出错时的默认数据
      */
     constructor ({
         host,
@@ -62,8 +63,8 @@ class TuaApi {
 
     /**
      * 添加一个中间件函数
-     * @param {Function} fn
-     * @return {Application} self
+     * @param {function} fn
+     * @return {object} self
      */
     use (fn) {
         if (typeof fn !== 'function') {
@@ -76,8 +77,8 @@ class TuaApi {
 
     /**
      * 根据 apiConfig 生成请求函数组成的 map
-     * @param {Object} apiConfig
-     * @return {Object}
+     * @param {object} apiConfig
+     * @return {object}
      */
     getApi (apiConfig) {
         return pipe(
@@ -91,16 +92,16 @@ class TuaApi {
 
     /**
      * 根据 reqType 和 type 决定调用哪个库
-     * @param {Object} options
+     * @param {object} options
      * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
-     * @param {String} options.url 接口地址
-     * @param {String} options.type 接口请求类型 get/post...
-     * @param {String} options.fullUrl 完整接口地址
-     * @param {String} options.reqType 使用什么工具发(axios/jsonp/wx)
-     * @param {Object} options.reqParams 请求参数
-     * @param {String} options.callbackName 使用 jsonp 时的回调函数名
-     * @param {Object} options.axiosOptions 透传 axios 配置参数
-     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @param {string} options.url 接口地址
+     * @param {string} options.type 接口请求类型 get/post...
+     * @param {string} options.fullUrl 完整接口地址
+     * @param {string} options.reqType 使用什么工具发(axios/jsonp/wx)
+     * @param {object} options.reqParams 请求参数
+     * @param {string} options.callbackName 使用 jsonp 时的回调函数名
+     * @param {object} options.axiosOptions 透传 axios 配置参数
+     * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
      * @return {Promise}
      */
     _reqFn ({
@@ -164,7 +165,7 @@ class TuaApi {
 
     /**
      * 组合生成中间件函数
-     * @param {Function[]} middleware
+     * @param {function[]} middleware
      * @param {Boolean} useGlobalMiddleware 是否使用全局中间件
      */
     _getMiddlewareFn (middleware, useGlobalMiddleware) {
@@ -200,22 +201,22 @@ class TuaApi {
 
     /**
      * 接受 api 对象，返回待接收参数的单个 api 函数的对象
-     * @param {Object} options
-     * @param {String} options.type 接口请求类型 get/post...
+     * @param {object} options
+     * @param {string} options.type 接口请求类型 get/post...
      * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
-     * @param {String} options.name 自定义的接口名称
-     * @param {String} options.path 接口结尾路径
-     * @param {String[]} options.params 接口参数数组
-     * @param {String} options.prefix 接口前缀
-     * @param {Function} options.afterFn 在请求完成后执行的钩子函数（将被废弃）
-     * @param {Function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
-     * @param {Function[]} options.middleware 中间件函数数组
+     * @param {string} options.name 自定义的接口名称
+     * @param {string} options.path 接口结尾路径
+     * @param {String[] | object} options.params 接口参数数组
+     * @param {string} options.prefix 接口前缀
+     * @param {function} options.afterFn 在请求完成后执行的钩子函数（将被废弃）
+     * @param {function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
+     * @param {function[]} options.middleware 中间件函数数组
      * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
-     * @param {String} options.host 服务器地址
-     * @param {String} options.reqType 使用什么工具发
-     * @param {Object} options.axiosOptions 透传 axios 配置参数
-     * @param {Object} options.jsonpOptions 透传 fetch-jsonp 配置参数
-     * @return {Object} 以 apiName 为 key，请求函数为值的对象
+     * @param {string} options.host 服务器地址
+     * @param {string} options.reqType 使用什么工具发
+     * @param {object} options.axiosOptions 透传 axios 配置参数
+     * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
+     * @return {object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
         type = 'get',
@@ -245,8 +246,8 @@ class TuaApi {
 
         /**
          * 被业务侧调用的函数
-         * @param {Object} args 接口参数（覆盖默认值）
-         * @param {Object} runtimeOptions 运行时配置
+         * @param {object} args 接口参数（覆盖默认值）
+         * @param {object} runtimeOptions 运行时配置
          * @return {Promise}
          */
         const apiFn = (

@@ -8,7 +8,7 @@ import {
 
 /**
  * 记录请求开始时间
- * @param {Object} ctx 上下文对象
+ * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const recordStartTimeMiddleware = (ctx, next) => {
@@ -19,7 +19,7 @@ const recordStartTimeMiddleware = (ctx, next) => {
 
 /**
  * 记录接受响应时间和请求总时间的中间件
- * @param {Object} ctx 上下文对象
+ * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const recordReqTimeMiddleware = (ctx, next) => {
@@ -32,8 +32,7 @@ const recordReqTimeMiddleware = (ctx, next) => {
 /**
  * 由于后台返回数据结构不统一，增加对于返回数组情况的兼容处理
  * 且对于 code 进行强制类型转换
- * @param {Object} ctx 上下文对象
- * @param {Array|Object} ctx.res.data 接口返回数据
+ * @param {object} ctx 上下文对象（ctx.res.data 接口返回数据）
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const formatResDataMiddleware = (ctx, next) => next().then(() => {
@@ -51,7 +50,7 @@ const formatResDataMiddleware = (ctx, next) => next().then(() => {
 
 /**
  * 生成请求函数所需参数
- * @param {Object} ctx 上下文对象
+ * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const formatReqParamsMiddleware = (ctx, next) => {
@@ -83,7 +82,7 @@ const formatReqParamsMiddleware = (ctx, next) => {
 
 /**
  * 设置请求的 reqFnParams 参数，将被用于 _reqFn 函数
- * @param {Object} ctx 上下文对象
+ * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const setReqFnParamsMiddleware = (ctx, next) => {

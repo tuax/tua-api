@@ -1,4 +1,4 @@
-const map = fn => arr => Array.isArray(arr)
+const map = (fn) => (arr) => Array.isArray(arr)
     ? arr.map(fn)
     : pipe(
         Object.keys,
@@ -9,6 +9,7 @@ const map = fn => arr => Array.isArray(arr)
 const join = str => arr => arr.join(str)
 const concat = val => arr => arr.concat(val)
 const filter = fn => arr => arr.filter(fn)
+const values = obj => map(k => obj[k])(Object.keys(obj))
 const reduce = (fn, val) => (arr) => !arr.length
     ? val
     : val == null
@@ -55,6 +56,7 @@ export {
     concat,
     reduce,
     filter,
+    values,
     compose,
     flatten,
     mergeAll,

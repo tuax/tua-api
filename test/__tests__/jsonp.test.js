@@ -1,9 +1,12 @@
-import fetchJsonp from 'fetch-jsonp'
-
 import { fakeGetApi } from '@examples/apis-web/'
 import { ERROR_STRINGS } from '@/constants'
 
 jest.mock('fetch-jsonp')
+
+/**
+ * @type {*}
+ */
+const fetchJsonp = require('fetch-jsonp')
 
 const data = [ 0, 'array data' ]
 const returnVal = { code: 0, data: 'array data' }
@@ -11,6 +14,9 @@ const returnVal = { code: 0, data: 'array data' }
 describe('mock data', () => {
     test('mock object data', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
+        /**
+         * @type {*}
+         */
         const resData = await fakeGetApi.mockObjectData()
 
         expect(resData.code).toBe(404)
@@ -27,7 +33,7 @@ describe('fake jsonp requests', () => {
 
     test('array-data', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
-        const resData = await fakeGetApi.ap()
+        const resData = await fakeGetApi.ap({})
 
         expect(resData).toEqual(returnVal)
     })
