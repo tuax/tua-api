@@ -54,7 +54,8 @@ export default {
         {
             name: 'op',
             path: 'object-params',
-            reqType: '',
+            /** @type { import('../../src/').ReqType } */
+            reqType: (''),
             params: {
                 param1: 1217,
                 param2: 'steve',
@@ -69,7 +70,10 @@ export default {
             name: 'acp',
             path: 'async-common-params',
             params: [],
-            // 在这里返回的 params 会和请求的 params 合并
+            /**
+             * 在这里返回的 params 会和请求的 params 合并
+             * @returns {Promise<any>}
+             */
             beforeFn: () => Promise.resolve({
                 params: { asyncCp: 'asyncCp' },
             }),
@@ -82,8 +86,12 @@ export default {
             path: 'req-type-axios',
             // 用哪个包发起请求目前支持：jsonp、axios
             // 如果不指定默认对于 get 请求使用 fetch-jsonp，post 请求使用 axios
-            reqType: 'axios',
-            // 在这里返回的 params 会和请求的 params 合并
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('axios'),
+            /**
+             * 在这里返回的 params 会和请求的 params 合并
+             * @returns {Promise<any>}
+             */
             beforeFn: () => Promise.resolve({
                 params: { asyncCp: 'asyncCp' },
             }),
@@ -94,7 +102,8 @@ export default {
         {
             name: 'irt',
             path: 'invalid-req-type',
-            reqType: 'foobar',
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('foobar'),
         },
         /**
          * afterFn-data
@@ -126,7 +135,8 @@ export default {
         {
             name: 'mockFnData',
             path: 'mock-function-data',
-            reqType: 'axios',
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('axios'),
             mock: ({ mockCode }) => ({ code: mockCode, data: {} }),
         },
     ],

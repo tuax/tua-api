@@ -41,6 +41,7 @@ describe('mock data', () => {
 
 describe('error handling', () => {
     test('non-object params', () => {
+        // @ts-ignore
         return expect(fakePostApi.ap('a')).rejects.toEqual(TypeError(ERROR_STRINGS.argsType))
     })
 
@@ -51,6 +52,7 @@ describe('error handling', () => {
     })
 
     test('must pass required params', () => {
+        // @ts-ignore
         return expect(fakePostApi.op())
             .rejects.toEqual(Error(ERROR_STRINGS.requiredParamFn('op', 'param3')))
     })
@@ -58,6 +60,7 @@ describe('error handling', () => {
 
 describe('fake get requests', () => {
     beforeEach(() => {
+        // @ts-ignore
         mock.resetHistory()
     })
 
@@ -93,6 +96,7 @@ describe('fake get requests', () => {
 
 describe('fake post requests', () => {
     beforeEach(() => {
+        // @ts-ignore
         mock.resetHistory()
     })
 
@@ -132,7 +136,7 @@ describe('fake post requests', () => {
         mock.onPost(reqOHUrl).reply(200, {})
         const formData = new FormData()
         formData.append('a', 'a')
-        formData.append('b', 123)
+        formData.append('b', '123')
 
         await fakePostApi.oh(formData)
 

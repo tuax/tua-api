@@ -1,9 +1,15 @@
 {
     "compilerOptions": {
-        "lib": ["es2015"],
         "allowJs": true,
+        "checkJs": true,
         "baseUrl": ".",
+        "target": "es5",
+        "resolveJsonModule": true,
         "experimentalDecorators": true,
+        "lib": [
+            "dom",
+            "es2015"
+        ],
         "paths":{
             "@/*": ["src/*"],
             "@examples/*": ["examples/*"]

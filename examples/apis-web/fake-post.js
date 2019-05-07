@@ -5,6 +5,9 @@ export default {
     // 该参数表示请求的中间路径，建议与文件同名，以便后期维护。
     prefix: 'fake-post',
 
+    /** @type { import('../../src/').Method } */
+    type: ('post'),
+
     // 所有请求都需要携带的参数
     commonParams: { common: 'params' },
 
@@ -19,7 +22,6 @@ export default {
         {
             name: 'eap',
             path: 'empty-array-params',
-            type: 'post',
         },
         /**
          * array-params
@@ -27,8 +29,8 @@ export default {
         {
             name: 'ap',
             path: 'array-params',
-            type: 'post',
-            reqType: 'axios',
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('axios'),
             params: ['param1', 'param2'],
         },
         /**
@@ -37,8 +39,8 @@ export default {
         {
             name: 'hap',
             path: 'array-params',
-            type: 'post',
-            reqType: 'axios',
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('axios'),
             middleware: [
                 async (ctx, next) => {
                     ctx.req.host = 'http://custom-host.com/'
@@ -52,7 +54,6 @@ export default {
         {
             name: 'op',
             path: 'object-params',
-            type: 'post',
             params: {
                 param1: 1217,
                 param2: 'steve',
@@ -65,7 +66,6 @@ export default {
         {
             name: 'oh',
             path: 'own-host',
-            type: 'post',
             host: 'http://example-test.com/',
             params: {},
             // 表示这个接口不需要传递 commonParams

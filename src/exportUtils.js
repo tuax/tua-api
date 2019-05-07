@@ -2,6 +2,7 @@ import {
     map,
     pipe,
     filter,
+    values,
     flatten,
     mergeAll,
 } from './utils/'
@@ -20,12 +21,12 @@ import {
  *  key2: [Function: path2] key: key2,
  *  ...
  * }
- * @param {Object} apis
- * @return {Object}
+ * @param {object} apis
+ * @return {object}
  */
 const getSyncFnMapByApis = pipe(
-    Object.values,
-    map(Object.values),
+    values,
+    map(values),
     flatten,
     map(val => ({ [val.key]: val })),
     mergeAll
@@ -33,7 +34,7 @@ const getSyncFnMapByApis = pipe(
 
 /**
  * 过滤出有默认参数的接口（接口参数非数组，且不含有 isRequired/required）
- * @param {Object} syncFnMap
+ * @param {object} syncFnMap
  * @return {Array} keys 所有有默认参数的接口名称
  */
 const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(

@@ -1,6 +1,10 @@
 import { logger, promisifyWxApi } from '../utils'
 import { ERROR_STRINGS, WX_VALID_METHODS } from '../constants'
 
+/**
+* 获取使用 wx 发起请求后的 promise 对象
+* @param {object} options
+*/
 export const getWxPromise = ({
     url,
     data,

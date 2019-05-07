@@ -5,8 +5,9 @@ export default {
     // 该参数表示请求的中间路径，建议与文件同名，以便后期维护。
     prefix: 'fake-wx',
 
-    // 所有请求类型（可选值 OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT）
-    type: 'post',
+    // 所有请求类型
+    /** @type { import('../../src/').Method } */
+    type: ('post'),
 
     // 所有请求都需要携带的参数，例如小程序中的所有接口都要携带以下参数 `from=miniprogram`
     commonParams: { from: 'miniprogram' },
@@ -27,6 +28,9 @@ export default {
          */
         {
             path: 'fail',
+            /**
+             * @returns {Promise<any>}
+             */
             beforeFn: () => Promise.resolve({
                 header: { cookie: '123' },
             }),
@@ -38,7 +42,8 @@ export default {
         {
             name: 'arrayData',
             path: 'array-data',
-            type: 'get',
+            /** @type { import('../../src/').Method } */
+            type: ('get'),
             params: ['param1', 'param2'],
         },
         /**
@@ -77,7 +82,8 @@ export default {
             name: 'typeGet',
             path: 'type-get',
             // 这个接口单独配置类型
-            type: 'get',
+            /** @type { import('../../src/').Method } */
+            type: ('get'),
         },
         /**
          * unknown-type
@@ -86,7 +92,8 @@ export default {
             name: 'unknownType',
             path: 'unknown-type',
             // 这个接口单独配置类型
-            type: 'foo',
+            /** @type { import('../../src/').Method } */
+            type: ('foo'),
         },
         /**
          * nav-loading
