@@ -62,7 +62,12 @@ const getDefaultParamObj = ({
             args[key] == null
 
         if (isRequiredValUndefined) {
-            throw Error(ERROR_STRINGS.requiredParamFn(apiName, key))
+            logger.error(ERROR_STRINGS.requiredParamFn(apiName, key))
+
+            /* istanbul ignore next */
+            if (process.env.NODE_ENV === 'test') {
+                throw TypeError(ERROR_STRINGS.requiredParamFn(apiName, key))
+            }
         }
 
         return { [key]: val }
