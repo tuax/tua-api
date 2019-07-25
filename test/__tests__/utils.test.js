@@ -38,6 +38,10 @@ test('getDefaultParamObj', () => {
         commonParams: { c: '3' },
     })).toEqual({ b: '2', c: '3' })
 
+    expect(getDefaultParamObj({
+        params: { a: { required: false } },
+    })).toEqual({ a: '' })
+
     expect(() => getDefaultParamObj({
         params: { b: { required: true } },
         apiName: 'steve',

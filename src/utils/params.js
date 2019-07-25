@@ -70,7 +70,9 @@ const getDefaultParamObj = ({
             }
         }
 
-        return { [key]: val }
+        const returnVal = typeof val === 'object' ? '' : val
+
+        return { [key]: returnVal }
     }),
     reduce(merge, commonParams)
 )(params)
