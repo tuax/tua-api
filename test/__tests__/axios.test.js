@@ -85,7 +85,7 @@ describe('fake get requests', () => {
     })
 
     test('required param', async () => {
-        const data = [ 0, 'array data' ]
+        const data = [0, 'array data']
         mock.onGet(reqGOPUrl + `?param1=1217&param2=steve&param3=young`).reply(200, data)
         const resData = await fakeGetApi.op({ param3: 'young' }, { reqType: 'axios' })
 
@@ -125,7 +125,7 @@ describe('fake post requests', () => {
     })
 
     test('array-data', async () => {
-        const data = [ 0, 'array data' ]
+        const data = [0, 'array data']
         mock.onPost(reqOPUrl).reply(200, data)
         const resData = await fakePostApi.op({ param3: 'steve' })
 
@@ -133,6 +133,7 @@ describe('fake post requests', () => {
     })
 
     test('form-data', async () => {
+        mock.resetHistory()
         mock.onPost(reqOHUrl).reply(200, {})
         const formData = new FormData()
         formData.append('a', 'a')
@@ -146,6 +147,6 @@ describe('fake post requests', () => {
         } = mock.history.post[0]
 
         expect(data).toBe(formData)
-        expect(transformRequest[0].name).toBe('transformRequest')
+        expect(transformRequest).toBe(null)
     })
 })

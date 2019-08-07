@@ -41,7 +41,7 @@ const formatResDataMiddleware = (ctx, next) => next().then(() => {
     if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
 
     if (Array.isArray(jsonData)) {
-        const [ code, data, msg ] = jsonData
+        const [code, data, msg] = jsonData
         ctx.res.data = { code: +code, data, msg }
     } else {
         ctx.res.data = { ...jsonData, code: +jsonData.code }
