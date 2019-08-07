@@ -8,7 +8,7 @@ jest.mock('fetch-jsonp')
  */
 const fetchJsonp = require('fetch-jsonp')
 
-const data = [ 0, 'array data' ]
+const data = [0, 'array data']
 const returnVal = { code: 0, data: 'array data' }
 
 describe('mock data', () => {

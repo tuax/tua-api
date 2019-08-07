@@ -47,7 +47,7 @@ const external = ['axios', 'fetch-jsonp']
 
 export default [{
     input,
-    output: [ output.cjs, output.esm ],
+    output: [output.cjs, output.esm],
     plugins,
     external,
 }, {

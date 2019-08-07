@@ -6,7 +6,7 @@ import fakeWx from '@examples/apis-mp/fake-wx'
 import { mockApi, fakeWxApi } from '@examples/apis-mp/'
 
 const testObjData = { code: 0, data: 'object data' }
-const testArrData = [ 0, 'array data' ]
+const testArrData = [0, 'array data']
 
 describe('mock data', () => {
     beforeEach(() => {
