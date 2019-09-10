@@ -6,7 +6,7 @@ export default {
     prefix: 'fake-post',
 
     /** @type { import('../../src/').Method } */
-    type: ('post'),
+    method: ('post'),
 
     // 所有请求都需要携带的参数
     commonParams: { common: 'params' },
