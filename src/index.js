@@ -235,8 +235,8 @@ class TuaApi {
     }) {
         if (type) {
             logger.warn(
-                `[type] will be deprecated, please use [method] instead!\n` +
-                `[type] 属性将被废弃, 请用 [method] 替代！`
+                '[type] will be deprecated, please use [method] instead!\n' +
+                '[type] 属性将被废弃, 请用 [method] 替代！'
             )
         }
 

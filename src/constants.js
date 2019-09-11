@@ -9,9 +9,9 @@ const DEFAULT_HEADER = { 'Content-Type': 'application/x-www-form-urlencoded' }
 
 // 错误信息
 const ERROR_STRINGS = {
-    noData: `no data!`,
-    argsType: `the first parameter must be an object!`,
-    middleware: `middleware must be a function!`,
+    noData: 'no data!',
+    argsType: 'the first parameter must be an object!',
+    middleware: 'middleware must be a function!',
 
     reqTypeFn: (reqType) => `invalid reqType: "${reqType}", ` +
         `support these reqTypes: ["${VALID_REQ_TYPES.join('", "')}"].`,

@@ -11,18 +11,18 @@ const params = {
     param2: 'young',
 }
 
-const reqAPUrl = `http://example-base.com/fake-post/array-params`
-const reqOPUrl = `http://example-base.com/fake-post/object-params`
-const reqGOPUrl = `http://example-base.com/fake-get/object-params`
-const reqOHUrl = `http://example-test.com/fake-post/own-host`
-const reqTAUrl = `http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp`
-const reqEAPUrl = `http://example-base.com/fake-post/empty-array-params`
-const reqMFDUrl = `http://example-base.com/fake-get/mock-function-data`
+const reqAPUrl = 'http://example-base.com/fake-post/array-params'
+const reqOPUrl = 'http://example-base.com/fake-post/object-params'
+const reqGOPUrl = 'http://example-base.com/fake-get/object-params'
+const reqOHUrl = 'http://example-test.com/fake-post/own-host'
+const reqTAUrl = 'http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp'
+const reqEAPUrl = 'http://example-base.com/fake-post/empty-array-params'
+const reqMFDUrl = 'http://example-base.com/fake-get/mock-function-data'
 
 describe('middleware', () => {
     test('change host before request', async () => {
         const data = { code: 0, data: 'custom host' }
-        const reqHAPUrl = `http://custom-host.com/fake-post/array-params`
+        const reqHAPUrl = 'http://custom-host.com/fake-post/array-params'
         mock.onPost(reqHAPUrl).reply(200, data)
         const resData = await fakePostApi.hap()
 
@@ -86,7 +86,7 @@ describe('fake get requests', () => {
 
     test('required param', async () => {
         const data = [0, 'array data']
-        mock.onGet(reqGOPUrl + `?param1=1217&param2=steve&param3=young`).reply(200, data)
+        mock.onGet(reqGOPUrl + '?param1=1217&param2=steve&param3=young').reply(200, data)
         const resData = await fakeGetApi.op({ param3: 'young' }, { reqType: 'axios' })
 
         expect(mock.history.get[0].params).toBe(undefined)

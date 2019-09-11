@@ -23,7 +23,7 @@ export const getWxPromise = ({
     } else {
         logger.log(`Req Url: ${url}`)
         if (data && Object.keys(data).length) {
-            logger.log(`Req Data:`, data)
+            logger.log('Req Data:', data)
         }
     }
 

@@ -8,7 +8,7 @@ module.exports = {
         '/': { title: name, description },
     },
     head: [
-        ['link', { rel: 'icon', href: `/logo.png` }],
+        ['link', { rel: 'icon', href: '/logo.png' }],
     ],
     evergreen: true,
     serviceWorker: true,

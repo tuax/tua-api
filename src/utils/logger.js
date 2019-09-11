@@ -8,7 +8,7 @@ const logByType = (type) => (...out) => {
     if (env === 'test' || env === 'production') return
 
     /* istanbul ignore next */
-    console[type](`[TUA-API]:`, ...out)
+    console[type]('[TUA-API]:', ...out)
 }
 
 export const logger = {

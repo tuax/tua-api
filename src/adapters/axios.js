@@ -21,7 +21,7 @@ export const getAxiosPromise = ({
 
     logger.log(`Req Url: ${url}`)
     if (data && (Object.keys(data).length || isFD)) {
-        logger.log(`Req Data:`, data)
+        logger.log('Req Data:', data)
     }
 
     transformRequest = isFD ? null : transformRequest
