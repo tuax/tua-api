@@ -1,13 +1,16 @@
 # 公共配置
 详细地址指的是填写在 `src/apis/foobar.js` 中的一级配置。这部分的配置优先级比默认配置高，但低于各个接口的自身配置。
 
-## type 请求类型
+## type 请求类型 <badge text="2.0.0-" />
+重命名为 `method`，`type` 属性将在 `2.0.0+` 后废弃。
+
+## method 请求类型 <badge text="1.3.5+" />
 所有请求类型（可忽略大小写，可选值 OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT）
 
 ```js
 export default {
     // 忽略大小写
-    type: 'post',
+    method: 'post',
 }
 ```
 

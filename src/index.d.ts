@@ -48,7 +48,9 @@ export interface ParamsObject {
 export interface CtxReq {
     host: string
     mock: Mock
+    // deprecated
     type: Method
+    method: Method
     path: string
     prefix: string
     reqType: ReqType
@@ -77,7 +79,9 @@ export interface Ctx {
 export interface BaseApiConfig {
     mock?: Mock
     host?: string
+    // deprecated
     type?: Method
+    method?: Method
     prefix?: string
     reqType?: ReqType
     afterFn?: <T = any, U = any>(args: [U?, Ctx?]) => Promise<T>

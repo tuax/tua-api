@@ -95,7 +95,7 @@ class TuaApi {
      * @param {object} options
      * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @param {string} options.url 接口地址
-     * @param {string} options.type 接口请求类型 get/post...
+     * @param {string} options.method 接口请求类型 get/post...
      * @param {string} options.fullUrl 完整接口地址
      * @param {string} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {object} options.reqParams 请求参数
@@ -107,7 +107,7 @@ class TuaApi {
     _reqFn ({
         url,
         mock,
-        type,
+        method,
         fullUrl,
         reqType,
         reqParams: data,
@@ -128,7 +128,7 @@ class TuaApi {
             return Promise.resolve({ data: resData })
         }
 
-        const method = type.toUpperCase()
+        method = method.toLowerCase()
 
         if (reqType === 'wx') {
             return getWxPromise({ url, fullUrl, data, method, ...rest })
@@ -136,8 +136,8 @@ class TuaApi {
 
         if (reqType === 'axios') {
             const params = {
-                url: method === 'GET' ? fullUrl : url,
-                data: method === 'GET' ? {} : data,
+                url: method === 'get' ? fullUrl : url,
+                data: method === 'get' ? {} : data,
                 method,
                 ...axiosOptions,
             }
@@ -146,7 +146,7 @@ class TuaApi {
         }
 
         // 对于 post 请求使用 axios
-        return method === 'POST'
+        return method === 'post'
             ? getAxiosPromise({ url, data, ...axiosOptions })
             : getFetchJsonpPromise({
                 url: fullUrl,
@@ -203,6 +203,7 @@ class TuaApi {
      * 接受 api 对象，返回待接收参数的单个 api 函数的对象
      * @param {object} options
      * @param {string} options.type 接口请求类型 get/post...
+     * @param {string} options.method 接口请求类型 get/post...
      * @param {Object|Function} options.mock 模拟的响应数据或是生成数据的函数
      * @param {string} options.name 自定义的接口名称
      * @param {string} options.path 接口结尾路径
@@ -219,7 +220,8 @@ class TuaApi {
      * @return {object} 以 apiName 为 key，请求函数为值的对象
      */
     _getOneReqMap ({
-        type = 'get',
+        type,
+        method = type,
         mock,
         name,
         path,
@@ -231,8 +233,19 @@ class TuaApi {
         useGlobalMiddleware = true,
         ...rest
     }) {
+        if (type) {
+            logger.warn(
+                `[type] will be deprecated, please use [method] instead!\n` +
+                `[type] 属性将被废弃, 请用 [method] 替代！`
+            )
+        }
+
         // 优先使用 name
         const apiName = name || path
+        // 默认值
+        method = method || 'get'
+        // 向前兼容
+        type = method
 
         // 合并全局默认值
         rest.host = rest.host || this.host
@@ -250,15 +263,14 @@ class TuaApi {
          * @param {object} runtimeOptions 运行时配置
          * @return {Promise}
          */
-        const apiFn = (
-            args = {},
-            runtimeOptions = {}
-        ) => {
-            // args 可能为 null
-            args = args === null ? {} : args
+        const apiFn = (args, runtimeOptions = {}) => {
+            args = args || {}
 
             // 最终的运行时配置，runtimeOptions 有最高优先级
             const runtimeParams = { type, path, params, prefix, apiName, fullPath: `${prefix}/${path}`, ...rest, ...runtimeOptions }
+
+            // 向前兼容
+            runtimeParams.method = runtimeParams.type
 
             // 自定义回调函数名称（用于 jsonp）
             runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
