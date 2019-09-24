@@ -18,6 +18,7 @@ const reqOHUrl = 'http://example-test.com/fake-post/own-host'
 const reqTAUrl = 'http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp'
 const reqEAPUrl = 'http://example-base.com/fake-post/empty-array-params'
 const reqMFDUrl = 'http://example-base.com/fake-get/mock-function-data'
+const reqBFCUrl = 'http://example-base.com/fake-get/beforeFn-cookie'
 
 describe('middleware', () => {
     test('change host before request', async () => {
@@ -27,6 +28,20 @@ describe('middleware', () => {
         const resData = await fakePostApi.hap()
 
         expect(resData).toEqual(data)
+    })
+})
+
+describe('beforeFn cookie', () => {
+    beforeEach(() => {
+        // @ts-ignore
+        mock.resetHistory()
+    })
+
+    test('set cookie by beforeFn', async () => {
+        mock.onGet(reqBFCUrl).reply(200, {})
+        await fakeGetApi.beforeFnCookie()
+
+        expect(mock.history.get[0].headers.cookie).toBe('123')
     })
 })
 

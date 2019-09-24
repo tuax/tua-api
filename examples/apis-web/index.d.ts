@@ -21,6 +21,7 @@ export const fakeGetApi: {
 	'afterData': ReqFnWithAnyParams
 	'mockFnData': ReqFnWithAnyParams
 	'noAfterData': ReqFnWithAnyParams
+	'beforeFnCookie': ReqFnWithAnyParams
 	'mockObjectData': ReqFnWithAnyParams
 	'empty-array-params': ReqFnWithAnyParams
 	'ap': ReqFn & {

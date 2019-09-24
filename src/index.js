@@ -99,6 +99,7 @@ class TuaApi {
      * @param {string} options.fullUrl 完整接口地址
      * @param {string} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {object} options.reqParams 请求参数
+     * @param {object} options.header 请求的 header
      * @param {string} options.callbackName 使用 jsonp 时的回调函数名
      * @param {object} options.axiosOptions 透传 axios 配置参数
      * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
@@ -107,6 +108,7 @@ class TuaApi {
     _reqFn ({
         url,
         mock,
+        header,
         method,
         fullUrl,
         reqType,
@@ -131,15 +133,16 @@ class TuaApi {
         method = method.toLowerCase()
 
         if (reqType === 'wx') {
-            return getWxPromise({ url, fullUrl, data, method, ...rest })
+            return getWxPromise({ url, fullUrl, data, method, header, ...rest })
         }
 
         if (reqType === 'axios') {
             const params = {
+                ...axiosOptions,
                 url: method === 'get' ? fullUrl : url,
                 data: method === 'get' ? {} : data,
                 method,
-                ...axiosOptions,
+                headers: header,
             }
 
             return getAxiosPromise(params)
@@ -282,7 +285,7 @@ class TuaApi {
 
             // 执行完 beforeFn 后执行的函数
             const beforeFnCb = (rArgs = {}) => {
-                // 兼容小程序传递请求头（建议还是放在中间件中）
+                // 传递请求头
                 if (rArgs.header) {
                     ctx.req.reqFnParams.header = rArgs.header
                 }

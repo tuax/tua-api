@@ -99,7 +99,19 @@ export default {
 详情参阅：[中间件进阶](../guide/middleware.md)
 
 ## beforeFn 发起请求前钩子函数
-在请求发起前执行的函数（例如小程序可以通过返回 `header` 传递 `cookie`），因为是通过 `beforeFn().then(...)` 调用，所以注意要返回 Promise。
+在请求发起前执行的函数，因为是通过 `beforeFn().then(...)` 调用，所以注意要返回 Promise。
+
+例如小程序端可以通过返回 `header` 传递 `cookie`，web 端使用 axios 时也可以用来修改 `header`。
+
+> 虽然 axios 配置是 `headers` 但为了和小程序端保持一致就都用 `header`
+
+```js
+export default {
+    beforeFn: () => Promise.resolve({
+        header: { cookie: '1' },
+    }),
+}
+```
 
 ## afterFn 收到响应后的钩子函数
 在收到响应后执行的函数，可以不用返回 `Promise`
