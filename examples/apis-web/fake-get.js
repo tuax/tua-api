@@ -139,5 +139,20 @@ export default {
             reqType: ('axios'),
             mock: ({ mockCode }) => ({ code: mockCode, data: {} }),
         },
+        /**
+         * beforeFnCookie
+         */
+        {
+            name: 'beforeFnCookie',
+            path: 'beforeFn-cookie',
+            /**
+             * @returns {Promise<any>}
+             */
+            beforeFn: () => Promise.resolve({
+                header: { cookie: '123' },
+            }),
+            /** @type { import('../../src/').ReqType } */
+            reqType: ('axios'),
+        },
     ],
 }

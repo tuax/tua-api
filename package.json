@@ -1,6 +1,6 @@
 {
     "name": "tua-api",
-    "version": "1.3.5",
+    "version": "1.4.0",
     "description": "🏗 A common tool helps converting configs to api functions",
     "main": "dist/TuaApi.cjs.js",
     "module": "dist/TuaApi.esm.js",
@@ -67,7 +67,7 @@
         "koa-compose": "^4.1.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.6.0",
+        "@babel/core": "^7.6.2",
         "@babel/plugin-external-helpers": "^7.2.0",
         "@babel/plugin-proposal-decorators": "^7.6.0",
         "@babel/plugin-proposal-object-rest-spread": "^7.5.5",

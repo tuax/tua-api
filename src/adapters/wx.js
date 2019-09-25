@@ -43,6 +43,8 @@ export const getWxPromise = ({
         complete: () => {
             // 同步隐藏 loading
             isShowLoading && hideLoadingFn()
+            /* istanbul ignore next */
+            rest.complete && rest.complete()
         },
     })
 }
