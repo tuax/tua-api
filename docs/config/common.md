@@ -98,6 +98,24 @@ export default {
 
 详情参阅：[中间件进阶](../guide/middleware.md)
 
+## header 请求头 <badge text="1.4.0+" />
+> 注意：jsonp 的请求方式用不了哟
+
+配置静态请求头，例如 `Content-Type` 默认为 `application/x-www-form-urlencoded`，可以这么配置进行修改。
+
+```js
+export default {
+    header: {
+        'Content-Type': 'application/json',
+    },
+}
+```
+
+::: tip
+* 如果想要发送二进制数据可以参阅 [FormData](../guide/form-data.md#formdata) 章节
+* 如果请求头上的一些数据是异步获取到的，比如小程序端的 `cookie`。建议配置下面的 `beforeFn` 函数或是中间件，异步设置请求头。
+:::
+
 ## beforeFn 发起请求前钩子函数
 在请求发起前执行的函数，因为是通过 `beforeFn().then(...)` 调用，所以注意要返回 Promise。
 
@@ -128,9 +146,8 @@ const afterFn = ([x]) => x
 ```
 
 ::: warning
-注意若是返回了数据，则业务侧将收到这个数据。所以在这里可以添加一些通用逻辑，处理返回的数据。
-
-反之，若是返回 `undefined` 则业务侧将收到 `res.data`。
+* 该函数若是返回了数据，则业务侧将收到这个数据。所以在这里可以添加一些通用逻辑，处理返回的数据。
+* 该函数若是没有返回数据，业务侧也会收到 `res.data`。
 :::
 
 ## isShowLoading (小程序 only)
