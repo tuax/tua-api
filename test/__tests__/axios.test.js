@@ -14,16 +14,16 @@ const params = {
 const reqAPUrl = 'http://example-base.com/fake-post/array-params'
 const reqOPUrl = 'http://example-base.com/fake-post/object-params'
 const reqGOPUrl = 'http://example-base.com/fake-get/object-params'
-const reqOHUrl = 'http://example-test.com/fake-post/own-host'
+const reqOHUrl = 'http://example-test.com/fake-post/own-baseUrl'
 const reqTAUrl = 'http://example-base.com/fake-get/req-type-axios?asyncCp=asyncCp'
 const reqEAPUrl = 'http://example-base.com/fake-post/empty-array-params'
 const reqMFDUrl = 'http://example-base.com/fake-get/mock-function-data'
 const reqBFCUrl = 'http://example-base.com/fake-get/beforeFn-cookie'
 
 describe('middleware', () => {
-    test('change host before request', async () => {
-        const data = { code: 0, data: 'custom host' }
-        const reqHAPUrl = 'http://custom-host.com/fake-post/array-params'
+    test('change baseUrl before request', async () => {
+        const data = { code: 0, data: 'custom baseUrl' }
+        const reqHAPUrl = 'http://custom-baseUrl.com/fake-post/array-params'
         mock.onPost(reqHAPUrl).reply(200, data)
         const resData = await fakePostApi.hap()
 
@@ -115,8 +115,8 @@ describe('fake post requests', () => {
         mock.resetHistory()
     })
 
-    test('own-host', async () => {
-        const data = { code: 0, data: 'own-host' }
+    test('own-baseUrl', async () => {
+        const data = { code: 0, data: 'own-baseUrl' }
         mock.onPost(reqOHUrl).reply(200, data)
         const resData = await fakePostApi.oh()
 

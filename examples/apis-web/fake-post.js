@@ -1,6 +1,6 @@
 export default {
     // 该参数表示请求的公用服务器地址。
-    host: 'http://example-base.com/',
+    baseUrl: 'http://example-base.com/',
 
     // 该参数表示请求的中间路径，建议与文件同名，以便后期维护。
     prefix: 'fake-post',
@@ -34,7 +34,7 @@ export default {
             params: ['param1', 'param2'],
         },
         /**
-         * array-params with new host
+         * array-params with new baseUrl
          */
         {
             name: 'hap',
@@ -43,7 +43,7 @@ export default {
             reqType: ('axios'),
             middleware: [
                 async (ctx, next) => {
-                    ctx.req.host = 'http://custom-host.com/'
+                    ctx.req.baseUrl = 'http://custom-baseUrl.com/'
                     await next()
                 },
             ],
@@ -61,12 +61,12 @@ export default {
             },
         },
         /**
-         * own-host
+         * own-baseUrl
          */
         {
             name: 'oh',
-            path: 'own-host',
-            host: 'http://example-test.com/',
+            path: 'own-baseUrl',
+            baseUrl: 'http://example-test.com/',
             params: {},
             // 表示这个接口不需要传递 commonParams
             commonParams: null,

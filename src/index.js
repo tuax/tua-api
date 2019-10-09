@@ -33,6 +33,7 @@ class TuaApi {
     /**
      * @param {object} [options]
      * @param {string} [options.host] 服务器基础地址，例如 https://example.com/
+     * @param {string} [options.baseUrl] 服务器基础地址，例如 https://example.com/
      * @param {string} [options.reqType] 使用什么工具发(axios/jsonp/wx)
      * @param {function[]} [options.middleware] 中间件函数数组
      * @param {object} [options.axiosOptions] 透传 axios 配置参数
@@ -41,13 +42,14 @@ class TuaApi {
      */
     constructor ({
         host,
+        baseUrl = host,
         reqType = isWx() ? 'wx' : 'axios',
         middleware = [],
         axiosOptions = {},
         jsonpOptions = {},
         defaultErrorData = { code: 999, msg: '出错啦！' },
     } = {}) {
-        this.host = host
+        this.baseUrl = baseUrl
         this.reqType = reqType
         this.middleware = middleware
         this.axiosOptions = axiosOptions
@@ -55,6 +57,13 @@ class TuaApi {
         this.defaultErrorData = defaultErrorData
 
         this._checkReqType(this.reqType)
+
+        if (host) {
+            logger.warn(
+                '[host] will be deprecated, please use [baseUrl] instead!\n' +
+                '[host] 属性将被废弃, 请用 [baseUrl] 替代！'
+            )
+        }
 
         return this
     }
@@ -113,7 +122,7 @@ class TuaApi {
         fullUrl,
         reqType,
         reqParams: data,
-        callbackName,
+        callbackName: jsonpCallbackFunction,
         axiosOptions,
         jsonpOptions,
         ...rest
@@ -153,7 +162,7 @@ class TuaApi {
             ? getAxiosPromise({ url, data, ...axiosOptions })
             : getFetchJsonpPromise({
                 url: fullUrl,
-                jsonpOptions: { ...jsonpOptions, callbackName },
+                jsonpOptions: { ...jsonpOptions, jsonpCallbackFunction },
             })
     }
 
@@ -216,7 +225,7 @@ class TuaApi {
      * @param {function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
      * @param {function[]} options.middleware 中间件函数数组
      * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
-     * @param {string} options.host 服务器地址
+     * @param {string} options.baseUrl 服务器地址
      * @param {string} options.reqType 使用什么工具发
      * @param {object} options.axiosOptions 透传 axios 配置参数
      * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
@@ -251,7 +260,7 @@ class TuaApi {
         type = method
 
         // 合并全局默认值
-        rest.host = rest.host || this.host
+        rest.baseUrl = rest.baseUrl || this.baseUrl
         rest.reqType = rest.reqType || this.reqType
         rest.axiosOptions = rest.axiosOptions
             ? { ...this.axiosOptions, ...rest.axiosOptions }
@@ -270,9 +279,19 @@ class TuaApi {
             args = args || {}
 
             // 最终的运行时配置，runtimeOptions 有最高优先级
-            const runtimeParams = { type, path, params, prefix, apiName, fullPath: `${prefix}/${path}`, ...rest, ...runtimeOptions }
+            const runtimeParams = {
+                type,
+                path,
+                params,
+                prefix,
+                apiName,
+                fullPath: `${prefix}/${path}`,
+                ...rest,
+                ...runtimeOptions,
+            }
 
             // 向前兼容
+            runtimeParams.host = runtimeParams.baseUrl
             runtimeParams.method = runtimeParams.type
 
             // 自定义回调函数名称（用于 jsonp）

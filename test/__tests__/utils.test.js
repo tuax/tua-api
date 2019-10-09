@@ -1,11 +1,20 @@
 import { ERROR_STRINGS } from '@/constants'
 import {
+    combineUrls,
     promisifyWxApi,
     checkArrayParams,
     getDefaultParamObj,
     getParamStrFromObj,
     apiConfigToReqFnParams,
 } from '@/utils'
+
+test('combineUrls', () => {
+    expect(combineUrls('https://api.github.com', 'users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com', '/users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/', '/users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/users', '')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/users', '/')).toBe('https://api.github.com/users/')
+})
 
 test('promisifyWxApi', () => {
     const fn = ({ success }) => setTimeout(() => success('test'), 0)

@@ -1,6 +1,6 @@
 {
     "name": "tua-api",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "🏗 A common tool helps converting configs to api functions",
     "main": "dist/TuaApi.cjs.js",
     "module": "dist/TuaApi.esm.js",
@@ -38,22 +38,6 @@
         "{src,test}/**/*.js": [
             "eslint --fix",
             "git add"
-        ]
-    },
-    "jest": {
-        "bail": true,
-        "clearMocks": true,
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        },
-        "moduleNameMapper": {
-            "@/(.*)$": "<rootDir>/src/$1",
-            "@examples/(.*)$": "<rootDir>/examples/$1"
-        },
-        "collectCoverage": true,
-        "collectCoverageFrom": [
-            "src/**",
-            "!src/index.d.ts"
         ]
     },
     "eslintIgnore": [
