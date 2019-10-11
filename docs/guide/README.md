@@ -90,10 +90,10 @@ tuaStorage
 // src/apis/something.js
 
 export default {
-    // 请求的公用服务器地址
+    // 接口基础地址
     baseUrl: 'https://example-base.com/foo/bar',
 
-    // 请求的中间路径
+    // 接口的中间路径
     prefix: 'something',
 
     // 接口地址数组

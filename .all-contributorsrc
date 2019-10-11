@@ -1,0 +1,35 @@
+{
+  "projectName": "tua-api",
+  "projectOwner": "tuateam",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "BuptStEve",
+      "name": "StEve Young",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11501493?v=4",
+      "profile": "https://buptsteve.github.io",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    },
+    {
+      "login": "evinma",
+      "name": "evinma",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/16096567?v=4",
+      "profile": "https://github.com/evinma",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

@@ -159,10 +159,10 @@ tuaStorage
 // src/apis/something.js
 
 export default {
-    // 请求的公用服务器地址
+    // 接口基础地址
     baseUrl: 'https://example-base.com/foo/bar',
 
-    // 请求的中间路径
+    // 接口的中间路径
     prefix: 'something',
 
     // 接口地址数组
@@ -224,3 +224,23 @@ $ tuamp add api <api-name>
 <p align="center">
     <a href="https://tuateam.github.io/tua-api/config/">👉更多配置点击这里👈</a>
 </p>
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://buptsteve.github.io"><img src="https://avatars2.githubusercontent.com/u/11501493?v=4" width="100px;" alt="StEve Young"/><br /><sub><b>StEve Young</b></sub></a><br /><a href="https://github.com/tuateam/tua-api/commits?author=BuptStEve" title="Code">💻</a> <a href="https://github.com/tuateam/tua-api/commits?author=BuptStEve" title="Documentation">📖</a> <a href="#infra-BuptStEve" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/evinma"><img src="https://avatars2.githubusercontent.com/u/16096567?v=4" width="100px;" alt="evinma"/><br /><sub><b>evinma</b></sub></a><br /><a href="https://github.com/tuateam/tua-api/commits?author=evinma" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

@@ -37,6 +37,7 @@ footer: MIT Licensed | Copyright © 2018-present StEve Young
     <a href="https://www.npmjs.com/package/tua-api" target="_blank">
         <img src="https://badgen.net/npm/dm/tua-api" alt="Downloads per month">
         <img src="https://img.shields.io/npm/v/tua-api.svg" alt="Version">
+        <img src="https://img.shields.io/npm/v/tua-api/next.svg" alt="Next Version">
         <img src="https://img.shields.io/npm/l/tua-api.svg" alt="License">
     </a>
 </p>
