@@ -67,6 +67,7 @@ test('getParamStrFromObj', () => {
     expect(getParamStrFromObj({})).toBe('')
     expect(getParamStrFromObj({ a: 1, b: 2 })).toBe('a=1&b=2')
     expect(getParamStrFromObj({ a: 1, b: 2, c: '哈喽' })).toBe('a=1&b=2&c=%E5%93%88%E5%96%BD')
+    expect(getParamStrFromObj({ 哈喽: '哈喽' })).toBe('%E5%93%88%E5%96%BD=%E5%93%88%E5%96%BD')
 })
 
 test('apiConfigToReqFnParams', () => {
