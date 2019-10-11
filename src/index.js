@@ -145,7 +145,7 @@ class TuaApi {
             return getWxPromise({ url, fullUrl, data, method, header, ...rest })
         }
 
-        if (reqType === 'axios') {
+        if (reqType === 'axios' || method === 'post') {
             const params = {
                 ...axiosOptions,
                 url: method === 'get' ? fullUrl : url,
@@ -157,13 +157,10 @@ class TuaApi {
             return getAxiosPromise(params)
         }
 
-        // 对于 post 请求使用 axios
-        return method === 'post'
-            ? getAxiosPromise({ url, data, ...axiosOptions })
-            : getFetchJsonpPromise({
-                url: fullUrl,
-                jsonpOptions: { ...jsonpOptions, jsonpCallbackFunction },
-            })
+        return getFetchJsonpPromise({
+            url: fullUrl,
+            jsonpOptions: { ...jsonpOptions, jsonpCallbackFunction },
+        })
     }
 
     /**
