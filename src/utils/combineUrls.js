@@ -4,7 +4,7 @@
  * @param {string} relativeUrl The relative URL
  * @returns {string} The combined URL
  */
-function combineUrls (baseUrl, relativeUrl) {
+function combineUrls (baseUrl = '', relativeUrl = '') {
     if (!relativeUrl) return baseUrl
 
     return (

@@ -9,6 +9,9 @@ import {
 } from '@/utils'
 
 test('combineUrls', () => {
+    expect(combineUrls(undefined, undefined)).toBe('')
+    expect(combineUrls(undefined, 'users')).toBe('/users')
+    expect(combineUrls('https://api.github.com', undefined)).toBe('https://api.github.com')
     expect(combineUrls('https://api.github.com', 'users')).toBe('https://api.github.com/users')
     expect(combineUrls('https://api.github.com', '/users')).toBe('https://api.github.com/users')
     expect(combineUrls('https://api.github.com/', '/users')).toBe('https://api.github.com/users')
