@@ -288,8 +288,10 @@ class TuaApi {
             }
 
             // 向前兼容
-            runtimeParams.host = runtimeParams.baseUrl
-            runtimeParams.method = runtimeParams.type
+            runtimeParams.host = runtimeParams.host || runtimeParams.baseUrl
+            runtimeParams.baseUrl = runtimeParams.baseUrl || runtimeParams.host
+
+            runtimeParams.method = runtimeParams.method || runtimeParams.type
 
             // 自定义回调函数名称（用于 jsonp）
             runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
