@@ -1,6 +1,7 @@
 import { ERROR_STRINGS } from './constants'
 import {
     isFormData,
+    combineUrls,
     checkArrayParams,
     getParamStrFromObj,
     getDefaultParamObj,
@@ -86,10 +87,10 @@ const formatReqParamsMiddleware = (ctx, next) => {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const setReqFnParamsMiddleware = (ctx, next) => {
-    const { path, host, prefix, reqParams, ...rest } = ctx.req
+    const { path, prefix, reqParams, baseUrl, ...rest } = ctx.req
 
     // 请求地址
-    const url = host + prefix + '/' + path
+    const url = combineUrls(combineUrls(baseUrl, prefix), path)
     const paramsStr = getParamStrFromObj(reqParams)
     // 完整请求地址，将参数拼在 url 上，用于 get 请求
     const fullUrl = paramsStr ? `${url}?${paramsStr}` : url

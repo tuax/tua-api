@@ -53,7 +53,8 @@ async function (ctx, next) {
 | 已使用的属性名 | 含义和作用 |
 | --- | --- |
 | req | 请求 |
-| req.host | 服务器地址 |
+| req.host <badge text="2.0.0-" /> | 接口基础地址 |
+| req.baseUrl <badge text="1.3.5+" /> | 接口基础地址 |
 | req.mock | 模拟的响应数据或是生成数据的函数 |
 | req.type <badge text="2.0.0-" /> | 接口请求类型 get/post... |
 | req.method <badge text="1.3.5+" /> | 接口请求类型 get/post... |

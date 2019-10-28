@@ -69,8 +69,8 @@ tuaStorage
 ### 地址结构划分
 以上地址，一般将其分为`3`部分：
 
-* host: `'https://example-base.com/'`
-* prefix: `'foo/bar/something'`
+* baseUrl: `'https://example-base.com/foo/bar'`
+* prefix: `'something'`
 * pathList: `[ 'create', 'modify', 'delete' ]`
 
 ### 文件结构
@@ -90,11 +90,11 @@ tuaStorage
 // src/apis/something.js
 
 export default {
-    // 请求的公用服务器地址
-    host: 'https://example-base.com/',
+    // 接口基础地址
+    baseUrl: 'https://example-base.com/foo/bar',
 
-    // 请求的中间路径
-    prefix: 'foo/bar/something',
+    // 接口的中间路径
+    prefix: 'something',
 
     // 接口地址数组
     pathList: [

@@ -1,11 +1,23 @@
 import { ERROR_STRINGS } from '@/constants'
 import {
+    combineUrls,
     promisifyWxApi,
     checkArrayParams,
     getDefaultParamObj,
     getParamStrFromObj,
     apiConfigToReqFnParams,
 } from '@/utils'
+
+test('combineUrls', () => {
+    expect(combineUrls(undefined, undefined)).toBe('')
+    expect(combineUrls(undefined, 'users')).toBe('/users')
+    expect(combineUrls('https://api.github.com', undefined)).toBe('https://api.github.com')
+    expect(combineUrls('https://api.github.com', 'users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com', '/users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/', '/users')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/users', '')).toBe('https://api.github.com/users')
+    expect(combineUrls('https://api.github.com/users', '/')).toBe('https://api.github.com/users/')
+})
 
 test('promisifyWxApi', () => {
     const fn = ({ success }) => setTimeout(() => success('test'), 0)
@@ -58,6 +70,7 @@ test('getParamStrFromObj', () => {
     expect(getParamStrFromObj({})).toBe('')
     expect(getParamStrFromObj({ a: 1, b: 2 })).toBe('a=1&b=2')
     expect(getParamStrFromObj({ a: 1, b: 2, c: '哈喽' })).toBe('a=1&b=2&c=%E5%93%88%E5%96%BD')
+    expect(getParamStrFromObj({ 哈喽: '哈喽' })).toBe('%E5%93%88%E5%96%BD=%E5%93%88%E5%96%BD')
 })
 
 test('apiConfigToReqFnParams', () => {

@@ -15,7 +15,7 @@ import { ERROR_STRINGS } from '../constants'
  */
 const getParamStrFromObj = (data = {}) => pipe(
     Object.keys,
-    map(key => `${key}=${encodeURIComponent(data[key])}`),
+    map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`),
     join('&')
 )(data)
 

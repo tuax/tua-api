@@ -10,7 +10,7 @@ import { logger, isFormData, getParamStrFromObj } from '../utils'
 export const getAxiosPromise = ({
     url,
     data,
-    method = 'post',
+    method,
     headers = DEFAULT_HEADER,
     crossDomain = true,
     withCredentials = true,

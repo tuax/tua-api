@@ -14,10 +14,13 @@ export default {
 }
 ```
 
-## host 服务器地址
+## host 接口基础地址 <badge text="2.0.0-" />
+重命名为 `baseUrl`，`host` 属性将在 `2.0.0+` 后废弃。
+
+## baseUrl 接口基础地址 <badge text="1.4.1+" />
 ```js
 export default {
-    host: 'https://example-api.com/',
+    baseUrl: 'https://example-api.com/',
 }
 ```
 

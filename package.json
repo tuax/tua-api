@@ -1,6 +1,6 @@
 {
     "name": "tua-api",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "🏗 A common tool helps converting configs to api functions",
     "main": "dist/TuaApi.cjs.js",
     "module": "dist/TuaApi.esm.js",
@@ -40,22 +40,6 @@
             "git add"
         ]
     },
-    "jest": {
-        "bail": true,
-        "clearMocks": true,
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        },
-        "moduleNameMapper": {
-            "@/(.*)$": "<rootDir>/src/$1",
-            "@examples/(.*)$": "<rootDir>/examples/$1"
-        },
-        "collectCoverage": true,
-        "collectCoverageFrom": [
-            "src/**",
-            "!src/index.d.ts"
-        ]
-    },
     "eslintIgnore": [
         "dist/*",
         "!.eslintrc.js",
@@ -67,32 +51,33 @@
         "koa-compose": "^4.1.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.6.2",
+        "@babel/core": "^7.6.4",
         "@babel/plugin-external-helpers": "^7.2.0",
         "@babel/plugin-proposal-decorators": "^7.6.0",
-        "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-        "@babel/preset-env": "^7.6.0",
-        "@commitlint/cli": "^8.1.0",
-        "@commitlint/config-conventional": "^8.1.0",
+        "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+        "@babel/preset-env": "^7.6.3",
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
         "@types/jest": "^24.0.18",
+        "all-contributors-cli": "^6.9.1",
         "axios-mock-adapter": "^1.17.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-eslint": "^10.0.3",
         "babel-jest": "^24.9.0",
-        "codecov": "^3.5.0",
-        "cross-env": "^5.2.1",
-        "eslint": "^6.3.0",
+        "codecov": "^3.6.1",
+        "cross-env": "^6.0.3",
+        "eslint": "^6.5.1",
         "eslint-config-standard": "^14.1.0",
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-node": "^10.0.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
         "gh-pages": "^2.1.1",
-        "husky": "^3.0.5",
+        "husky": "^3.0.8",
         "jest": "^24.9.0",
-        "lint-staged": "^9.2.5",
+        "lint-staged": "^9.4.2",
         "rimraf": "^3.0.0",
-        "rollup": "^1.21.2",
+        "rollup": "^1.23.1",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-eslint": "^7.0.0",
@@ -100,8 +85,8 @@
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-replace": "^2.2.0",
         "rollup-plugin-uglify": "^6.0.3",
-        "typescript": "^3.6.3",
-        "vuepress": "^1.0.4"
+        "typescript": "^3.6.4",
+        "vuepress": "^1.1.0"
     },
     "repository": {
         "type": "git",

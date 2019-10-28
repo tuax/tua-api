@@ -46,11 +46,14 @@ export interface ParamsObject {
 }
 
 export interface CtxReq {
+    // deprecated
     host: string
-    mock: Mock
+    baseUrl: string
     // deprecated
     type: Method
     method: Method
+
+    mock: Mock
     path: string
     prefix: string
     reqType: ReqType
@@ -77,11 +80,14 @@ export interface Ctx {
 }
 
 export interface BaseApiConfig {
-    mock?: Mock
+    // deprecated
     host?: string
+    baseUrl?: string
     // deprecated
     type?: Method
     method?: Method
+
+    mock?: Mock
     prefix?: string
     reqType?: ReqType
     afterFn?: <T = any, U = any>(args: [U?, Ctx?]) => Promise<T>
@@ -132,7 +138,10 @@ export interface SyncFnMap { [k: string]: Api }
 
 export interface TuaApiClass {
     new (args?: {
+        // deprecated
         host?: string
+        baseUrl?: string
+
         reqType?: string
         middleware?: Middleware<Ctx>[]
         axiosOptions?: AxiosOptions
