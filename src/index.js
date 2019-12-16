@@ -330,7 +330,7 @@ class TuaApi {
                 )
         }
 
-        apiFn.key = `${prefix}/${path}`
+        apiFn.key = `${prefix}/${apiName}`
         apiFn.mock = mock
         apiFn.params = params
 

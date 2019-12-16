@@ -37,6 +37,13 @@ export default {
             useGlobalMiddleware: true,
         },
         /**
+         * anotherFail
+         */
+        {
+            path: 'fail',
+            name: 'anotherFail',
+        },
+        /**
          * array-data
          */
         {
