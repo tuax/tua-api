@@ -96,6 +96,10 @@ describe('fake wx requests', () => {
         wx.__TEST_DATA__ = {}
     })
 
+    test('same key', () => {
+        expect(fakeWxApi.fail.key).not.toEqual(fakeWxApi.anotherFail.key)
+    })
+
     test('object-data', async () => {
         wx.__TEST_DATA__ = { testData: testObjData }
         const resData = await fakeWxApi.objectData({ param3: '123' })

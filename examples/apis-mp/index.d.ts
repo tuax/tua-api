@@ -25,6 +25,7 @@ export const fakeWxApi: {
 	'typeGet': ReqFnWithAnyParams
 	'noBeforeFn': ReqFnWithAnyParams
 	'navLoading': ReqFnWithAnyParams
+	'anotherFail': ReqFnWithAnyParams
 	'hideLoading': ReqFnWithAnyParams
 	'unknownType': ReqFnWithAnyParams
 	'arrayData': ReqFn & {
