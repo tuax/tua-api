@@ -9,7 +9,11 @@ export default {
     commonParams: null,
 
     // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
-    jsonpOptions: { timeout: 10 * 1000 },
+    jsonpOptions: {
+        timeout: 10 * 1000,
+        jsonpCallback: 'cb',
+        jsonpCallbackFunction: 'cbName',
+    },
 
     // 透传 `axios` 需要配置的参数。例如需要传递超时时间时可添加：
     axiosOptions: { timeout: 10 * 1000 },
@@ -153,6 +157,13 @@ export default {
             }),
             /** @type { import('../../src/').ReqType } */
             reqType: ('axios'),
+        },
+        /**
+         * jsonp-options
+         */
+        {
+            name: 'jsonpOptions',
+            path: 'jsonp-options',
         },
     ],
 }

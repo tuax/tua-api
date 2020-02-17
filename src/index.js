@@ -61,7 +61,7 @@ class TuaApi {
         if (host) {
             logger.warn(
                 '[host] will be deprecated, please use [baseUrl] instead!\n' +
-                '[host] 属性将被废弃, 请用 [baseUrl] 替代！'
+                '[host] 属性将被废弃, 请用 [baseUrl] 替代！',
             )
         }
 
@@ -109,6 +109,7 @@ class TuaApi {
      * @param {string} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {object} options.reqParams 请求参数
      * @param {object} options.header 请求的 header
+     * @param {string} options.callback 使用 jsonp 时标识回调函数的名称
      * @param {string} options.callbackName 使用 jsonp 时的回调函数名
      * @param {object} options.axiosOptions 透传 axios 配置参数
      * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
@@ -122,7 +123,8 @@ class TuaApi {
         fullUrl,
         reqType,
         reqParams: data,
-        callbackName: jsonpCallbackFunction,
+        callback,
+        callbackName,
         axiosOptions,
         jsonpOptions,
         ...rest
@@ -157,10 +159,13 @@ class TuaApi {
             return getAxiosPromise(params)
         }
 
-        return getFetchJsonpPromise({
-            url: fullUrl,
-            jsonpOptions: { ...jsonpOptions, jsonpCallbackFunction },
-        })
+        // 防止接口返回非英文时报错
+        jsonpOptions.charset = jsonpOptions.charset || 'UTF-8'
+
+        jsonpOptions.jsonpCallback = callback || jsonpOptions.jsonpCallback
+        jsonpOptions.jsonpCallbackFunction = callbackName || jsonpOptions.jsonpCallbackFunction
+
+        return getFetchJsonpPromise({ url: fullUrl, jsonpOptions })
     }
 
     /**
@@ -245,7 +250,7 @@ class TuaApi {
         if (type) {
             logger.warn(
                 '[type] will be deprecated, please use [method] instead!\n' +
-                '[type] 属性将被废弃, 请用 [method] 替代！'
+                '[type] 属性将被废弃, 请用 [method] 替代！',
             )
         }
 
@@ -293,9 +298,6 @@ class TuaApi {
 
             runtimeParams.method = runtimeParams.method || runtimeParams.type
 
-            // 自定义回调函数名称（用于 jsonp）
-            runtimeParams.callbackName = runtimeParams.callbackName || `${runtimeParams.path}Callback`
-
             // 请求的上下文信息
             const ctx = {
                 req: { args, mock: apiFn.mock, reqFnParams: {}, ...runtimeParams },
@@ -326,7 +328,7 @@ class TuaApi {
                 .then(() => afterFn([ctx.res.data, ctx]))
                 .then((data) => ctx.res.error
                     ? Promise.reject(ctx.res.error)
-                    : data || ctx.res.data
+                    : data || ctx.res.data,
                 )
         }
 

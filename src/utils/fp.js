@@ -3,7 +3,7 @@ const map = (fn) => (arr) => Array.isArray(arr)
     : pipe(
         Object.keys,
         map(key => ({ [key]: fn(arr[key]) })),
-        mergeAll
+        mergeAll,
     )(arr)
 
 const join = str => arr => arr.join(str)
@@ -20,7 +20,7 @@ const flatten = reduce(
     (acc, cur) => Array.isArray(cur)
         ? compose(concat, flatten)(cur)(acc)
         : concat(cur)(acc),
-    []
+    [],
 )
 
 const merge = (acc, cur) => ({ ...acc, ...cur })
