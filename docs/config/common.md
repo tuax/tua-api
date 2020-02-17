@@ -117,6 +117,7 @@ export default {
 ::: tip
 * 如果想要发送二进制数据可以参阅 [FormData](../guide/form-data.md#formdata) 章节
 * 如果请求头上的一些数据是异步获取到的，比如小程序端的 `cookie`。建议配置下面的 `beforeFn` 函数或是中间件，异步设置请求头。
+* <badge text="1.5.0+" /> 若当前以 `post` 的方式发送请求，且当前没有配置 `transformRequest` 时，`tua-api` 会自动调用 `JSON.stringify`，并设置 `Content-Type` 为 `'application/json'`。
 :::
 
 ## beforeFn 发起请求前钩子函数

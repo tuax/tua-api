@@ -11,10 +11,10 @@ export const getAxiosPromise = ({
     url,
     data,
     method,
-    headers = DEFAULT_HEADER,
+    headers,
     crossDomain = true,
     withCredentials = true,
-    transformRequest = [getParamStrFromObj],
+    transformRequest,
     ...rest
 }) => {
     const isFD = isFormData(data)
@@ -24,7 +24,20 @@ export const getAxiosPromise = ({
         logger.log('Req Data:', data)
     }
 
-    transformRequest = isFD ? null : transformRequest
+    // 优先使用用户的配置
+    if (!transformRequest) {
+        transformRequest = isFD
+            ? null
+            : method !== 'post'
+                ? getParamStrFromObj
+                // 如果使用 post 的请求方式，自动对其 stringify
+                : x => JSON.stringify(x)
+    }
+    if (!headers) {
+        headers = method === 'post'
+            ? { 'Content-Type': 'application/json' }
+            : DEFAULT_HEADER
+    }
 
     return axios({
         url,
