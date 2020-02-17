@@ -63,10 +63,11 @@ describe('middleware', () => {
         expect(ctx.req.prefix).toBeDefined()
         expect(ctx.req.reqType).toBeDefined()
         expect(ctx.req.reqParams).toBeDefined()
-        expect(ctx.req.callbackName).toBeDefined()
         expect(ctx.req.axiosOptions).toBeDefined()
         expect(ctx.req.jsonpOptions).toBeDefined()
         expect(ctx.req.reqFnParams).toBeDefined()
+
+        expect(ctx.req.callbackName).toBeUndefined()
 
         await next()
 

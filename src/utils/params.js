@@ -16,7 +16,7 @@ import { ERROR_STRINGS } from '../constants'
 const getParamStrFromObj = (data = {}) => pipe(
     Object.keys,
     map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`),
-    join('&')
+    join('&'),
 )(data)
 
 /**
@@ -74,7 +74,7 @@ const getDefaultParamObj = ({
 
         return { [key]: returnVal }
     }),
-    reduce(merge, commonParams)
+    reduce(merge, commonParams),
 )(params)
 
 /**

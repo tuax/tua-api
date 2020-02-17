@@ -1,4 +1,5 @@
 import { fakeGetApi } from '@examples/apis-web/'
+import fakeGetConfig from '@examples/apis-web/fake-get'
 import { ERROR_STRINGS } from '@/constants'
 
 jest.mock('fetch-jsonp')
@@ -24,6 +25,26 @@ describe('mock data', () => {
 })
 
 describe('fake jsonp requests', () => {
+    test('jsonp options', async () => {
+        const url = 'http://example-base.com/fake-get/jsonp-options'
+        const jsonpOptions = {
+            ...fakeGetConfig.jsonpOptions,
+            charset: 'UTF-8',
+        }
+
+        await fakeGetApi.jsonpOptions()
+        expect(fetchJsonp).toBeCalledWith(url, jsonpOptions)
+
+        const callback = 'test_cb'
+        const callbackName = 'test_cbName'
+        await fakeGetApi.jsonpOptions(null, { callback, callbackName })
+        expect(fetchJsonp).toBeCalledWith(url, {
+            ...jsonpOptions,
+            jsonpCallback: callback,
+            jsonpCallbackFunction: callbackName,
+        })
+    })
+
     test('async-common-params', async () => {
         fetchJsonp.mockResolvedValue({ json: () => data })
         const resData = await fakeGetApi.acp()

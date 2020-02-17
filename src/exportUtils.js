@@ -29,7 +29,7 @@ const getSyncFnMapByApis = pipe(
     map(values),
     flatten,
     map(val => ({ [val.key]: val })),
-    mergeAll
+    mergeAll,
 )
 
 /**
@@ -53,7 +53,7 @@ const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
 
         return Object.keys(params).every(isParamNotRequired)
     }),
-    map(key => ({ key }))
+    map(key => ({ key })),
 )(syncFnMap)
 
 export {
