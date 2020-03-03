@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { DEFAULT_HEADER } from '../constants'
-import { logger, isFormData, getParamStrFromObj } from '../utils'
+import { logger, isFormData, isUndefined, getParamStrFromObj } from '../utils'
 
 /**
  * 获取使用 axios 发起请求后的 promise 对象
@@ -18,6 +18,7 @@ export const getAxiosPromise = ({
     ...rest
 }) => {
     const isFD = isFormData(data)
+    const isPost = method.toLowerCase() === 'post'
 
     logger.log(`Req Url: ${url}`)
     if (data && (Object.keys(data).length || isFD)) {
@@ -25,17 +26,17 @@ export const getAxiosPromise = ({
     }
 
     // 优先使用用户的配置
-    if (!transformRequest) {
+    if (isUndefined(transformRequest)) {
         transformRequest = isFD
             ? null
-            : method !== 'post'
-                ? getParamStrFromObj
+            : isPost
                 // 如果使用 post 的请求方式，自动对其 stringify
-                : x => JSON.stringify(x)
+                ? x => JSON.stringify(x)
+                : getParamStrFromObj
     }
-    if (!headers) {
-        headers = method === 'post'
-            ? { 'Content-Type': 'application/json' }
+    if (isUndefined(headers)) {
+        headers = isPost
+            ? { 'Content-Type': 'application/json;charset=utf-8' }
             : DEFAULT_HEADER
     }
 

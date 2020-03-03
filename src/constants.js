@@ -5,7 +5,7 @@ const VALID_REQ_TYPES = ['wx', 'axios', 'jsonp']
 const WX_VALID_METHODS = ['OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT']
 
 // 默认请求头
-const DEFAULT_HEADER = { 'Content-Type': 'application/x-www-form-urlencoded' }
+const DEFAULT_HEADER = { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 
 // 错误信息
 const ERROR_STRINGS = {

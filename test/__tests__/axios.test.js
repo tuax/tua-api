@@ -188,6 +188,6 @@ describe('fake post requests', () => {
         const { data } = mock.history.post[0]
 
         expect(data).toBe(JSON.stringify(fakePostConfig.commonParams))
-        expect(mock.history.post[0].headers['Content-Type']).toBe('application/json')
+        expect(mock.history.post[0].headers['Content-Type']).toBe('application/json;charset=utf-8')
     })
 })
