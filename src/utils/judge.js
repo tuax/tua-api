@@ -7,3 +7,5 @@ export const isFormData = (val) => (
     (typeof FormData !== 'undefined') &&
     (val instanceof FormData)
 )
+
+export const isUndefined = val => typeof val === 'undefined'

@@ -71,5 +71,22 @@ export default {
             // 表示这个接口不需要传递 commonParams
             commonParams: null,
         },
+        /**
+         * custom-transformRequest
+         */
+        {
+            name: 'ct',
+            path: 'custom-transformRequest',
+            axiosOptions: {
+                transformRequest: () => `ct`,
+            },
+        },
+        /**
+         * application/json
+         */
+        {
+            name: 'pj',
+            path: 'post-json',
+        },
     ],
 }

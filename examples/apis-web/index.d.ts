@@ -40,7 +40,9 @@ export const fakeGetApi: {
 }
 
 export const fakePostApi: {
+	'ct': ReqFnWithAnyParams
 	'oh': ReqFnWithAnyParams
+	'pj': ReqFnWithAnyParams
 	'eap': ReqFnWithAnyParams
 	'hap': ReqFnWithAnyParams
 	'ap': ReqFn & {

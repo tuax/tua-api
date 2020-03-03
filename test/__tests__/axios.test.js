@@ -1,6 +1,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
+import fakePostConfig from '@examples/apis-web/fake-post'
 import { ERROR_STRINGS } from '@/constants'
 import { fakeGetApi, fakePostApi } from '@examples/apis-web/'
 
@@ -19,6 +20,8 @@ const reqTAUrl = 'http://example-base.com/fake-get/req-type-axios?asyncCp=asyncC
 const reqEAPUrl = 'http://example-base.com/fake-post/empty-array-params'
 const reqMFDUrl = 'http://example-base.com/fake-get/mock-function-data'
 const reqBFCUrl = 'http://example-base.com/fake-get/beforeFn-cookie'
+const reqCTUrl = 'http://example-base.com/fake-post/custom-transformRequest'
+const reqPjUrl = 'http://example-base.com/fake-post/post-json'
 
 describe('middleware', () => {
     test('change baseUrl before request', async () => {
@@ -163,5 +166,28 @@ describe('fake post requests', () => {
 
         expect(data).toBe(formData)
         expect(transformRequest).toBe(null)
+    })
+
+    test('custom-transformRequest', async () => {
+        mock.resetHistory()
+        mock.onPost(reqCTUrl).reply(200, {})
+
+        await fakePostApi.ct()
+
+        const { data } = mock.history.post[0]
+
+        expect(data).toBe('ct')
+    })
+
+    test('post-json', async () => {
+        mock.resetHistory()
+        mock.onPost(reqPjUrl).reply(200, {})
+
+        await fakePostApi.pj()
+
+        const { data } = mock.history.post[0]
+
+        expect(data).toBe(JSON.stringify(fakePostConfig.commonParams))
+        expect(mock.history.post[0].headers['Content-Type']).toBe('application/json;charset=utf-8')
     })
 })
