@@ -1,3 +1,5 @@
+import { WebApiConfig } from '../../src/types'
+
 export default {
     // 该参数表示请求的公用服务器地址。
     baseUrl: 'http://example-base.com/',
@@ -5,8 +7,7 @@ export default {
     // 该参数表示请求的中间路径，建议与文件同名，以便后期维护。
     prefix: 'fake-post',
 
-    /** @type { import('../../src/').Method } */
-    method: ('post'),
+    method: 'post',
 
     // 所有请求都需要携带的参数
     commonParams: { common: 'params' },
@@ -29,8 +30,7 @@ export default {
         {
             name: 'ap',
             path: 'array-params',
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('axios'),
+            reqType: 'axios',
             params: ['param1', 'param2'],
         },
         /**
@@ -39,8 +39,7 @@ export default {
         {
             name: 'hap',
             path: 'array-params',
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('axios'),
+            reqType: 'axios',
             middleware: [
                 async (ctx, next) => {
                     ctx.req.baseUrl = 'http://custom-baseUrl.com/'
@@ -78,7 +77,7 @@ export default {
             name: 'ct',
             path: 'custom-transformRequest',
             axiosOptions: {
-                transformRequest: () => `ct`,
+                transformRequest: () => 'ct',
             },
         },
         /**
@@ -89,4 +88,4 @@ export default {
             path: 'post-json',
         },
     ],
-}
+} as WebApiConfig

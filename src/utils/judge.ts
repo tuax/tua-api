@@ -3,9 +3,9 @@ export const isWx = () => (
     typeof wx.request === 'function'
 )
 
-export const isFormData = (val) => (
+export const isFormData = (val: any) => (
     (typeof FormData !== 'undefined') &&
     (val instanceof FormData)
 )
 
-export const isUndefined = val => typeof val === 'undefined'
+export const isUndefined = (val: any) => typeof val === 'undefined'

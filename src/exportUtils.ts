@@ -1,11 +1,10 @@
+import * as R from 'remeda'
+
 import {
     map,
-    pipe,
-    filter,
     values,
-    flatten,
-    mergeAll,
-} from './utils/'
+} from './utils'
+import { Apis, ApiFn, SyncFnMap } from './types'
 
 /**
  * 将各个发起 api 的函数的 key 与其绑定，与 TuaStorage 配合使用效果更佳
@@ -21,40 +20,46 @@ import {
  *  key2: [Function: path2] key: key2,
  *  ...
  * }
- * @param {object} apis
- * @return {object}
+ * @param apis
+ * @return 各个发起 api 的函数和 key 的 map
  */
-const getSyncFnMapByApis = pipe(
+const getSyncFnMapByApis = (apis: Apis) => R.pipe(
+    apis,
     values,
     map(values),
-    flatten,
-    map(val => ({ [val.key]: val })),
-    mergeAll,
-)
+    (x: ApiFn[][]) => R.flatten(x),
+    map((val: ApiFn) => ({ [val.key]: val })),
+    R.mergeAll,
+) as { [k: string]: ApiFn }
 
 /**
  * 过滤出有默认参数的接口（接口参数非数组，且不含有 isRequired/required）
- * @param {object} syncFnMap
- * @return {Array} keys 所有有默认参数的接口名称
+ * @param syncFnMap
+ * @return keys 所有有默认参数的接口名称
  */
-const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
+const getPreFetchFnKeysBySyncFnMap = (syncFnMap: SyncFnMap) => R.pipe(
+    syncFnMap,
     Object.keys,
-    filter((key) => {
+    R.filter((key) => {
         const { params } = syncFnMap[key]
 
         if (Array.isArray(params)) return false
 
         // 当前参数不是必须的
-        const isParamNotRequired = (key) => (
-            typeof params[key] !== 'object' ||
-            // 兼容 vue 的写法
-            (!params[key].isRequired && !params[key].required)
-        )
+        const isParamNotRequired = (key: string) => {
+            const value = params[key]
+
+            return (
+                typeof value !== 'object' ||
+                // 兼容 vue 的写法
+                (!value.required && !value.isRequired)
+            )
+        }
 
         return Object.keys(params).every(isParamNotRequired)
     }),
     map(key => ({ key })),
-)(syncFnMap)
+)
 
 export {
     getSyncFnMapByApis,

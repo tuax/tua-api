@@ -6,13 +6,14 @@ import {
     getParamStrFromObj,
     getDefaultParamObj,
 } from './utils'
+import { Ctx, AnyPromiseFunction } from './types'
 
 /**
  * 记录请求开始时间
- * @param {object} ctx 上下文对象
- * @param {Function} next 转移控制权给下一个中间件的函数
+ * @param ctx 上下文对象
+ * @param next 转移控制权给下一个中间件的函数
  */
-const recordStartTimeMiddleware = (ctx, next) => {
+const recordStartTimeMiddleware = <T = any>(ctx: Ctx, next: AnyPromiseFunction<T>) => {
     ctx.startTime = Date.now()
 
     return next()
@@ -20,10 +21,10 @@ const recordStartTimeMiddleware = (ctx, next) => {
 
 /**
  * 记录接受响应时间和请求总时间的中间件
- * @param {object} ctx 上下文对象
- * @param {Function} next 转移控制权给下一个中间件的函数
+ * @param ctx 上下文对象
+ * @param next 转移控制权给下一个中间件的函数
  */
-const recordReqTimeMiddleware = (ctx, next) => {
+const recordReqTimeMiddleware = <T = any>(ctx: Ctx, next: AnyPromiseFunction<T>) => {
     return next().then(() => {
         ctx.endTime = Date.now()
         ctx.reqTime = Date.now() - ctx.startTime
@@ -33,10 +34,10 @@ const recordReqTimeMiddleware = (ctx, next) => {
 /**
  * 由于后台返回数据结构不统一，增加对于返回数组情况的兼容处理
  * 且对于 code 进行强制类型转换
- * @param {object} ctx 上下文对象（ctx.res.data 接口返回数据）
- * @param {Function} next 转移控制权给下一个中间件的函数
+ * @param ctx 上下文对象（ctx.res.data 接口返回数据）
+ * @param next 转移控制权给下一个中间件的函数
  */
-const formatResDataMiddleware = (ctx, next) => next().then(() => {
+const formatResDataMiddleware = <T = any>(ctx: Ctx, next: AnyPromiseFunction<T>) => next().then(() => {
     const jsonData = ctx.res.data
 
     if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
@@ -51,10 +52,10 @@ const formatResDataMiddleware = (ctx, next) => next().then(() => {
 
 /**
  * 生成请求函数所需参数
- * @param {object} ctx 上下文对象
- * @param {Function} next 转移控制权给下一个中间件的函数
+ * @param ctx 上下文对象
+ * @param next 转移控制权给下一个中间件的函数
  */
-const formatReqParamsMiddleware = (ctx, next) => {
+const formatReqParamsMiddleware = <T = any>(ctx: Ctx, next: AnyPromiseFunction<T>) => {
     const {
         args,
         params,
@@ -83,10 +84,10 @@ const formatReqParamsMiddleware = (ctx, next) => {
 
 /**
  * 设置请求的 reqFnParams 参数，将被用于 _reqFn 函数
- * @param {object} ctx 上下文对象
- * @param {Function} next 转移控制权给下一个中间件的函数
+ * @param ctx 上下文对象
+ * @param next 转移控制权给下一个中间件的函数
  */
-const setReqFnParamsMiddleware = (ctx, next) => {
+const setReqFnParamsMiddleware = <T = any>(ctx: Ctx, next: AnyPromiseFunction<T>) => {
     const { path, prefix, reqParams, baseUrl, ...rest } = ctx.req
 
     // 请求地址

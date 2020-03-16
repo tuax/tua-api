@@ -1,29 +1,28 @@
-const presets = [
-    [
-        '@babel/preset-env',
-        { targets: { node: 'current' } },
-    ],
-]
-const plugins = [
-    [
-        '@babel/plugin-proposal-decorators',
-        { legacy: true },
-    ],
-    '@babel/plugin-proposal-object-rest-spread',
-]
-
 module.exports = {
     env: {
-        dev: { presets, plugins },
-        test: { presets, plugins },
+        test: {
+            presets: [
+                [
+                    '@babel/preset-env',
+                    { targets: { node: 'current' } },
+                ],
+                '@babel/typescript',
+            ],
+            plugins: [
+                ['@babel/plugin-proposal-decorators', { legacy: true }],
+            ],
+        },
         production: {
             presets: [
                 [
                     '@babel/preset-env',
                     { modules: false },
                 ],
+                '@babel/typescript',
             ],
-            plugins,
+            plugins: [
+                '@babel/plugin-proposal-object-rest-spread',
+            ],
         },
     },
 }

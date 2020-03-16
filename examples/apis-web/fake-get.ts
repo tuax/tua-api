@@ -1,3 +1,5 @@
+import { WebApiConfig } from '../../src/types'
+
 export default {
     // 请求的公用服务器地址。
     // baseUrl: 'http://example-base.com/',
@@ -58,8 +60,7 @@ export default {
         {
             name: 'op',
             path: 'object-params',
-            /** @type { import('../../src/').ReqType } */
-            reqType: (''),
+            reqType: '',
             params: {
                 param1: 1217,
                 param2: 'steve',
@@ -90,8 +91,7 @@ export default {
             path: 'req-type-axios',
             // 用哪个包发起请求目前支持：jsonp、axios
             // 如果不指定默认对于 get 请求使用 fetch-jsonp，post 请求使用 axios
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('axios'),
+            reqType: 'axios',
             /**
              * 在这里返回的 params 会和请求的 params 合并
              * @returns {Promise<any>}
@@ -106,8 +106,7 @@ export default {
         {
             name: 'irt',
             path: 'invalid-req-type',
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('foobar'),
+            reqType: 'foobar',
         },
         /**
          * afterFn-data
@@ -123,7 +122,7 @@ export default {
         {
             name: 'noAfterData',
             path: 'no-afterFn-data',
-            afterFn: () => {},
+            afterFn: () => '',
         },
         /**
          * mock-object-data
@@ -139,9 +138,8 @@ export default {
         {
             name: 'mockFnData',
             path: 'mock-function-data',
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('axios'),
-            mock: ({ mockCode }) => ({ code: mockCode, data: {} }),
+            reqType: 'axios',
+            mock: ({ mockCode }: { mockCode: number }) => ({ code: mockCode, data: {} }),
         },
         /**
          * beforeFnCookie
@@ -155,8 +153,7 @@ export default {
             beforeFn: () => Promise.resolve({
                 header: { cookie: '123' },
             }),
-            /** @type { import('../../src/').ReqType } */
-            reqType: ('axios'),
+            reqType: 'axios',
         },
         /**
          * jsonp-options
@@ -166,4 +163,4 @@ export default {
             path: 'jsonp-options',
         },
     ],
-}
+} as WebApiConfig

@@ -1,11 +1,23 @@
 {
     "compilerOptions": {
-        "allowJs": true,
-        "checkJs": true,
+        "strict": true,
+        "pretty": true,
+        "target": "es6",
+        "module": "esnext",
         "baseUrl": ".",
-        "target": "es5",
+        "declaration": true,
+        "diagnostics": true,
+        "skipLibCheck": true,
+        "noEmitOnError": true,
+        "noUnusedLocals": true,
+        "declarationDir": "dist",
+        "moduleResolution": "node",
         "resolveJsonModule": true,
+        "noUnusedParameters": true,
+        "strictFunctionTypes": false,
         "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "strictPropertyInitialization": false,
         "lib": [
             "dom",
             "es2015"
@@ -13,7 +25,11 @@
         "paths":{
             "@/*": ["src/*"],
             "@examples/*": ["examples/*"]
-        }
+        },
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/miniprogram-api-typings"
+        ]
     },
     "exclude": ["node_modules", "dist"]
 }

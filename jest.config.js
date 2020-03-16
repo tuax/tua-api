@@ -2,7 +2,7 @@ module.exports = {
     bail: true,
     clearMocks: true,
     transform: {
-        '^.+\\.js$': 'babel-jest',
+        '^.+\\.[j|t]sx?$': 'babel-jest',
     },
     moduleNameMapper: {
         '@/(.*)$': '<rootDir>/src/$1',

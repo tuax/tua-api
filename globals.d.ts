@@ -1,5 +1,4 @@
-interface Wx {
-    request: jest.Mocked<any>
+interface Wx extends WechatMiniprogram.Wx {
     hideLoading: jest.Mocked<any>
     showLoading: jest.Mocked<any>
     hideNavigationBarLoading: jest.Mocked<any>

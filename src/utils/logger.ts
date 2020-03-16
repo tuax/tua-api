@@ -1,14 +1,19 @@
 /**
- * 统一的日志输出函数，在测试环境时不输出
- * @param {string} type 输出类型 log|warn|error
+ * 原生 Console 上的方法名
  */
-const logByType = (type) => (...out) => {
+export type LogType = keyof Console
+
+/**
+ * 统一的日志输出函数，在测试环境时不输出
+ * @param logType 输出类型
+ */
+const logByType = (logType: LogType) => (...out: any[]) => {
     const env = process.env.NODE_ENV
     /* istanbul ignore next */
     if (env === 'test' || env === 'production') return
 
     /* istanbul ignore next */
-    console[type]('[TUA-API]:', ...out)
+    console[logType]('[TUA-API]:', ...out)
 }
 
 export const logger = {

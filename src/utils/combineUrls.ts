@@ -1,8 +1,8 @@
 /**
  * Creates a new URL by combining the specified URLs
- * @param {string} baseUrl The base URL
- * @param {string} relativeUrl The relative URL
- * @returns {string} The combined URL
+ * @param baseUrl The base URL
+ * @param relativeUrl The relative URL
+ * @returns The combined URL
  */
 function combineUrls (baseUrl = '', relativeUrl = '') {
     if (!relativeUrl) return baseUrl
