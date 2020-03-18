@@ -44,7 +44,7 @@ describe('mock data', () => {
 
     test('dynamic function mock data', async () => {
         wx.__TEST_DATA__ = { testData: testObjData }
-        mockApi.foo.mock = ({ mockCode }) => ({ code: mockCode })
+        mockApi.foo.mock = ({ mockCode }: { mockCode: number }) => ({ code: mockCode })
         const resData = await mockApi.foo({ mockCode: 123 })
 
         expect(resData.code).toBe(123)
@@ -55,9 +55,7 @@ describe('middleware', () => {
     const tuaApi = new TuaApi()
     const fakeWxApi = tuaApi.getApi(fakeWx)
     const globalMiddlewareFn = jest.fn(async (ctx, next) => {
-        expect(ctx.req.host).toBeDefined()
         expect(ctx.req.baseUrl).toBeDefined()
-        expect(ctx.req.type).toBeDefined()
         expect(ctx.req.method).toBeDefined()
         expect(ctx.req.path).toBeDefined()
         expect(ctx.req.prefix).toBeDefined()
@@ -67,6 +65,8 @@ describe('middleware', () => {
         expect(ctx.req.jsonpOptions).toBeDefined()
         expect(ctx.req.reqFnParams).toBeDefined()
 
+        expect(ctx.req.host).toBeUndefined()
+        expect(ctx.req.type).toBeUndefined()
         expect(ctx.req.callbackName).toBeUndefined()
 
         await next()
@@ -119,7 +119,7 @@ describe('fake wx requests', () => {
         wx.__TEST_DATA__ = { isTestFail: true }
 
         return expect(fakeWxApi.fail({ a: 'b' }))
-            .rejects.toEqual(Error('test'))
+            .rejects.toEqual({ errMsg: 'test' })
     })
 
     test('no-beforeFn', () => {

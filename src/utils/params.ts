@@ -3,7 +3,7 @@ import * as R from 'remeda'
 import { logger } from './logger'
 import { map, join } from './fp'
 import { ERROR_STRINGS } from '../constants'
-import { ApiConfig, ParamType, ParamsConfig, PathListItem } from '../types'
+import { ApiConfig, ParamType, ParamsConfig, PathListItem, ParamsObject } from '../types'
 
 /**
  * 将对象序列化为 queryString 的形式
@@ -24,10 +24,10 @@ const getParamStrFromObj = (data: { [k: string]: any } = {}) => R.pipe(
  * @param options.apiName 接口名称
  * @returns 检查结果（测试使用）
  */
-const checkArrayParams = <T>({ args, params, apiName }: {
+const checkArrayParams = <T>({ args, params, apiName = '' }: {
     args: T
     params: ParamsConfig
-    apiName: string
+    apiName?: string
 }): boolean => {
     if (!Array.isArray(params)) return true
 
@@ -50,17 +50,15 @@ const checkArrayParams = <T>({ args, params, apiName }: {
 function getDefaultParamObj ({
     args = {},
     params = {},
-    apiName,
+    apiName = '',
     commonParams = {},
 }: {
     args?: { [k: string]: any }
-    params?: ParamsConfig
-    apiName: string
+    params?: ParamsObject
+    apiName?: string
     commonParams?: ParamType | null
 }) {
     const getOneDefaultParam = (key: string) => {
-        if (Array.isArray(params)) return {}
-
         const val = params[key]
         const isRequiredValUndefined = (
             typeof val === 'object' &&
@@ -81,10 +79,6 @@ function getDefaultParamObj ({
         const returnVal = typeof val === 'object' ? '' : val
 
         return { [key]: returnVal }
-    }
-
-    if (Array.isArray(params)) {
-        return params.map(getOneDefaultParam)
     }
 
     return R.pipe(

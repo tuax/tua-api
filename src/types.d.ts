@@ -74,12 +74,12 @@ export interface ParamsObject {
     [k: string]: (
         | string
         | number
-        | { [k in 'required' | 'isRequired']: boolean }
+        | { [k in 'required' | 'isRequired']?: boolean }
     )
 }
 
 /** 请求上下文对象 */
-export interface CtxReq extends WxRuntimeOptions, PathListItemOnly {
+export interface CtxReq extends WxRuntimeOptions, PathListItemOnly, Required<Pick<PathListItemOnly, ['params']>> {
     args: object
     mock: Mock
     // 接口末端地址
@@ -138,7 +138,7 @@ export interface BaseApiConfig {
 export interface PathListItemOnly {
     path: string
     name?: string
-    params: ParamsConfig
+    params?: ParamsConfig
 }
 
 // for web
@@ -176,9 +176,9 @@ export interface ApiFn {
     mock?: Mock
     params: ParamsConfig
     <T = any, U = object | void>(
-        params?: U | null,
+        params?: U,
         runtimeOptions?: RuntimeOptions
-    ): Promise<T>
+    ): Promise
 }
 
 /**

@@ -3,16 +3,16 @@ import {
     getPreFetchFnKeysBySyncFnMap,
 } from '@/exportUtils'
 
-const noop1 = () => {}
+const noop1 = () => Promise.resolve('')
 noop1.key = 'noop1'
-noop1.params = []
-const noop2 = () => {}
+noop1.params = ['a']
+const noop2 = () => Promise.resolve('')
 noop2.key = 'noop2'
 noop2.params = {}
-const noop3 = () => {}
+const noop3 = () => Promise.resolve('')
 noop3.key = 'noop3'
 noop3.params = { a: { required: true } }
-const noop4 = () => {}
+const noop4 = () => Promise.resolve('')
 noop4.key = 'noop4'
 noop4.params = {}
 

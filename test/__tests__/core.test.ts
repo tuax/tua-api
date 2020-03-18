@@ -10,6 +10,7 @@ describe('error handling', () => {
     })
 
     test('unknown reqType', () => {
+        // @ts-ignore
         expect(() => new TuaApi({ reqType: '' })).toThrow(TypeError(ERROR_STRINGS.reqTypeFn('')))
     })
 })

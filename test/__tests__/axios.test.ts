@@ -94,7 +94,7 @@ describe('fake get requests', () => {
         const data = { code: 0, data: 'runtime get' }
         mock.onGet(reqAPUrl).reply(200, data)
         const resData = await fakePostApi.ap(null, {
-            type: 'get',
+            method: 'get',
             reqType: 'axios',
             commonParams: null,
         })
@@ -148,24 +148,6 @@ describe('fake post requests', () => {
         const resData = await fakePostApi.op({ param3: 'steve' })
 
         expect(resData).toEqual({ code: 0, data: 'array data' })
-    })
-
-    test('form-data', async () => {
-        mock.resetHistory()
-        mock.onPost(reqOHUrl).reply(200, {})
-        const formData = new FormData()
-        formData.append('a', 'a')
-        formData.append('b', '123')
-
-        await fakePostApi.oh(formData)
-
-        const {
-            data,
-            transformRequest,
-        } = mock.history.post[0]
-
-        expect(data).toBe(formData)
-        expect(transformRequest).toBe(null)
     })
 
     test('custom-transformRequest', async () => {

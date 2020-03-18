@@ -19,17 +19,18 @@ test('combineUrls', () => {
     expect(combineUrls('https://api.github.com/users', '/')).toBe('https://api.github.com/users/')
 })
 
-test('promisifyWxApi', () => {
-    const fn = ({ success }) => setTimeout(() => success('test'), 0)
+test('promisifyWxApi', async () => {
+    const fn = ({ success }: { success: (a: any) => void }) => setTimeout(() => success('test'), 0)
     const promisifiedFn = promisifyWxApi(fn)
 
-    promisifiedFn().then(data => {
-        expect(data).toBe('test')
-    })
+    const data = await promisifiedFn()
+    expect(data).toBe('test')
+
+    expect(promisifyWxApi('')).toThrow('fn must be a function')
 })
 
 test('checkArrayParams', () => {
-    expect(checkArrayParams({ params: {} })).toBe(true)
+    expect(checkArrayParams({ args: {}, params: {} })).toBe(true)
     expect(checkArrayParams({ args: { a: 'a' }, params: ['a'] })).toBe(true)
     expect(checkArrayParams({ args: {}, params: ['a'] })).toBe(false)
 })
@@ -76,13 +77,13 @@ test('getParamStrFromObj', () => {
 test('apiConfigToReqFnParams', () => {
     expect(apiConfigToReqFnParams({
         pathList: [
-            { path: 'api1', a: 'aa' },
-            { path: 'api2', b: 'bb' },
+            { path: 'api1', method: 'get' },
+            { path: 'api2', baseUrl: 'bb' },
         ],
-        a: 'a',
-        b: 'b',
+        method: 'post',
+        baseUrl: 'b',
     })).toEqual([
-        { path: 'api1', a: 'aa', b: 'b' },
-        { path: 'api2', a: 'a', b: 'bb' },
+        { path: 'api1', method: 'get', baseUrl: 'b' },
+        { path: 'api2', method: 'post', baseUrl: 'bb' },
     ])
 })
