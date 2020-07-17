@@ -22,6 +22,7 @@ export type ReqType = (
     | 'wx' | 'WX'
     | 'axios' | 'AXIOS'
     | 'jsonp' | 'JSONP'
+    | 'custom' | 'CUSTOM'
 )
 
 export type Method = (
@@ -66,6 +67,7 @@ export interface CtxReq {
 }
 export interface CtxRes extends AxiosResponse {
     data: any
+    rawData: any
     error?: Error
     [k: string]: any
 }
@@ -93,6 +95,7 @@ export interface BaseApiConfig {
     afterFn?: <T = any, U = any>(args: [U?, Ctx?]) => Promise<T>
     beforeFn?: <T = any>() => Promise<T>
     middleware?: Middleware<Ctx>[]
+    customFetch?: AnyPromiseFunction
     commonParams?: object
     axiosOptions?: AxiosOptions
     jsonpOptions?: JsonpOptions
@@ -121,14 +124,14 @@ export interface RuntimeOptionsOnly {
     fullPath?: string
     callbackName?: string
 }
-export interface WxRuntimeOptions extends WxApiConfig, RuntimeOptionsOnly {}
-export interface WebRuntimeOptions extends WebApiConfig, RuntimeOptionsOnly {}
+export interface WxRuntimeOptions extends WxApiConfig, RuntimeOptionsOnly { }
+export interface WebRuntimeOptions extends WebApiConfig, RuntimeOptionsOnly { }
 
 export interface Api {
     key: string
     mock: Mock
     params: ParamsConfig
-    <T = object, U = object | void>(
+    <T = object, U = object | void> (
         params?: U,
         runtimeOptions?: RuntimeOptions
     ): Promise<T>
@@ -137,13 +140,14 @@ export interface Apis { [k: string]: SyncFnMap }
 export interface SyncFnMap { [k: string]: Api }
 
 export interface TuaApiClass {
-    new (args?: {
+    new(args?: {
         // deprecated
         host?: string
         baseUrl?: string
 
         reqType?: string
         middleware?: Middleware<Ctx>[]
+        customFetch?: AnyPromiseFunction
         axiosOptions?: AxiosOptions
         jsonpOptions?: JsonpOptions
         defaultErrorData?: any
@@ -157,8 +161,8 @@ export interface TuaApiInstance {
 
 /* -- export utils -- */
 
-export function getSyncFnMapByApis(apis: Apis): SyncFnMap
-export function getPreFetchFnKeysBySyncFnMap(syncFnMap: SyncFnMap): Api[]
+export function getSyncFnMapByApis (apis: Apis): SyncFnMap
+export function getPreFetchFnKeysBySyncFnMap (syncFnMap: SyncFnMap): Api[]
 
 /* -- export default -- */
 

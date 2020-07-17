@@ -28,7 +28,8 @@ function (ctx, next) {
     return next().then(() => {
         // 注意这里才有响应！
         ctx.res       // 响应对象
-        ctx.res.data  // 响应的数据
+        ctx.res.data  // 响应格式化后的数据
+        ctx.res.rawData  // 响应的原始数据
         ctx.reqTime   // 请求花费的时间
         ctx.endTime   // 收到响应的时间
     })
@@ -68,7 +69,8 @@ async function (ctx, next) {
 | req.reqFnParams | 发起请求时的参数对象（上面那些参数都会被放进来作为属性） |
 | --- | --- |
 | res | 响应 |
-| res.data | 响应的数据 |
+| res.data | 响应格式化后的数据 |
+| res.rawData | 响应的原始数据 |
 | res.error | 错误对象（可以取 stack 和 message） |
 | res.* | [透传 axios 的配置](https://github.com/axios/axios#response-schema) |
 | --- | --- |

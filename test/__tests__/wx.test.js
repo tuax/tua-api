@@ -76,6 +76,7 @@ describe('middleware', () => {
         expect(ctx.endTime).toBeDefined()
 
         expect(ctx.res.data).toBeDefined()
+        expect(ctx.res.rawData).toBeDefined()
     })
 
     tuaApi.use(globalMiddlewareFn)

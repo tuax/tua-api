@@ -36,6 +36,7 @@ class TuaApi {
      * @param {string} [options.baseUrl] 服务器基础地址，例如 https://example.com/
      * @param {string} [options.reqType] 使用什么工具发(axios/jsonp/wx)
      * @param {function[]} [options.middleware] 中间件函数数组
+     * @param {function} [options.customFetch] 自定义请求函数
      * @param {object} [options.axiosOptions] 透传 axios 配置参数
      * @param {object} [options.jsonpOptions] 透传 fetch-jsonp 配置参数
      * @param {object} [options.defaultErrorData] 出错时的默认数据
@@ -43,15 +44,19 @@ class TuaApi {
     constructor ({
         host,
         baseUrl = host,
-        reqType = isWx() ? 'wx' : 'axios',
+        reqType,
         middleware = [],
+        customFetch,
         axiosOptions = {},
         jsonpOptions = {},
         defaultErrorData = { code: 999, msg: '出错啦！' },
     } = {}) {
         this.baseUrl = baseUrl
-        this.reqType = reqType
+        this.reqType = reqType !== undefined
+            ? reqType.toLowerCase()
+            : (isWx() ? 'wx' : 'axios')
         this.middleware = middleware
+        this.customFetch = customFetch
         this.axiosOptions = axiosOptions
         this.jsonpOptions = jsonpOptions
         this.defaultErrorData = defaultErrorData
@@ -63,6 +68,9 @@ class TuaApi {
                 '[host] will be deprecated, please use [baseUrl] instead!\n' +
                 '[host] 属性将被废弃, 请用 [baseUrl] 替代！',
             )
+        }
+        if (reqType && reqType !== 'custom' && customFetch) {
+            throw TypeError(ERROR_STRINGS.reqTypeAndCustomFetch)
         }
 
         return this
@@ -109,28 +117,31 @@ class TuaApi {
      * @param {string} options.reqType 使用什么工具发(axios/jsonp/wx)
      * @param {object} options.reqParams 请求参数
      * @param {object} options.header 请求的 header
+     * @param {function} [options.customFetch] 自定义请求函数
      * @param {string} options.callback 使用 jsonp 时标识回调函数的名称
      * @param {string} options.callbackName 使用 jsonp 时的回调函数名
      * @param {object} options.axiosOptions 透传 axios 配置参数
      * @param {object} options.jsonpOptions 透传 fetch-jsonp 配置参数
      * @return {Promise}
      */
-    _reqFn ({
-        url,
-        mock,
-        header,
-        method,
-        fullUrl,
-        reqType,
-        reqParams: data,
-        callback,
-        callbackName,
-        axiosOptions,
-        jsonpOptions,
-        ...rest
-    }) {
+    _reqFn (options) {
+        const {
+            url,
+            mock,
+            header,
+            method: _method,
+            fullUrl,
+            reqType: _reqType,
+            reqParams: data,
+            callback,
+            callbackName,
+            axiosOptions,
+            jsonpOptions,
+            ...rest
+        } = options
+
         // check type
-        this._checkReqType(reqType)
+        this._checkReqType(_reqType)
 
         // mock data
         if (mock) {
@@ -141,7 +152,12 @@ class TuaApi {
             return Promise.resolve({ data: resData })
         }
 
-        method = method.toLowerCase()
+        const method = _method.toLowerCase()
+        const reqType = _reqType.toLowerCase()
+
+        if (reqType === 'custom') {
+            return rest.customFetch({ url, data, method, header, ...rest })
+        }
 
         if (reqType === 'wx') {
             return getWxPromise({ url, fullUrl, data, method, header, ...rest })
@@ -161,7 +177,6 @@ class TuaApi {
 
         // 防止接口返回非英文时报错
         jsonpOptions.charset = jsonpOptions.charset || 'UTF-8'
-
         jsonpOptions.jsonpCallback = callback || jsonpOptions.jsonpCallback
         jsonpOptions.jsonpCallbackFunction = callbackName || jsonpOptions.jsonpCallbackFunction
 
@@ -226,6 +241,7 @@ class TuaApi {
      * @param {function} options.afterFn 在请求完成后执行的钩子函数（将被废弃）
      * @param {function} options.beforeFn 在请求发起前执行的钩子函数（将被废弃）
      * @param {function[]} options.middleware 中间件函数数组
+     * @param {function} [options.customFetch] 自定义请求函数
      * @param {Boolean} options.useGlobalMiddleware 是否使用全局中间件
      * @param {string} options.baseUrl 服务器地址
      * @param {string} options.reqType 使用什么工具发
@@ -261,9 +277,21 @@ class TuaApi {
         // 向前兼容
         type = method
 
-        // 合并全局默认值
+        /* 合并全局默认值 */
+        if (rest.reqType && rest.customFetch) {
+            if (rest.reqType.toLowerCase() !== 'custom') {
+                logger.warn(ERROR_STRINGS.reqTypeAndCustomFetch)
+            }
+            rest.reqType = 'custom'
+        } else if (rest.customFetch || this.customFetch) {
+            // 没有配置 reqType，但配了公共配置或默认配置的 customFetch
+            rest.reqType = 'custom'
+        } else {
+            // 没有配置 customFetch
+            rest.reqType = rest.reqType || this.reqType
+        }
         rest.baseUrl = rest.baseUrl || this.baseUrl
-        rest.reqType = rest.reqType || this.reqType
+        rest.customFetch = rest.customFetch || this.customFetch
         rest.axiosOptions = rest.axiosOptions
             ? { ...this.axiosOptions, ...rest.axiosOptions }
             : this.axiosOptions
@@ -294,9 +322,8 @@ class TuaApi {
 
             // 向前兼容
             runtimeParams.host = runtimeParams.host || runtimeParams.baseUrl
-            runtimeParams.baseUrl = runtimeParams.baseUrl || runtimeParams.host
-
             runtimeParams.method = runtimeParams.method || runtimeParams.type
+            runtimeParams.baseUrl = runtimeParams.baseUrl || runtimeParams.host
 
             // 请求的上下文信息
             const ctx = {

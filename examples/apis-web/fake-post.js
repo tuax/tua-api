@@ -88,5 +88,13 @@ export default {
             name: 'pj',
             path: 'post-json',
         },
+        /**
+         * raw-data
+         */
+        {
+            name: 'rd',
+            path: 'raw-data',
+            afterFn: ([, ctx]) => ctx.res.rawData,
+        },
     ],
 }

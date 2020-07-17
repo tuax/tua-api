@@ -1,5 +1,5 @@
 // 支持的请求类型
-const VALID_REQ_TYPES = ['wx', 'axios', 'jsonp']
+const VALID_REQ_TYPES = ['wx', 'axios', 'jsonp', 'custom']
 
 // 小程序中合法的请求方法
 const WX_VALID_METHODS = ['OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT']
@@ -12,6 +12,7 @@ const ERROR_STRINGS = {
     noData: 'no data!',
     argsType: 'the first parameter must be an object!',
     middleware: 'middleware must be a function!',
+    reqTypeAndCustomFetch: 'reqType or customFetch only!',
 
     reqTypeFn: (reqType) => `invalid reqType: "${reqType}", ` +
         `support these reqTypes: ["${VALID_REQ_TYPES.join('", "')}"].`,
