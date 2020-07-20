@@ -78,7 +78,7 @@ export default {
             name: 'ct',
             path: 'custom-transformRequest',
             axiosOptions: {
-                transformRequest: () => `ct`,
+                transformRequest: () => 'ct',
             },
         },
         /**

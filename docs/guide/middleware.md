@@ -70,7 +70,7 @@ async function (ctx, next) {
 | --- | --- |
 | res | 响应 |
 | res.data | 响应格式化后的数据 |
-| res.rawData | 响应的原始数据 |
+| res.rawData <badge text="1.6.0+" /> | 响应的原始数据 |
 | res.error | 错误对象（可以取 stack 和 message） |
 | res.* | [透传 axios 的配置](https://github.com/axios/axios#response-schema) |
 | --- | --- |
