@@ -126,10 +126,12 @@ describe('fake post requests', () => {
 
     test('empty-array-params', async () => {
         const data = { code: 0, data: 'object data' }
+        const arrayArgs = [1, 2]
         mock.onPost(reqEAPUrl).reply(200, data)
-        const resData = await fakePostApi.eap()
+        const resData = await fakePostApi.eap(arrayArgs)
 
         expect(resData).toEqual(data)
+        expect(mock.history.post[0].data).toEqual(JSON.stringify(arrayArgs))
     })
 
     test('array-params', async () => {

@@ -66,7 +66,7 @@ const formatReqParamsMiddleware = (ctx, next) => {
         throw TypeError(ERROR_STRINGS.argsType)
     }
 
-    if (isFormData(args)) {
+    if (isFormData(args) || Array.isArray(args)) {
         ctx.req.reqParams = args
 
         return next()
