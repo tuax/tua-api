@@ -5,12 +5,12 @@
  * @returns {string} The combined URL
  */
 function combineUrls (baseUrl = '', relativeUrl = '') {
-    if (!relativeUrl) return baseUrl
+    if (!relativeUrl) return String(baseUrl)
 
     return (
-        baseUrl.replace(/\/+$/, '') +
+        String(baseUrl).replace(/\/+$/, '') +
         '/' +
-        relativeUrl.replace(/^\/+/, '')
+        String(relativeUrl).replace(/^\/+/, '')
     )
 }
 
