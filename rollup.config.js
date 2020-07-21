@@ -1,10 +1,10 @@
-import json from 'rollup-plugin-json'
-import babel from 'rollup-plugin-babel'
-import replace from 'rollup-plugin-replace'
-import commonjs from 'rollup-plugin-commonjs'
+import json from '@rollup/plugin-json'
+import babel from '@rollup/plugin-babel'
+import replace from '@rollup/plugin-replace'
+import commonjs from '@rollup/plugin-commonjs'
 import { eslint } from 'rollup-plugin-eslint'
-import { uglify } from 'rollup-plugin-uglify'
-import nodeResolve from 'rollup-plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
+import nodeResolve from '@rollup/plugin-node-resolve'
 
 import pkg from './package.json'
 
@@ -40,7 +40,7 @@ const plugins = [
     json(),
     nodeResolve(),
     commonjs(),
-    babel(),
+    babel({ babelHelpers: 'bundled' }),
 ]
 const env = 'process.env.NODE_ENV'
 const external = ['axios', 'fetch-jsonp']
@@ -68,6 +68,11 @@ export default [{
     plugins: [
         ...plugins,
         replace({ [env]: '"production"' }),
-        uglify(),
+        terser({
+            output: {
+                /* eslint-disable */
+                ascii_only: true,
+            },
+        }),
     ],
 }]

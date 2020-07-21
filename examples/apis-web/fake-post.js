@@ -78,7 +78,7 @@ export default {
             name: 'ct',
             path: 'custom-transformRequest',
             axiosOptions: {
-                transformRequest: () => `ct`,
+                transformRequest: () => 'ct',
             },
         },
         /**
@@ -87,6 +87,14 @@ export default {
         {
             name: 'pj',
             path: 'post-json',
+        },
+        /**
+         * raw-data
+         */
+        {
+            name: 'rd',
+            path: 'raw-data',
+            afterFn: ([, ctx]) => ctx.res.rawData,
         },
     ],
 }

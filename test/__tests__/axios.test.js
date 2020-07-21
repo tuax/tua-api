@@ -7,10 +7,7 @@ import { fakeGetApi, fakePostApi } from '@examples/apis-web/'
 
 const mock = new MockAdapter(axios)
 
-const params = {
-    param1: 'steve',
-    param2: 'young',
-}
+const params = { param1: 'steve', param2: 'young' }
 
 const reqAPUrl = 'http://example-base.com/fake-post/array-params'
 const reqOPUrl = 'http://example-base.com/fake-post/object-params'
@@ -22,6 +19,7 @@ const reqMFDUrl = 'http://example-base.com/fake-get/mock-function-data'
 const reqBFCUrl = 'http://example-base.com/fake-get/beforeFn-cookie'
 const reqCTUrl = 'http://example-base.com/fake-post/custom-transformRequest'
 const reqPjUrl = 'http://example-base.com/fake-post/post-json'
+const reqRdUrl = 'http://example-base.com/fake-post/raw-data'
 
 describe('middleware', () => {
     test('change baseUrl before request', async () => {
@@ -128,10 +126,12 @@ describe('fake post requests', () => {
 
     test('empty-array-params', async () => {
         const data = { code: 0, data: 'object data' }
+        const arrayArgs = [1, 2]
         mock.onPost(reqEAPUrl).reply(200, data)
-        const resData = await fakePostApi.eap()
+        const resData = await fakePostApi.eap(arrayArgs)
 
         expect(resData).toEqual(data)
+        expect(mock.history.post[0].data).toEqual(JSON.stringify(arrayArgs))
     })
 
     test('array-params', async () => {
@@ -189,5 +189,13 @@ describe('fake post requests', () => {
 
         expect(data).toBe(JSON.stringify(fakePostConfig.commonParams))
         expect(mock.history.post[0].headers['Content-Type']).toBe('application/json;charset=utf-8')
+    })
+
+    test('raw-data', async () => {
+        const data = [0, 'array data']
+        mock.onPost(reqRdUrl).reply(200, data)
+        const resData = await fakePostApi.rd()
+
+        expect(resData).toEqual(data)
     })
 })

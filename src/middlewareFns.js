@@ -38,6 +38,7 @@ const recordReqTimeMiddleware = (ctx, next) => {
  */
 const formatResDataMiddleware = (ctx, next) => next().then(() => {
     const jsonData = ctx.res.data
+    ctx.res.rawData = ctx.res.data
 
     if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
 
@@ -65,7 +66,7 @@ const formatReqParamsMiddleware = (ctx, next) => {
         throw TypeError(ERROR_STRINGS.argsType)
     }
 
-    if (isFormData(args)) {
+    if (isFormData(args) || Array.isArray(args)) {
         ctx.req.reqParams = args
 
         return next()
@@ -97,6 +98,7 @@ const setReqFnParamsMiddleware = (ctx, next) => {
 
     ctx.req.reqFnParams = {
         url,
+        baseUrl,
         fullUrl,
         reqParams,
         ...rest,
