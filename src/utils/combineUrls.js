@@ -5,12 +5,15 @@
  * @returns {string} The combined URL
  */
 function combineUrls (baseUrl = '', relativeUrl = '') {
-    if (!relativeUrl) return String(baseUrl)
+    const strBaseUrl = baseUrl === null ? '' : String(baseUrl)
+    const strRelativeUrl = relativeUrl === null ? '' : String(relativeUrl)
+
+    if (!strRelativeUrl) return strBaseUrl
 
     return (
-        String(baseUrl).replace(/\/+$/, '') +
+        strBaseUrl.replace(/\/+$/, '') +
         '/' +
-        String(relativeUrl).replace(/^\/+/, '')
+        strRelativeUrl.replace(/^\/+/, '')
     )
 }
 
