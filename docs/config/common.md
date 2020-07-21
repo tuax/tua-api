@@ -63,6 +63,23 @@ export default {
 }
 ```
 
+## customFetch 自定义请求函数 <badge text="1.6.0+" />
+适用于内置库覆盖不到的场景下使用，这是一个函数，将会接收接口相关配置，在函数内发起请求，返回值为一个 Promise。
+
+```js
+export default {
+    customFetch: ({ url, data, method }) => {
+        // ...
+    },
+}
+```
+
+::: warning
+从优先级上来说这个参数和 `reqType` 互相替代，例如：
+1. 低优先级的 `reqType` 会被高优先级的 `customFetch` 覆盖（反之亦然）
+2. 若是 `reqType` 和 `customFetch` 在同级同时配置时，控制台发出告警，并且实际以 `customFetch` 为准。
+:::
+
 ## commonParams 公共参数
 有时对于所有接口都需要添加一个公共参数。
 

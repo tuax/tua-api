@@ -5,9 +5,10 @@
 import TuaApi from 'tua-api'
 
 new TuaApi({
-    host,
+    baseUrl, // 即原 host
     reqType,
     middleware,
+    customFetch,
     axiosOptions,
     jsonpOptions,
     defaultErrorData,
@@ -25,6 +26,9 @@ new TuaApi({
 
 ## middleware 中间件函数数组
 【所有】请求都会调用的中间件函数数组！适合添加一些通用逻辑，例如接口上报。
+
+## customFetch 自定义请求函数 <badge text="1.6.0+" />
+这是一个函数，将会接收接口相关配置，在函数内发起请求，返回值为一个 Promise。
 
 ## axiosOptions 透传 axios 配置参数
 【通用】的配置，会和之后的配置合并。
