@@ -8,4 +8,10 @@ export const isFormData = (val) => (
     (val instanceof FormData)
 )
 
+export const runFn = (fn, ...params) => {
+    if (typeof fn === 'function') return fn(...params)
+
+    return fn
+}
+
 export const isUndefined = val => typeof val === 'undefined'

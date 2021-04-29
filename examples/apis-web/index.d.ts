@@ -58,3 +58,12 @@ export const fakePostApi: {
 		): Promise<T>
 	}
 }
+
+export const fakeFnApi: {
+	'fp': ReqFn & {
+		<T = Result>(
+			params: { t?: any },
+			options?: RuntimeOptions
+		): Promise<T>
+	}
+}

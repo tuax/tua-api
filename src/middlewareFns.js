@@ -1,5 +1,6 @@
 import { ERROR_STRINGS } from './constants'
 import {
+    runFn,
     isFormData,
     combineUrls,
     checkArrayParams,
@@ -59,7 +60,7 @@ const formatReqParamsMiddleware = (ctx, next) => {
     const {
         args,
         params,
-        commonParams,
+        commonParams: rawCommonParams,
     } = ctx.req
 
     if (typeof args !== 'object') {
@@ -74,10 +75,11 @@ const formatReqParamsMiddleware = (ctx, next) => {
 
     checkArrayParams(ctx.req)
 
+    const commonParams = runFn(rawCommonParams, args)
     // 根据配置生成请求的参数
     ctx.req.reqParams = Array.isArray(params)
         ? { ...commonParams, ...args }
-        : { ...getDefaultParamObj(ctx.req), ...args }
+        : { ...getDefaultParamObj({ ...ctx.req, commonParams }), ...args }
 
     return next()
 }

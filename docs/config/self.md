@@ -63,6 +63,24 @@ export default {
 }
 ```
 
+::: tip
+<badge text="1.7.0+" /> 后，支持函数模式
+
+```js
+export default {
+    pathList: [
+        {
+            ...
+            params: (params) => ({
+                t: Date.now(),
+                foo: params.foo,
+            }),
+        },
+    ],
+}
+```
+:::
+
 ## commonParams 覆盖公共参数
 有时某个接口正好不需要上一级中 `commonParams` 的参数。那么可以传递 `null` 覆盖上一级中的 `commonParams`。
 

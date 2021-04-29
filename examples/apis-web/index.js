@@ -17,5 +17,6 @@ tuaApi.use(async (ctx, next) => {
     // console.log('after: ', ctx)
 })
 
+export const fakeFnApi = tuaApi.getApi(require('./fake-fn').default)
 export const fakeGetApi = tuaApi.getApi(require('./fake-get').default)
 export const fakePostApi = tuaApi.getApi(require('./fake-post').default)
