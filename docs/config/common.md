@@ -91,6 +91,16 @@ export default {
 }
 ```
 
+::: tip
+<badge text="1.7.0+" /> 后，支持函数模式
+
+```js
+export default {
+    commonParams: (params) => ({ t: Date.now(), foo: params.foo }),
+}
+```
+:::
+
 ## axiosOptions 透传参数配置
 由于 tua-api 是依赖于 `axios` 或是 `fetch-jsop` 来发送请求的。所以势必要提供参数透传的功能。
 

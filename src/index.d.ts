@@ -12,7 +12,7 @@ export type Mock = AnyFunction | any
 
 export type ApiConfig = WxApiConfig | WebApiConfig
 
-export type ParamsConfig = string[] | ParamsObject
+export type ParamsConfig = string[] | ParamsObject | ((args?: object) => object)
 
 export type Middleware<T> = (ctx: T, next: () => Promise<any>) => Promise<any>
 
@@ -96,7 +96,7 @@ export interface BaseApiConfig {
     beforeFn?: <T = any>() => Promise<T>
     middleware?: Middleware<Ctx>[]
     customFetch?: AnyPromiseFunction
-    commonParams?: object
+    commonParams?: object | ((args?: object) => object),
     axiosOptions?: AxiosOptions
     jsonpOptions?: JsonpOptions
     useGlobalMiddleware?: boolean

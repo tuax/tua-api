@@ -6,6 +6,7 @@ import {
     map,
     pipe,
     isWx,
+    runFn,
     logger,
     mergeAll,
     apiConfigToReqFnParams,
@@ -145,9 +146,7 @@ class TuaApi {
 
         // mock data
         if (mock) {
-            const resData = typeof mock === 'function'
-                ? mock(data)
-                : { ...mock }
+            const resData = { ...runFn(mock, data) }
 
             return Promise.resolve({ data: resData })
         }
@@ -255,7 +254,7 @@ class TuaApi {
         mock,
         name,
         path,
-        params = {},
+        params: rawParams = {},
         prefix,
         afterFn = ([x]) => x,
         beforeFn = Promise.resolve.bind(Promise),
@@ -307,6 +306,8 @@ class TuaApi {
          */
         const apiFn = (args, runtimeOptions = {}) => {
             args = args || {}
+
+            const params = runFn(rawParams, args)
 
             // 最终的运行时配置，runtimeOptions 有最高优先级
             const runtimeParams = {
@@ -361,7 +362,7 @@ class TuaApi {
 
         apiFn.key = `${prefix}/${apiName}`
         apiFn.mock = mock
-        apiFn.params = params
+        apiFn.params = rawParams
 
         return { [apiName]: apiFn }
     }

@@ -151,7 +151,6 @@ describe('fake post requests', () => {
     })
 
     test('form-data', async () => {
-        mock.resetHistory()
         mock.onPost(reqOHUrl).reply(200, {})
         const formData = new FormData()
         formData.append('a', 'a')
@@ -169,7 +168,6 @@ describe('fake post requests', () => {
     })
 
     test('custom-transformRequest', async () => {
-        mock.resetHistory()
         mock.onPost(reqCTUrl).reply(200, {})
 
         await fakePostApi.ct()
@@ -180,7 +178,6 @@ describe('fake post requests', () => {
     })
 
     test('post-json', async () => {
-        mock.resetHistory()
         mock.onPost(reqPjUrl).reply(200, {})
 
         await fakePostApi.pj()

@@ -19,10 +19,7 @@ export default {
         /**
          * empty-array-params
          */
-        {
-            name: 'eap',
-            path: 'empty-array-params',
-        },
+        { name: 'eap', path: 'empty-array-params' },
         /**
          * array-params
          */
@@ -84,10 +81,7 @@ export default {
         /**
          * application/json
          */
-        {
-            name: 'pj',
-            path: 'post-json',
-        },
+        { name: 'pj', path: 'post-json' },
         /**
          * raw-data
          */
