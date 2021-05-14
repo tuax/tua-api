@@ -3,11 +3,11 @@
  * @param {Function} fn
  */
 const promisifyWxApi = (fn) => (args = {}) => (
-    new Promise((success, fail) => {
-        fn({ fail, success, ...args })
-    })
+  new Promise((success, fail) => {
+    fn({ fail, success, ...args })
+  })
 )
 
 export {
-    promisifyWxApi,
+  promisifyWxApi,
 }

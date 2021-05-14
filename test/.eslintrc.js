@@ -1,6 +1,6 @@
 module.exports = {
-    env: { jest: true },
-    globals: {
-        FormData: true,
-    },
+  env: { jest: true },
+  globals: {
+    FormData: true,
+  },
 }

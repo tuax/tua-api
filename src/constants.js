@@ -9,20 +9,20 @@ const DEFAULT_HEADER = { 'Content-Type': 'application/x-www-form-urlencoded;char
 
 // 错误信息
 const ERROR_STRINGS = {
-    noData: 'no data!',
-    argsType: 'the first parameter must be an object!',
-    middleware: 'middleware must be a function!',
-    reqTypeAndCustomFetch: 'reqType or customFetch only!',
+  noData: 'no data!',
+  argsType: 'the first parameter must be an object!',
+  middleware: 'middleware must be a function!',
+  reqTypeAndCustomFetch: 'reqType or customFetch only!',
 
-    reqTypeFn: (reqType) => `invalid reqType: "${reqType}", ` +
+  reqTypeFn: (reqType) => `invalid reqType: "${reqType}", ` +
         `support these reqTypes: ["${VALID_REQ_TYPES.join('", "')}"].`,
-    unknownMethodFn: method => `unknown method: "${method}"!`,
-    requiredParamFn: (apiName, param) => `${apiName} must pass required param: "${param}"!`,
+  unknownMethodFn: method => `unknown method: "${method}"!`,
+  requiredParamFn: (apiName, param) => `${apiName} must pass required param: "${param}"!`,
 }
 
 export {
-    ERROR_STRINGS,
-    DEFAULT_HEADER,
-    VALID_REQ_TYPES,
-    WX_VALID_METHODS,
+  ERROR_STRINGS,
+  DEFAULT_HEADER,
+  VALID_REQ_TYPES,
+  WX_VALID_METHODS,
 }

@@ -1,9 +1,9 @@
 import {
-    map,
-    pipe,
-    join,
-    merge,
-    reduce,
+  map,
+  pipe,
+  join,
+  merge,
+  reduce,
 } from './fp'
 import { logger } from './logger'
 import { ERROR_STRINGS } from '../constants'
@@ -14,9 +14,9 @@ import { ERROR_STRINGS } from '../constants'
  * @returns {string}
  */
 const getParamStrFromObj = (data = {}) => pipe(
-    Object.keys,
-    map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`),
-    join('&'),
+  Object.keys,
+  map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`),
+  join('&'),
 )(data)
 
 /**
@@ -28,14 +28,14 @@ const getParamStrFromObj = (data = {}) => pipe(
  * @return {Boolean} 检查结果（测试使用）
  */
 const checkArrayParams = ({ args, params, apiName }) => {
-    if (!Array.isArray(params)) return true
+  if (!Array.isArray(params)) return true
 
-    if (Object.keys(args).length !== params.length) {
-        logger.warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
-        return false
-    }
+  if (Object.keys(args).length !== params.length) {
+    logger.warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
+    return false
+  }
 
-    return true
+  return true
 }
 
 /**
@@ -47,34 +47,34 @@ const checkArrayParams = ({ args, params, apiName }) => {
  * @param {object} [options.commonParams] 公用默认参数
  */
 const getDefaultParamObj = ({
-    args = {},
-    params = {},
-    apiName,
-    commonParams = {},
+  args = {},
+  params = {},
+  apiName,
+  commonParams = {},
 }) => pipe(
-    Object.keys,
-    map((key) => {
-        const val = params[key]
-        const isRequiredValUndefined =
+  Object.keys,
+  map((key) => {
+    const val = params[key]
+    const isRequiredValUndefined =
             typeof val === 'object' &&
             // 兼容 vue 的写法
             (val.isRequired || val.required) &&
             args[key] == null
 
-        if (isRequiredValUndefined) {
-            logger.error(ERROR_STRINGS.requiredParamFn(apiName, key))
+    if (isRequiredValUndefined) {
+      logger.error(ERROR_STRINGS.requiredParamFn(apiName, key))
 
-            /* istanbul ignore next */
-            if (process.env.NODE_ENV === 'test') {
-                throw TypeError(ERROR_STRINGS.requiredParamFn(apiName, key))
-            }
-        }
+      /* istanbul ignore next */
+      if (process.env.NODE_ENV === 'test') {
+        throw TypeError(ERROR_STRINGS.requiredParamFn(apiName, key))
+      }
+    }
 
-        const returnVal = typeof val === 'object' ? '' : val
+    const returnVal = typeof val === 'object' ? '' : val
 
-        return { [key]: returnVal }
-    }),
-    reduce(merge, commonParams),
+    return { [key]: returnVal }
+  }),
+  reduce(merge, commonParams),
 )(params)
 
 /**
@@ -83,11 +83,11 @@ const getDefaultParamObj = ({
  * @return {array} 请求所需参数数组
  */
 const apiConfigToReqFnParams = ({ pathList, ...rest }) =>
-    map((pathObj) => ({ ...rest, ...pathObj }))(pathList)
+  map((pathObj) => ({ ...rest, ...pathObj }))(pathList)
 
 export {
-    checkArrayParams,
-    getDefaultParamObj,
-    getParamStrFromObj,
-    apiConfigToReqFnParams,
+  checkArrayParams,
+  getDefaultParamObj,
+  getParamStrFromObj,
+  apiConfigToReqFnParams,
 }

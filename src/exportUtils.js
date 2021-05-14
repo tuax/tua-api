@@ -1,10 +1,10 @@
 import {
-    map,
-    pipe,
-    filter,
-    values,
-    flatten,
-    mergeAll,
+  map,
+  pipe,
+  filter,
+  values,
+  flatten,
+  mergeAll,
 } from './utils/'
 
 /**
@@ -25,11 +25,11 @@ import {
  * @return {object}
  */
 const getSyncFnMapByApis = pipe(
-    values,
-    map(values),
-    flatten,
-    map(val => ({ [val.key]: val })),
-    mergeAll,
+  values,
+  map(values),
+  flatten,
+  map(val => ({ [val.key]: val })),
+  mergeAll,
 )
 
 /**
@@ -38,25 +38,25 @@ const getSyncFnMapByApis = pipe(
  * @return {Array} keys 所有有默认参数的接口名称
  */
 const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
-    Object.keys,
-    filter((key) => {
-        const { params } = syncFnMap[key]
+  Object.keys,
+  filter((key) => {
+    const { params } = syncFnMap[key]
 
-        if (Array.isArray(params)) return false
+    if (Array.isArray(params)) return false
 
-        // 当前参数不是必须的
-        const isParamNotRequired = (key) => (
-            typeof params[key] !== 'object' ||
+    // 当前参数不是必须的
+    const isParamNotRequired = (key) => (
+      typeof params[key] !== 'object' ||
             // 兼容 vue 的写法
             (!params[key].isRequired && !params[key].required)
-        )
+    )
 
-        return Object.keys(params).every(isParamNotRequired)
-    }),
-    map(key => ({ key })),
+    return Object.keys(params).every(isParamNotRequired)
+  }),
+  map(key => ({ key })),
 )(syncFnMap)
 
 export {
-    getSyncFnMapByApis,
-    getPreFetchFnKeysBySyncFnMap,
+  getSyncFnMapByApis,
+  getPreFetchFnKeysBySyncFnMap,
 }

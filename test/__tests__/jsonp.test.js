@@ -13,75 +13,75 @@ const data = [0, 'array data']
 const returnVal = { code: 0, data: 'array data' }
 
 describe('mock data', () => {
-    test('mock object data', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        /**
+  test('mock object data', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    /**
          * @type {*}
          */
-        const resData = await fakeGetApi.mockObjectData()
+    const resData = await fakeGetApi.mockObjectData()
 
-        expect(resData.code).toBe(404)
-    })
+    expect(resData.code).toBe(404)
+  })
 })
 
 describe('fake jsonp requests', () => {
-    test('jsonp options', async () => {
-        const url = 'http://example-base.com/fake-get/jsonp-options'
-        const jsonpOptions = {
-            ...fakeGetConfig.jsonpOptions,
-            charset: 'UTF-8',
-        }
+  test('jsonp options', async () => {
+    const url = 'http://example-base.com/fake-get/jsonp-options'
+    const jsonpOptions = {
+      ...fakeGetConfig.jsonpOptions,
+      charset: 'UTF-8',
+    }
 
-        await fakeGetApi.jsonpOptions()
-        expect(fetchJsonp).toBeCalledWith(url, jsonpOptions)
+    await fakeGetApi.jsonpOptions()
+    expect(fetchJsonp).toBeCalledWith(url, jsonpOptions)
 
-        const callback = 'test_cb'
-        const callbackName = 'test_cbName'
-        await fakeGetApi.jsonpOptions(null, { callback, callbackName })
-        expect(fetchJsonp).toBeCalledWith(url, {
-            ...jsonpOptions,
-            jsonpCallback: callback,
-            jsonpCallbackFunction: callbackName,
-        })
+    const callback = 'test_cb'
+    const callbackName = 'test_cbName'
+    await fakeGetApi.jsonpOptions(null, { callback, callbackName })
+    expect(fetchJsonp).toBeCalledWith(url, {
+      ...jsonpOptions,
+      jsonpCallback: callback,
+      jsonpCallbackFunction: callbackName,
     })
+  })
 
-    test('async-common-params', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        const resData = await fakeGetApi.acp()
+  test('async-common-params', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    const resData = await fakeGetApi.acp()
 
-        expect(resData).toEqual(returnVal)
-    })
+    expect(resData).toEqual(returnVal)
+  })
 
-    test('array-data', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        const resData = await fakeGetApi.ap({})
+  test('array-data', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    const resData = await fakeGetApi.ap({})
 
-        expect(resData).toEqual(returnVal)
-    })
+    expect(resData).toEqual(returnVal)
+  })
 
-    test('object-params', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        const resData = await fakeGetApi.op({ param3: 'steve' })
+  test('object-params', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    const resData = await fakeGetApi.op({ param3: 'steve' })
 
-        expect(resData).toEqual(returnVal)
-    })
+    expect(resData).toEqual(returnVal)
+  })
 
-    test('invalid-req-type', () => {
-        return expect(fakeGetApi.irt({ param3: 'steve' }))
-            .rejects.toEqual(TypeError(ERROR_STRINGS.reqTypeFn('foobar')))
-    })
+  test('invalid-req-type', () => {
+    return expect(fakeGetApi.irt({ param3: 'steve' }))
+      .rejects.toEqual(TypeError(ERROR_STRINGS.reqTypeFn('foobar')))
+  })
 
-    test('data should be passed through afterFn', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        const { afterData } = await fakeGetApi.afterData()
+  test('data should be passed through afterFn', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    const { afterData } = await fakeGetApi.afterData()
 
-        expect(afterData).toBe('afterData')
-    })
+    expect(afterData).toBe('afterData')
+  })
 
-    test('there must be some data after afterFn', async () => {
-        fetchJsonp.mockResolvedValue({ json: () => data })
-        const resData = await fakeGetApi.noAfterData()
+  test('there must be some data after afterFn', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+    const resData = await fakeGetApi.noAfterData()
 
-        expect(resData).toEqual(returnVal)
-    })
+    expect(resData).toEqual(returnVal)
+  })
 })

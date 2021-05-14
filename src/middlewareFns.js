@@ -1,11 +1,11 @@
 import { ERROR_STRINGS } from './constants'
 import {
-    runFn,
-    isFormData,
-    combineUrls,
-    checkArrayParams,
-    getParamStrFromObj,
-    getDefaultParamObj,
+  runFn,
+  isFormData,
+  combineUrls,
+  checkArrayParams,
+  getParamStrFromObj,
+  getDefaultParamObj,
 } from './utils'
 
 /**
@@ -14,9 +14,9 @@ import {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const recordStartTimeMiddleware = (ctx, next) => {
-    ctx.startTime = Date.now()
+  ctx.startTime = Date.now()
 
-    return next()
+  return next()
 }
 
 /**
@@ -25,10 +25,10 @@ const recordStartTimeMiddleware = (ctx, next) => {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const recordReqTimeMiddleware = (ctx, next) => {
-    return next().then(() => {
-        ctx.endTime = Date.now()
-        ctx.reqTime = Date.now() - ctx.startTime
-    })
+  return next().then(() => {
+    ctx.endTime = Date.now()
+    ctx.reqTime = Date.now() - ctx.startTime
+  })
 }
 
 /**
@@ -38,17 +38,17 @@ const recordReqTimeMiddleware = (ctx, next) => {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const formatResDataMiddleware = (ctx, next) => next().then(() => {
-    const jsonData = ctx.res.data
-    ctx.res.rawData = ctx.res.data
+  const jsonData = ctx.res.data
+  ctx.res.rawData = ctx.res.data
 
-    if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
+  if (!jsonData) return Promise.reject(Error(ERROR_STRINGS.noData))
 
-    if (Array.isArray(jsonData)) {
-        const [code, data, msg] = jsonData
-        ctx.res.data = { code: +code, data, msg }
-    } else {
-        ctx.res.data = { ...jsonData, code: +jsonData.code }
-    }
+  if (Array.isArray(jsonData)) {
+    const [code, data, msg] = jsonData
+    ctx.res.data = { code: +code, data, msg }
+  } else {
+    ctx.res.data = { ...jsonData, code: +jsonData.code }
+  }
 })
 
 /**
@@ -57,31 +57,31 @@ const formatResDataMiddleware = (ctx, next) => next().then(() => {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const formatReqParamsMiddleware = (ctx, next) => {
-    const {
-        args,
-        params,
-        commonParams: rawCommonParams,
-    } = ctx.req
+  const {
+    args,
+    params,
+    commonParams: rawCommonParams,
+  } = ctx.req
 
-    if (typeof args !== 'object') {
-        throw TypeError(ERROR_STRINGS.argsType)
-    }
+  if (typeof args !== 'object') {
+    throw TypeError(ERROR_STRINGS.argsType)
+  }
 
-    if (isFormData(args) || Array.isArray(args)) {
-        ctx.req.reqParams = args
-
-        return next()
-    }
-
-    checkArrayParams(ctx.req)
-
-    const commonParams = runFn(rawCommonParams, args)
-    // 根据配置生成请求的参数
-    ctx.req.reqParams = Array.isArray(params)
-        ? { ...commonParams, ...args }
-        : { ...getDefaultParamObj({ ...ctx.req, commonParams }), ...args }
+  if (isFormData(args) || Array.isArray(args)) {
+    ctx.req.reqParams = args
 
     return next()
+  }
+
+  checkArrayParams(ctx.req)
+
+  const commonParams = runFn(rawCommonParams, args)
+  // 根据配置生成请求的参数
+  ctx.req.reqParams = Array.isArray(params)
+    ? { ...commonParams, ...args }
+    : { ...getDefaultParamObj({ ...ctx.req, commonParams }), ...args }
+
+  return next()
 }
 
 /**
@@ -90,31 +90,31 @@ const formatReqParamsMiddleware = (ctx, next) => {
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
 const setReqFnParamsMiddleware = (ctx, next) => {
-    const { path, prefix, reqParams, baseUrl, ...rest } = ctx.req
+  const { path, prefix, reqParams, baseUrl, ...rest } = ctx.req
 
-    // 请求地址
-    const url = combineUrls(combineUrls(baseUrl, prefix), path)
-    const paramsStr = getParamStrFromObj(reqParams)
-    // 完整请求地址，将参数拼在 url 上，用于 get 请求
-    const fullUrl = paramsStr ? `${url}?${paramsStr}` : url
+  // 请求地址
+  const url = combineUrls(combineUrls(baseUrl, prefix), path)
+  const paramsStr = getParamStrFromObj(reqParams)
+  // 完整请求地址，将参数拼在 url 上，用于 get 请求
+  const fullUrl = paramsStr ? `${url}?${paramsStr}` : url
 
-    ctx.req.reqFnParams = {
-        url,
-        baseUrl,
-        fullUrl,
-        reqParams,
-        ...rest,
-        // 若是用户自己传递 reqFnParams 则优先级最高
-        ...ctx.req.reqFnParams,
-    }
+  ctx.req.reqFnParams = {
+    url,
+    baseUrl,
+    fullUrl,
+    reqParams,
+    ...rest,
+    // 若是用户自己传递 reqFnParams 则优先级最高
+    ...ctx.req.reqFnParams,
+  }
 
-    return next()
+  return next()
 }
 
 export {
-    recordReqTimeMiddleware,
-    formatResDataMiddleware,
-    setReqFnParamsMiddleware,
-    recordStartTimeMiddleware,
-    formatReqParamsMiddleware,
+  recordReqTimeMiddleware,
+  formatResDataMiddleware,
+  setReqFnParamsMiddleware,
+  recordStartTimeMiddleware,
+  formatReqParamsMiddleware,
 }

@@ -10,22 +10,22 @@ const params = { param1: 'steve', param2: 'young' }
 const reqFPUrl = 'http://example-base.com/fake-fn/fn-params'
 
 describe('function params', () => {
-    beforeEach(() => {
-        // @ts-ignore
-        mock.resetHistory()
-    })
+  beforeEach(() => {
+    // @ts-ignore
+    mock.resetHistory()
+  })
 
-    test('should support function type params', async () => {
-        Math.random = jest.fn(() => 'foo')
-        mock.onPost(reqFPUrl).reply(200, {})
-        await fakeFnApi.fp(params)
+  test('should support function type params', async () => {
+    Math.random = jest.fn(() => 'foo')
+    mock.onPost(reqFPUrl).reply(200, {})
+    await fakeFnApi.fp(params)
 
-        const { data } = mock.history.post[0]
-        expect(data).toEqual(JSON.stringify({
-            ...fakeFnConfig.commonParams(params),
-            t: 'foo',
-            p1: params.param1,
-            p2: params.param2,
-        }))
-    });
-});
+    const { data } = mock.history.post[0]
+    expect(data).toEqual(JSON.stringify({
+      ...fakeFnConfig.commonParams(params),
+      t: 'foo',
+      p1: params.param1,
+      p2: params.param2,
+    }))
+  })
+})

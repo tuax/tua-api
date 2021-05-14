@@ -1,6 +1,6 @@
 import {
-    getSyncFnMapByApis,
-    getPreFetchFnKeysBySyncFnMap,
+  getSyncFnMapByApis,
+  getPreFetchFnKeysBySyncFnMap,
 } from '@/exportUtils'
 
 const noop1 = () => {}
@@ -17,17 +17,17 @@ noop4.key = 'noop4'
 noop4.params = {}
 
 const syncFnMap = getSyncFnMapByApis({
-    api1: { path1: noop1, path2: noop2 },
-    api2: { path1: noop3, path2: noop4 },
+  api1: { path1: noop1, path2: noop2 },
+  api2: { path1: noop3, path2: noop4 },
 })
 
 test('getSyncFnMapByApis', () => {
-    expect(syncFnMap).toEqual({ noop1, noop2, noop3, noop4 })
+  expect(syncFnMap).toEqual({ noop1, noop2, noop3, noop4 })
 })
 
 test('getPreFetchFnKeysBySyncFnMap', () => {
-    expect(getPreFetchFnKeysBySyncFnMap(syncFnMap)).toEqual([
-        { key: 'noop2' },
-        { key: 'noop4' },
-    ])
+  expect(getPreFetchFnKeysBySyncFnMap(syncFnMap)).toEqual([
+    { key: 'noop2' },
+    { key: 'noop4' },
+  ])
 })
