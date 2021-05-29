@@ -3,16 +3,16 @@
  * @param {string} type 输出类型 log|warn|error
  */
 const logByType = (type) => (...out) => {
-    const env = process.env.NODE_ENV
-    /* istanbul ignore next */
-    if (env === 'test' || env === 'production') return
+  const env = process.env.NODE_ENV
+  /* istanbul ignore next */
+  if (env === 'test' || env === 'production') return
 
-    /* istanbul ignore next */
-    console[type]('[TUA-API]:', ...out)
+  /* istanbul ignore next */
+  console[type]('[TUA-API]:', ...out)
 }
 
 export const logger = {
-    log: logByType('log'),
-    warn: logByType('warn'),
-    error: logByType('error'),
+  log: logByType('log'),
+  warn: logByType('warn'),
+  error: logByType('error'),
 }

@@ -12,65 +12,65 @@ const input = 'src/index.js'
 const banner = `/* ${pkg.name} version ${pkg.version} */`
 
 const output = {
-    cjs: {
-        file: pkg.main,
-        banner,
-        format: 'cjs',
-        exports: 'named',
+  cjs: {
+    file: pkg.main,
+    banner,
+    format: 'cjs',
+    exports: 'named',
+  },
+  esm: {
+    file: pkg.module,
+    banner,
+    format: 'esm',
+  },
+  umd: {
+    file: pkg.unpkg,
+    name: 'TuaApi',
+    banner,
+    format: 'umd',
+    exports: 'named',
+    globals: {
+      axios: 'axios',
+      'fetch-jsonp': 'fetchJsonp',
     },
-    esm: {
-        file: pkg.module,
-        banner,
-        format: 'esm',
-    },
-    umd: {
-        file: pkg.unpkg,
-        name: 'TuaApi',
-        banner,
-        format: 'umd',
-        exports: 'named',
-        globals: {
-            axios: 'axios',
-            'fetch-jsonp': 'fetchJsonp',
-        },
-    },
+  },
 }
 const plugins = [
-    eslint(),
-    json(),
-    nodeResolve(),
-    commonjs(),
-    babel({ babelHelpers: 'bundled' }),
+  eslint(),
+  json(),
+  nodeResolve(),
+  commonjs(),
+  babel({ babelHelpers: 'bundled' }),
 ]
 const env = 'process.env.NODE_ENV'
 const external = ['axios', 'fetch-jsonp']
 
 export default [{
-    input,
-    output: [output.cjs, output.esm],
-    plugins,
-    external,
+  input,
+  output: [output.cjs, output.esm],
+  plugins,
+  external,
 }, {
-    input,
-    output: output.umd,
-    external,
-    plugins: [
-        ...plugins,
-        replace({ [env]: '"development"' }),
-    ],
+  input,
+  output: output.umd,
+  external,
+  plugins: [
+    ...plugins,
+    replace({ [env]: '"development"' }),
+  ],
 }, {
-    input,
-    output: {
-        ...output.umd,
-        file: 'dist/TuaApi.umd.min.js',
-    },
-    external,
-    plugins: [
-        ...plugins,
-        replace({ [env]: '"production"' }),
-        terser({
-            output: {
-                /* eslint-disable */
+  input,
+  output: {
+    ...output.umd,
+    file: 'dist/TuaApi.umd.min.js',
+  },
+  external,
+  plugins: [
+    ...plugins,
+    replace({ [env]: '"production"' }),
+    terser({
+      output: {
+        /* eslint-disable */
                 ascii_only: true,
             },
         }),
