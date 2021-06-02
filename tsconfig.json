@@ -1,19 +1,16 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "checkJs": true,
-        "baseUrl": ".",
-        "target": "es5",
-        "resolveJsonModule": true,
-        "experimentalDecorators": true,
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "paths":{
-            "@/*": ["src/*"],
-            "@examples/*": ["examples/*"]
-        }
-    },
-    "exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "baseUrl": ".",
+    "target": "es5",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "paths":{
+      "@/*": ["src/*"],
+      "@examples/*": ["examples/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
 }

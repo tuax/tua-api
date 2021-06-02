@@ -55,14 +55,11 @@ describe('middleware', () => {
   const tuaApi = new TuaApi()
   const fakeWxApi = tuaApi.getApi(fakeWx)
   const globalMiddlewareFn = jest.fn(async (ctx, next) => {
-    expect(ctx.req.host).toBeDefined()
     expect(ctx.req.baseUrl).toBeDefined()
-    expect(ctx.req.type).toBeDefined()
     expect(ctx.req.method).toBeDefined()
     expect(ctx.req.path).toBeDefined()
     expect(ctx.req.prefix).toBeDefined()
     expect(ctx.req.reqType).toBeDefined()
-    expect(ctx.req.reqParams).toBeDefined()
     expect(ctx.req.axiosOptions).toBeDefined()
     expect(ctx.req.jsonpOptions).toBeDefined()
     expect(ctx.req.reqFnParams).toBeDefined()
@@ -85,7 +82,7 @@ describe('middleware', () => {
     wx.__TEST_DATA__ = { testData: {} }
   })
 
-  test('useGlobalMiddleware', async () => {
+  test.only('useGlobalMiddleware', async () => {
     await fakeWxApi.arrayData()
     expect(globalMiddlewareFn).toBeCalledTimes(0)
     await fakeWxApi.fail()

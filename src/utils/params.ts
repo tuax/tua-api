@@ -1,3 +1,5 @@
+import { logger } from './logger'
+import { ERROR_STRINGS } from '../constants'
 import {
   map,
   pipe,
@@ -5,8 +7,6 @@ import {
   merge,
   reduce,
 } from './fp'
-import { logger } from './logger'
-import { ERROR_STRINGS } from '../constants'
 
 /**
  * 将对象序列化为 queryString 的形式
@@ -24,14 +24,14 @@ const getParamStrFromObj = (data = {}) => pipe(
  * @param {object} options
  * @param {object} [options.args] 业务侧传递的请求参数
  * @param {array|object} options.params 配置中定义的接口数组
- * @param {string} [options.apiName] 接口名称
+ * @param {string} [options.name] 接口名称
  * @return {Boolean} 检查结果（测试使用）
  */
-const checkArrayParams = ({ args, params, apiName }) => {
+const checkArrayParams = ({ args = {}, params, name = '' }) => {
   if (!Array.isArray(params)) return true
 
   if (Object.keys(args).length !== params.length) {
-    logger.warn(`${apiName}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
+    logger.warn(`${name}：传递参数长度与 apiConfig 中配置的不同！请检查！`)
     return false
   }
 
@@ -43,30 +43,31 @@ const checkArrayParams = ({ args, params, apiName }) => {
  * @param {object} options
  * @param {object} [options.args] 调用时传递参数
  * @param {object} [options.params] 默认参数
- * @param {string} [options.apiName] 接口名字
+ * @param {string} [options.name] 接口名字
  * @param {object} [options.commonParams] 公用默认参数
  */
 const getDefaultParamObj = ({
   args = {},
   params = {},
-  apiName,
+  name = '',
   commonParams = {},
 }) => pipe(
   Object.keys,
   map((key) => {
     const val = params[key]
-    const isRequiredValUndefined =
-            typeof val === 'object' &&
-            // 兼容 vue 的写法
-            (val.isRequired || val.required) &&
-            args[key] == null
+    const isRequiredValUndefined = (
+      typeof val === 'object' &&
+      // 兼容 vue 的写法
+      (val.isRequired || val.required) &&
+      args[key] == null
+    )
 
     if (isRequiredValUndefined) {
-      logger.error(ERROR_STRINGS.requiredParamFn(apiName, key))
+      logger.error(ERROR_STRINGS.requiredParamFn(name, key))
 
       /* istanbul ignore next */
       if (process.env.NODE_ENV === 'test') {
-        throw TypeError(ERROR_STRINGS.requiredParamFn(apiName, key))
+        throw TypeError(ERROR_STRINGS.requiredParamFn(name, key))
       }
     }
 

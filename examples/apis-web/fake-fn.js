@@ -16,8 +16,8 @@ export default {
   // 接口地址数组
   pathList: [
     /**
-        * fn-params
-        */
+     * fn-params
+     */
     {
       name: 'fp',
       path: 'fn-params',

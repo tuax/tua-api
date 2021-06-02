@@ -2,9 +2,9 @@ import { logger, promisifyWxApi } from '../utils'
 import { ERROR_STRINGS, WX_VALID_METHODS } from '../constants'
 
 /**
-* 获取使用 wx 发起请求后的 promise 对象
-* @param {object} options
-*/
+ * 获取使用 wx 发起请求后的 promise 对象
+ * @param {object} options
+ */
 export const getWxPromise = ({
   url,
   data,
@@ -13,7 +13,7 @@ export const getWxPromise = ({
   fullUrl,
   isShowLoading = true,
   showLoadingFn = () => wx.showLoading({ title: '加载中' }),
-  hideLoadingFn = wx.hideLoading.bind(wx),
+  hideLoadingFn = () => wx.hideLoading(),
   ...rest
 }) => {
   method = method.toUpperCase()

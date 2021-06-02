@@ -15,9 +15,6 @@ const returnVal = { code: 0, data: 'array data' }
 describe('mock data', () => {
   test('mock object data', async () => {
     fetchJsonp.mockResolvedValue({ json: () => data })
-    /**
-         * @type {*}
-         */
     const resData = await fakeGetApi.mockObjectData()
 
     expect(resData.code).toBe(404)
@@ -25,7 +22,9 @@ describe('mock data', () => {
 })
 
 describe('fake jsonp requests', () => {
-  test('jsonp options', async () => {
+  test.only('jsonp options', async () => {
+    fetchJsonp.mockResolvedValue({ json: () => data })
+
     const url = 'http://example-base.com/fake-get/jsonp-options'
     const jsonpOptions = {
       ...fakeGetConfig.jsonpOptions,
@@ -35,13 +34,13 @@ describe('fake jsonp requests', () => {
     await fakeGetApi.jsonpOptions()
     expect(fetchJsonp).toBeCalledWith(url, jsonpOptions)
 
-    const callback = 'test_cb'
-    const callbackName = 'test_cbName'
-    await fakeGetApi.jsonpOptions(null, { callback, callbackName })
+    const jsonpCallback = 'test_cb'
+    const jsonpCallbackFunction = 'test_cbName'
+    await fakeGetApi.jsonpOptions(null, { jsonpCallback, jsonpCallbackFunction })
     expect(fetchJsonp).toBeCalledWith(url, {
       ...jsonpOptions,
-      jsonpCallback: callback,
-      jsonpCallbackFunction: callbackName,
+      jsonpCallback,
+      jsonpCallbackFunction,
     })
   })
 

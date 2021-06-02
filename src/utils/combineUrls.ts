@@ -4,7 +4,7 @@
  * @param {string} relativeUrl The relative URL
  * @returns {string} The combined URL
  */
-function combineUrls (baseUrl = '', relativeUrl = '') {
+export function combineUrls (baseUrl: string | number = '', relativeUrl: string | number = '') {
   const strBaseUrl = baseUrl === null ? '' : String(baseUrl)
   const strRelativeUrl = relativeUrl === null ? '' : String(relativeUrl)
 
@@ -12,11 +12,7 @@ function combineUrls (baseUrl = '', relativeUrl = '') {
 
   return (
     strBaseUrl.replace(/\/+$/, '') +
-        '/' +
-        strRelativeUrl.replace(/^\/+/, '')
+    '/' +
+    strRelativeUrl.replace(/^\/+/, '')
   )
-}
-
-export {
-  combineUrls,
 }

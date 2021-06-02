@@ -6,8 +6,7 @@ export default {
   prefix: 'fake-wx',
 
   // 所有请求类型
-  /** @type { import('../../src/').Method } */
-  type: ('post'),
+  method: 'post',
 
   // 所有请求都需要携带的参数，例如小程序中的所有接口都要携带以下参数 `from=miniprogram`
   commonParams: { from: 'miniprogram' },
@@ -15,47 +14,37 @@ export default {
   // 是否使用在 index.js 中定义的全局中间件，默认为 true
   useGlobalMiddleware: false,
 
-  // 所有请求发起时是否自动展示 loading（默认为 true）
-  // isShowLoading: true,
-
-  // 中间件函数数组
-  // middleware: [],
-
   // 接口地址数组
   pathList: [
     /**
-         * fail
-         */
+     * fail
+     */
     {
       path: 'fail',
-      /**
-             * @returns {Promise<any>}
-             */
       beforeFn: () => Promise.resolve({
         header: { cookie: '123' },
       }),
       useGlobalMiddleware: true,
     },
     /**
-         * anotherFail
-         */
+     * anotherFail
+     */
     {
       path: 'fail',
       name: 'anotherFail',
     },
     /**
-         * array-data
-         */
+     * array-data
+     */
     {
       name: 'arrayData',
       path: 'array-data',
-      /** @type { import('../../src/').Method } */
-      type: ('get'),
+      method: 'get',
       params: ['param1', 'param2'],
     },
     /**
-         * object-data
-         */
+     * object-data
+     */
     {
       name: 'objectData',
       path: 'object-data',
@@ -66,16 +55,16 @@ export default {
       },
     },
     /**
-         * no-beforeFn
-         */
+     * no-beforeFn
+     */
     {
       name: 'noBeforeFn',
       path: 'no-beforeFn',
       commonParams: null,
     },
     /**
-         * hide-loading
-         */
+     * hide-loading
+     */
     {
       name: 'hideLoading',
       path: 'hide-loading',
@@ -83,28 +72,25 @@ export default {
       isShowLoading: false,
     },
     /**
-         * type-get
-         */
+     * type-get
+     */
     {
       name: 'typeGet',
       path: 'type-get',
-      // 这个接口单独配置类型
-      /** @type { import('../../src/').Method } */
-      type: ('get'),
+      method: 'get',
     },
     /**
-         * unknown-type
-         */
+     * unknown-type
+     */
     {
       name: 'unknownType',
       path: 'unknown-type',
       // 这个接口单独配置类型
-      /** @type { import('../../src/').Method } */
-      type: ('foo'),
+      method: 'foo',
     },
     /**
-         * nav-loading
-         */
+     * nav-loading
+     */
     {
       name: 'navLoading',
       path: 'nav-loading',

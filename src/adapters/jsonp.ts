@@ -1,6 +1,5 @@
+import fetchJsonp from 'fetch-jsonp'
 import { logger } from '../utils'
-
-const fetchJsonp = require('fetch-jsonp')
 
 // 获取发起 jsonp 请求后的 promise 对象
 export const getFetchJsonpPromise = ({ url, jsonpOptions }) => {

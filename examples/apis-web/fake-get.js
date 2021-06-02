@@ -1,12 +1,14 @@
 export default {
   // 请求的公用服务器地址。
-  // baseUrl: 'http://example-base.com/',
+  baseUrl: 'http://example-base.com/',
 
   // 请求的中间路径，建议与文件同名，以便后期维护。
   prefix: 'fake-get',
 
   // 所有请求都需要携带的参数
   commonParams: null,
+
+  reqType: 'jsonp',
 
   // 透传 `fetch-jsonp` 需要配置的参数。例如需要传递超时时间时可添加：
   jsonpOptions: {
@@ -21,30 +23,15 @@ export default {
   // 是否使用在 index.js 中定义的全局中间件，默认为 true
   useGlobalMiddleware: false,
 
-  // 中间件函数数组
-  middleware: [
-    // (ctx, next) => {
-    //     // 请求发起前
-    //     console.log('before: ', ctx)
-
-    //     return next().then(() => {
-    //         // 响应返回后
-    //         console.log('after: ', ctx)
-    //     })
-    // },
-  ],
-
   // 接口地址数组
   pathList: [
     /**
-         * empty-array-params
-         */
-    {
-      path: 'empty-array-params',
-    },
+     * empty-array-params
+     */
+    { path: 'empty-array-params' },
     /**
-         * array-params
-         */
+     * array-params
+     */
     {
       name: 'ap',
       path: 'array-params',
@@ -53,8 +40,8 @@ export default {
       middleware: [],
     },
     /**
-         * object-params
-         */
+     * object-params
+     */
     {
       name: 'op',
       path: 'object-params',
@@ -68,23 +55,23 @@ export default {
       },
     },
     /**
-         * async-common-params
-         */
+     * async-common-params
+     */
     {
       name: 'acp',
       path: 'async-common-params',
       params: [],
       /**
-             * 在这里返回的 params 会和请求的 params 合并
-             * @returns {Promise<any>}
-             */
+       * 在这里返回的 params 会和请求的 params 合并
+       * @returns {Promise<any>}
+       */
       beforeFn: () => Promise.resolve({
         params: { asyncCp: 'asyncCp' },
       }),
     },
     /**
-         * req-type-axios
-         */
+     * req-type-axios
+     */
     {
       name: 'rta',
       path: 'req-type-axios',
@@ -93,16 +80,16 @@ export default {
       /** @type { import('../../src/').ReqType } */
       reqType: ('axios'),
       /**
-             * 在这里返回的 params 会和请求的 params 合并
-             * @returns {Promise<any>}
-             */
+       * 在这里返回的 params 会和请求的 params 合并
+       * @returns {Promise<any>}
+       */
       beforeFn: () => Promise.resolve({
         params: { asyncCp: 'asyncCp' },
       }),
     },
     /**
-         * invalid-req-type
-         */
+     * invalid-req-type
+     */
     {
       name: 'irt',
       path: 'invalid-req-type',
@@ -110,32 +97,32 @@ export default {
       reqType: ('foobar'),
     },
     /**
-         * afterFn-data
-         */
+     * afterFn-data
+     */
     {
       name: 'afterData',
       path: 'afterFn-data',
       afterFn: ([data]) => ({ ...data, afterData: 'afterData' }),
     },
     /**
-         * no-afterFn-data
-         */
+     * no-afterFn-data
+     */
     {
       name: 'noAfterData',
       path: 'no-afterFn-data',
       afterFn: () => {},
     },
     /**
-         * mock-object-data
-         */
+     * mock-object-data
+     */
     {
       name: 'mockObjectData',
       path: 'mock-object-data',
       mock: { code: 404, data: {} },
     },
     /**
-         * mock-function-data
-         */
+     * mock-function-data
+     */
     {
       name: 'mockFnData',
       path: 'mock-function-data',
@@ -144,14 +131,14 @@ export default {
       mock: ({ mockCode }) => ({ code: mockCode, data: {} }),
     },
     /**
-         * beforeFnCookie
-         */
+     * beforeFnCookie
+     */
     {
       name: 'beforeFnCookie',
       path: 'beforeFn-cookie',
       /**
-             * @returns {Promise<any>}
-             */
+       * @returns {Promise<any>}
+       */
       beforeFn: () => Promise.resolve({
         header: { cookie: '123' },
       }),
@@ -159,8 +146,8 @@ export default {
       reqType: ('axios'),
     },
     /**
-         * jsonp-options
-         */
+     * jsonp-options
+     */
     {
       name: 'jsonpOptions',
       path: 'jsonp-options',

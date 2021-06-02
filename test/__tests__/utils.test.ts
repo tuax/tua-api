@@ -60,12 +60,12 @@ test('getDefaultParamObj', () => {
 
   expect(() => getDefaultParamObj({
     params: { b: { required: true } },
-    apiName: 'steve',
+    name: 'steve',
   })).toThrow(Error(ERROR_STRINGS.requiredParamFn('steve', 'b')))
 
   expect(() => getDefaultParamObj({
     params: { c: { isRequired: true } },
-    apiName: 'steve',
+    name: 'steve',
   })).toThrow(Error(ERROR_STRINGS.requiredParamFn('steve', 'c')))
 })
 

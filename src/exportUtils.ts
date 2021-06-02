@@ -1,3 +1,4 @@
+import { Api, Apis, SyncFnMap, WebApiConfig, WxApiConfig } from './interfaces'
 import {
   map,
   pipe,
@@ -5,7 +6,7 @@ import {
   values,
   flatten,
   mergeAll,
-} from './utils/'
+} from './utils'
 
 /**
  * 将各个发起 api 的函数的 key 与其绑定，与 TuaStorage 配合使用效果更佳
@@ -24,20 +25,20 @@ import {
  * @param {object} apis
  * @return {object}
  */
-const getSyncFnMapByApis = pipe(
+export const getSyncFnMapByApis = (apis: Apis): SyncFnMap => pipe(
   values,
   map(values),
   flatten,
   map(val => ({ [val.key]: val })),
   mergeAll,
-)
+)(apis)
 
 /**
  * 过滤出有默认参数的接口（接口参数非数组，且不含有 isRequired/required）
  * @param {object} syncFnMap
  * @return {Array} keys 所有有默认参数的接口名称
  */
-const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
+export const getPreFetchFnKeysBySyncFnMap = (syncFnMap: SyncFnMap): Api[] => pipe(
   Object.keys,
   filter((key) => {
     const { params } = syncFnMap[key]
@@ -47,8 +48,8 @@ const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
     // 当前参数不是必须的
     const isParamNotRequired = (key) => (
       typeof params[key] !== 'object' ||
-            // 兼容 vue 的写法
-            (!params[key].isRequired && !params[key].required)
+      // 兼容 vue 的写法
+      (!params[key].isRequired && !params[key].required)
     )
 
     return Object.keys(params).every(isParamNotRequired)
@@ -56,7 +57,5 @@ const getPreFetchFnKeysBySyncFnMap = (syncFnMap) => pipe(
   map(key => ({ key })),
 )(syncFnMap)
 
-export {
-  getSyncFnMapByApis,
-  getPreFetchFnKeysBySyncFnMap,
-}
+export const defineWxApi= (config: WxApiConfig): WxApiConfig => config;
+export const defineWebApi= (config: WebApiConfig): WebApiConfig => config;

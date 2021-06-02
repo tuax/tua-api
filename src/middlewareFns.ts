@@ -1,4 +1,5 @@
 import { ERROR_STRINGS } from './constants'
+import { Ctx } from './interfaces'
 import {
   runFn,
   isFormData,
@@ -13,7 +14,7 @@ import {
  * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const recordStartTimeMiddleware = (ctx, next) => {
+const recordStartTimeMiddleware = (ctx: Ctx, next) => {
   ctx.startTime = Date.now()
 
   return next()
@@ -24,7 +25,7 @@ const recordStartTimeMiddleware = (ctx, next) => {
  * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const recordReqTimeMiddleware = (ctx, next) => {
+const recordReqTimeMiddleware = (ctx: Ctx, next) => {
   return next().then(() => {
     ctx.endTime = Date.now()
     ctx.reqTime = Date.now() - ctx.startTime
@@ -37,7 +38,7 @@ const recordReqTimeMiddleware = (ctx, next) => {
  * @param {object} ctx 上下文对象（ctx.res.data 接口返回数据）
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const formatResDataMiddleware = (ctx, next) => next().then(() => {
+const formatResDataMiddleware = (ctx: Ctx, next) => next().then(() => {
   const jsonData = ctx.res.data
   ctx.res.rawData = ctx.res.data
 
@@ -56,30 +57,28 @@ const formatResDataMiddleware = (ctx, next) => next().then(() => {
  * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const formatReqParamsMiddleware = (ctx, next) => {
+const formatReqArgsMiddleware = (ctx: Ctx, next) => {
   const {
-    args,
     params,
+    reqArgs,
     commonParams: rawCommonParams,
   } = ctx.req
+  const useParams = Object.keys(params).length > 0
 
-  if (typeof args !== 'object') {
+  // use body
+  // if (!useParams) return next()
+
+  if (typeof reqArgs !== 'object') {
     throw TypeError(ERROR_STRINGS.argsType)
-  }
-
-  if (isFormData(args) || Array.isArray(args)) {
-    ctx.req.reqParams = args
-
-    return next()
   }
 
   checkArrayParams(ctx.req)
 
-  const commonParams = runFn(rawCommonParams, args)
+  const commonParams = runFn(rawCommonParams, reqArgs)
   // 根据配置生成请求的参数
-  ctx.req.reqParams = Array.isArray(params)
-    ? { ...commonParams, ...args }
-    : { ...getDefaultParamObj({ ...ctx.req, commonParams }), ...args }
+  ctx.req.reqArgs = Array.isArray(params)
+    ? { ...commonParams, ...reqArgs }
+    : { ...getDefaultParamObj({ ...ctx.req, commonParams }), ...reqArgs }
 
   return next()
 }
@@ -89,12 +88,12 @@ const formatReqParamsMiddleware = (ctx, next) => {
  * @param {object} ctx 上下文对象
  * @param {Function} next 转移控制权给下一个中间件的函数
  */
-const setReqFnParamsMiddleware = (ctx, next) => {
-  const { path, prefix, reqParams, baseUrl, ...rest } = ctx.req
+const setReqFnParamsMiddleware = (ctx: Ctx, next) => {
+  const { path, prefix, reqArgs, baseUrl, params, ...rest } = ctx.req
 
   // 请求地址
   const url = combineUrls(combineUrls(baseUrl, prefix), path)
-  const paramsStr = getParamStrFromObj(reqParams)
+  const paramsStr = getParamStrFromObj(reqArgs)
   // 完整请求地址，将参数拼在 url 上，用于 get 请求
   const fullUrl = paramsStr ? `${url}?${paramsStr}` : url
 
@@ -102,7 +101,7 @@ const setReqFnParamsMiddleware = (ctx, next) => {
     url,
     baseUrl,
     fullUrl,
-    reqParams,
+    reqArgs,
     ...rest,
     // 若是用户自己传递 reqFnParams 则优先级最高
     ...ctx.req.reqFnParams,
@@ -114,7 +113,7 @@ const setReqFnParamsMiddleware = (ctx, next) => {
 export {
   recordReqTimeMiddleware,
   formatResDataMiddleware,
+  formatReqArgsMiddleware,
   setReqFnParamsMiddleware,
   recordStartTimeMiddleware,
-  formatReqParamsMiddleware,
 }

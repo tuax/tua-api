@@ -9,8 +9,8 @@
 
 ```js
 export default {
-    // 忽略大小写
-    method: 'post',
+  // 忽略大小写
+  method: 'post',
 }
 ```
 
@@ -20,7 +20,7 @@ export default {
 ## baseUrl 接口基础地址 <badge text="1.4.1+" />
 ```js
 export default {
-    baseUrl: 'https://example-api.com/',
+  baseUrl: 'https://example-api.com/',
 }
 ```
 
@@ -32,14 +32,14 @@ export default {
 
 ```js
 export default {
-    // 对象形式
-    mock: { code: 0, data: 'some data' },
+  // 对象形式
+  mock: { code: 0, data: 'some data' },
 
-    // 函数形式
-    mock: (params) => ({
-        code: params.mockCode,
-        data: params.mockData,
-    }),
+  // 函数形式
+  mock: (params) => ({
+    code: params.mockCode,
+    data: params.mockData,
+  }),
 }
 ```
 
@@ -50,7 +50,7 @@ export default {
 
 ```js
 export default {
-    prefix: 'foobar',
+  prefix: 'foobar',
 }
 ```
 
@@ -59,7 +59,7 @@ export default {
 
 ```js
 export default {
-    reqType: 'jsonp',
+  reqType: 'jsonp',
 }
 ```
 
@@ -68,9 +68,9 @@ export default {
 
 ```js
 export default {
-    customFetch: ({ url, data, method }) => {
-        // ...
-    },
+  customFetch: ({ url, data, method }) => {
+    // ...
+  },
 }
 ```
 

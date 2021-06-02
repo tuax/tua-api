@@ -2,7 +2,7 @@ module.exports = {
   bail: true,
   clearMocks: true,
   transform: {
-    '^.+\\.js$': 'babel-jest',
+    '^.+\\.(js|ts)$': 'babel-jest',
   },
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
@@ -11,6 +11,5 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**',
-    '!src/index.d.ts',
   ],
 }

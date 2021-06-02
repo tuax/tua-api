@@ -8,8 +8,4 @@ describe('error handling', () => {
     // @ts-ignore
     expect(() => tuaApi.use('')).toThrow(TypeError(ERROR_STRINGS.middleware))
   })
-
-  test('unknown reqType', () => {
-    expect(() => new TuaApi({ reqType: '' })).toThrow(TypeError(ERROR_STRINGS.reqTypeFn('')))
-  })
 })
